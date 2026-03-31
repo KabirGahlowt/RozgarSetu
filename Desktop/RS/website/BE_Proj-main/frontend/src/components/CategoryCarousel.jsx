@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -7,6 +7,9 @@ import {
   CarouselPrevious,
 } from "./ui/carousel";
 import { Button } from "./ui/button";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setSearchQuery } from "../redux/workSlice";
 
 const category = [
   "Housekeeping",
@@ -17,13 +20,26 @@ const category = [
 ];
 
 const CategoryCarousel = () => {
+  const [query, setQuery] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const searchWorkerHandler = (query) => {
+    dispatch(setSearchQuery(query));
+    navigate("/browse");
+  };
+
   return (
     <div>
       <Carousel className="w-full max-w-xl mx-auto my-20">
         <CarouselContent>
           {category.map((cat, index) => (
             <CarouselItem className="md:basis-1/2 lg-basis-1/3">
-              <Button variant="outline" className="rounded-full">
+              <Button
+                onClick={() => searchWorkerHandler(cat)}
+                variant="outline"
+                className="rounded-full"
+              >
                 {cat}
               </Button>
             </CarouselItem>

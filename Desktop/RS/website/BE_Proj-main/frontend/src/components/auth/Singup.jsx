@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Navbar from "../shared/navbar";
+import React, { useEffect, useState } from "react";
+import Navbar from "../shared/Navbar";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
@@ -26,7 +26,7 @@ const Singup = () => {
   });
 
   const navigate = useNavigate();
-  const { loading } = useSelector((store) => store.auth);
+  const { loading, user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
 
   const changeEventHandler = (e) => {
@@ -68,11 +68,19 @@ const Singup = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "An error occurred during signup");
     } finally {
       dispatch(setLoading(false));
     }
   };
+
+  //To prevent an already logged in user to go to the signup page through URL and sign in
+  useEffect(() => {
+    dispatch(setLoading(false)); // Stop LocalStorage persistence bug
+    if (user) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div>

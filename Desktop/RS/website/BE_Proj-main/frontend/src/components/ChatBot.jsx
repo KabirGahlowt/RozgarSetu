@@ -6,14 +6,12 @@ import "../styles/rojarAssistant.css";
  * Floating entry point to the full-screen assistant + map at /assistant.
  */
 export default function ChatBot() {
-  const navigate = useNavigate();
-
   return (
     <div className="rs-bot-fab">
       <button
         type="button"
         className="rs-bot-trigger"
-        onClick={() => navigate("/assistant")}
+        onClick={() => { window.location.href = "/assistant" }}
         title="Open AI Assistant (full page with map)"
       >
         <MessageCircle size={24} />

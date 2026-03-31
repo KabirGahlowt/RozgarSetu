@@ -4,13 +4,14 @@ import { Bookmark } from "lucide-react";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
 import { useNavigate } from "react-router-dom";
+import { Star } from "lucide-react";
 
 const Worker = ({ worker }) => {
   const navigate = useNavigate();
   //const workerId = "thisistheworkerid";
 
   /*const daysAgoFunction = (mongodbTime) => { its a days ago function, could be used for recording the application time later
-    const createdAt = new Date(mongodbTime);
+    const createdAt = new Date(mongodbTime); timestamp : 8:21:22
     const currentTime = new Date();
     const timeDifference = currentTime - createdAt;
     return Math.floor(timeDifference/(1000*24*60*60));
@@ -19,7 +20,7 @@ const Worker = ({ worker }) => {
   return (
     <div className="p-5 rounded-md shadow-xl bg-white border border-gray-100">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-500">{worker?.skills}</p>
+        <p className="text-sm text-gray-500">{worker?.address}</p>
         <Button variant="outline" className="rounded-full" size="icon">
           <Bookmark />
         </Button>
@@ -33,6 +34,22 @@ const Worker = ({ worker }) => {
         </Button>
         <div>
           <h1 className="font-medium text-lg">{worker?.fullname}</h1>
+        </div>
+        <div className="flex items-center gap-1">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <Star
+              key={star}
+              size={14}
+              className={`${
+                star <= Math.round(worker?.avgRating || 0)
+                  ? "fill-yellow-400 text-yellow-400"
+                  : "text-gray-300"
+              }`}
+            />
+          ))}
+          <span className="text-xs text-gray-500 ml-1">
+            ({worker?.avgRating?.toFixed(1) || 0})
+          </span>
         </div>
       </div>
 

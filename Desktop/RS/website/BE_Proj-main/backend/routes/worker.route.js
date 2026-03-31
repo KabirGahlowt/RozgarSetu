@@ -11,17 +11,21 @@ router.route("/profile/update").post(isAuthenticated,updateProfile);
 export default router;*/
 
 import express from "express";
-import { loginWorker, logoutWorker, registerWorker, updateWorkerProfile, getAllWorkers, getWorkerById } from "../controllers/worker.controller.js";
+import { loginWorker, logoutWorker, registerWorker, updateWorkerProfile, getAllWorkers, getWorkerById, updateWorkerById, getAllWorkersForBrowse } from "../controllers/worker.controller.js";
 import isAuthenticated from "../middlewares/isWorkerAuthenticated.js";
 import { singleUpload } from "../middlewares/multer.js";
+import isAdminAuthenticated from "../middlewares/isAdminAuthenticated.js";
+import isWorkerAuthenticated from "../middlewares/isWorkerAuthenticated.js";
 
 const router = express.Router();
 
 router.route("/register").post(singleUpload,registerWorker);
 router.route("/login").post(loginWorker);
-router.route("/profile/update").post(isAuthenticated, updateWorkerProfile);
+router.route("/profile/update").post(isAuthenticated,singleUpload,updateWorkerProfile);
 router.route("/logout").get(logoutWorker);
 router.route("/getAllWorkers").get(getAllWorkers);
 router.route("/getWorkerById/:id").get(getWorkerById);
+router.route("/profile/update/:id").put(isAdminAuthenticated,singleUpload,updateWorkerById);
+router.route("/getAllWorkersForBrowse").get(isAuthenticated,getAllWorkersForBrowse);
 
 export default router;

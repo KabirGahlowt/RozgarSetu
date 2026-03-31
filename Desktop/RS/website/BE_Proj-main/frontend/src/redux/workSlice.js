@@ -5,6 +5,8 @@ const workSlice = createSlice ({
     initialState : {
         allWorkers:[],
         singleWorker:null,
+        searchWorkerByText:"",
+        searchQuery:"",
     },
     reducers : {
         //actions
@@ -13,9 +15,15 @@ const workSlice = createSlice ({
         },
         setSingleWorker:(state,action) => {
             state.singleWorker = action.payload;
-        }
+        },
+        setSearchWorkerByText:(state,action) => {
+            state.searchWorkerByText = action.payload;
+        },
+        setSearchQuery:(state,action) => {
+            state.searchQuery = action.payload;
+        },
     }
 });
 
-export const {setAllWorkers, setSingleWorker} = workSlice.actions;
+export const {setAllWorkers, setSingleWorker, setSearchWorkerByText, setSearchQuery} = workSlice.actions;
 export default workSlice.reducer;

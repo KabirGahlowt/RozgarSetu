@@ -2,6 +2,7 @@ import { Application } from "../models/application.model.js";
 import { Job } from "../models/job.model.js";
 import {User} from "../models/user.model.js";
 
+//Useless
 export const applyJobs = async(req,res) => {
     try
     {
@@ -103,7 +104,7 @@ export const hireWorker = async (req, res) => {
     }
 };
 
-//This is for when a worker wants to see which Jobs they have applied to
+//This is for when a worker wants to see which Jobs they have applied to {Useless}
 export const getAppliedJobs = async(req,res) => { 
     try
     {
@@ -157,7 +158,7 @@ export const getHireRequestsForWorker = async (req, res) => {
 };
 
 
-//Client can see who all have applied to their job application
+//Client can see who all have applied to their job application {useless}
 export const getApplicants = async(req,res) => {
     try
     {
@@ -210,6 +211,7 @@ export const getHiredWorkersForClient = async (req, res) => {
     }
 };
 
+//useless
 export const updateStatus = async(req,res) => {
     try
     {
@@ -256,9 +258,11 @@ export const updateHireStatus = async (req, res) => {
         const { status } = req.body;
         const applicationId = req.params.id;
 
-        if (!status) {
+        const validStatus = ["Pending", "Accepted", "Rejected"];
+
+        if (!validStatus.includes(status)) {
             return res.status(400).json({
-                message: "Status is required",
+                message: "Invalid Status",
                 success: false
             });
         }
@@ -277,7 +281,8 @@ export const updateHireStatus = async (req, res) => {
 
         return res.status(200).json({
             message: "Hire request updated",
-            success: true
+            success: true,
+            application,
         });
 
     } catch (error) {

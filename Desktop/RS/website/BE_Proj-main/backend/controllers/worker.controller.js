@@ -1,8 +1,10 @@
 import {Worker} from "../models/worker.model.js"
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { Application } from "../models/application.model.js";
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
+import { Review } from "../models/review.model.js";
 
 export const registerWorker = async (req, res) => {
     try
@@ -17,6 +19,13 @@ export const registerWorker = async (req, res) => {
             });
         };
 
+        let profilePhoto = "";
+        if (req.file) {
+            const fileUri = getDataUri(req.file);
+            const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+            profilePhoto = cloudResponse.secure_url;
+        }
+
         const user = await Worker.findOne({phoneNumber});
         if(user)
         {
@@ -26,12 +35,6 @@ export const registerWorker = async (req, res) => {
                 success : false 
             });
         };
-
-        let cloudResponse;
-        if (req.file) {
-            const fileUri = getDataUri(req.file);
-            cloudResponse = await cloudinary.uploader.upload(fileUri.content);
-        }
 
         const hashedPassword = await bcrypt.hash(password,10);
 
@@ -45,7 +48,7 @@ export const registerWorker = async (req, res) => {
             skills,
             avaliability,
             experienceYears,
-            profilePhoto: cloudResponse ? cloudResponse.secure_url : ""
+            profilePhoto,
         });
 
         return res.status(201).json({
@@ -57,6 +60,7 @@ export const registerWorker = async (req, res) => {
     catch (error)
     {
         console.log(error);
+        return res.status(500).json({ message: "Internal server error: " + error.message, success: false });
     }
 }
 
@@ -141,11 +145,13 @@ export const getAllWorkers = async (req, res) => {
     }
 };
 
-export const getWorkerById = async (req, res) => {
+/*export const getWorkerById = async (req, res) => {
   try {
     const workerId = req.params.id;
 
-    const worker = await Worker.findById(workerId);
+    const worker = await Worker.findById(workerId).populate({
+        path:"applications"
+    });
 
     if (!worker) {
       return res.status(404).json({
@@ -165,6 +171,35 @@ export const getWorkerById = async (req, res) => {
       message: "Server error",
       success: false,
     });
+  }
+};*/
+
+export const getWorkerById = async (req, res) => {
+  try {
+    const workerId = req.params.id;
+
+    const worker = await Worker.findById(workerId);
+
+    if (!worker) {
+      return res.status(404).json({
+        message: "Worker not found",
+        success: false,
+      });
+    }
+
+    // get all applications for this worker
+    const applications = await Application.find({ worker: workerId });
+
+    return res.status(200).json({
+      worker: {
+        ...worker._doc,
+        applications
+      },
+      success: true
+    });
+
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -186,7 +221,7 @@ export const logoutWorker = async (req,res) => {
 export const updateWorkerProfile = async (req,res) => {
     try
     {
-        const {fullname,phoneNumber,address, city, pincode, skills, avaliability, experienceYears} = req.body;
+        const {fullname,phoneNumber,address, city, pincode, skills, avaliability, experienceYears, profilePhoto} = req.body;
         /*if(!fullname || !email || !phoneNumber)
         {
             return res.status(400).json({
@@ -224,7 +259,8 @@ export const updateWorkerProfile = async (req,res) => {
         if(experienceYears) worker.experienceYears = experienceYears
 
         if(cloudResponse){
-            worker.profilePhoto = cloudResponse.secure_url;
+            worker.profilePhoto = cloudResponse.secure_url //save the coudinary url
+            //user.profile.profilePhotoOriginalName = file.originalname (This is to save the original file name)
         }
 
         await worker.save();
@@ -233,13 +269,13 @@ export const updateWorkerProfile = async (req,res) => {
             _id : worker._id,
             fullname : worker.fullname,
             phoneNumber : worker.phoneNumber,
-            profilePhoto : worker.profilePhoto,
             city : worker.city,
             address : worker.address,
             pincode : worker.pincode,
             avaliability : worker.avaliability,
             skills : worker.skills,
-            experienceYears : worker.experienceYears
+            experienceYears : worker.experienceYears,
+            profilePhoto : worker.profilePhoto
         }
 
         return res.status(200).json({
@@ -251,6 +287,100 @@ export const updateWorkerProfile = async (req,res) => {
 
     catch(error)
     {
+        console.log(error);
+    }
+}
+
+export const updateWorkerById = async (req, res) => {
+  try {
+    const {
+      fullname,
+      phoneNumber,
+      address,
+      city,
+      pincode,
+      skills,
+      avaliability,
+      experienceYears,
+    } = req.body;
+
+    const workerId = req.params.id; 
+
+    let worker = await Worker.findById(workerId);
+
+    if (!worker) {
+      return res.status(404).json({
+        message: "Worker not found",
+        success: false,
+      });
+    }
+
+    let cloudResponse;
+    if (req.file) {
+      const fileUri = getDataUri(req.file);
+      cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+    }
+
+    if (fullname) worker.fullname = fullname;
+    if (phoneNumber) worker.phoneNumber = phoneNumber;
+    if (address) worker.address = address;
+    if (city) worker.city = city;
+    if (pincode) worker.pincode = pincode;
+    if (skills) worker.skills = skills;
+    if (avaliability) worker.avaliability = avaliability;
+    if (experienceYears) worker.experienceYears = experienceYears;
+
+    if (cloudResponse) {
+      worker.profilePhoto = cloudResponse.secure_url;
+    }
+
+    await worker.save();
+
+    return res.status(200).json({
+      message: "Worker updated successfully",
+      worker,
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllWorkersForBrowse = async(req, res) => {
+    try {
+        const keyword = req.query.keyword || "";
+        const query = {
+            $or: [
+                {fullname: {$regex: keyword, $options: "i"}},
+                {skills: {$regex: keyword, $options: "i"}},
+            ]
+        };
+        const workers = await Worker.find(query).sort({createdAt: -1}).lean();
+        if(!workers || workers.length === 0) {
+            return res.status(404).json({
+                message: "Workers not found",
+                success: false 
+            })
+        };
+
+        const workersWithRating = await Promise.all(
+            workers.map(async (worker) => {
+                const reviews = await Review.find({worker : worker._id});
+
+                const avgRating = reviews.length>0 ? reviews.reduce((acc,r) => acc + r.rating, 0) / reviews.length : 0;
+
+                return {
+                    ...worker,
+                    avgRating,
+                };
+            })
+        );
+
+        return res.status(200).json({
+            workers: workersWithRating,
+            success: true 
+        })
+    } catch (error) {
         console.log(error);
     }
 }

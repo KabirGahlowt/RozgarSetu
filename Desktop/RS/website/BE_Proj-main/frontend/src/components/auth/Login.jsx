@@ -1,28 +1,34 @@
-import React, { useState } from "react";
-import Navbar from "../shared/navbar";
+import React, { useEffect, useState } from "react";
+import Navbar from "../shared/Navbar";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Button } from "../ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { USER_API_END_POINT } from "../../utils/constant";
+import {
+  USER_API_END_POINT,
+  ADMIN_API_END_POINT,
+  WORKER_API_END_POINT,
+} from "../../utils/constant";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setUser } from "../../redux/authSlice";
 import store from "../../redux/store";
 import { Loader2 } from "lucide-react";
 import Footer from "../shared/Footer";
+import { setSingleWorker } from "../../redux/workSlice";
 
 const Login = () => {
   const [input, setInput] = useState({
+    email: "",
     phoneNumber: "",
     password: "",
     role: "",
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading } = useSelector((store) => store.auth);
+  const { loading, user } = useSelector((store) => store.auth);
 
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value }); //gets all the values entered
@@ -33,7 +39,17 @@ const Login = () => {
 
     try {
       dispatch(setLoading(true));
-      const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
+
+      let API = "";
+      if (input.role === "Client") {
+        API = USER_API_END_POINT;
+      } else if (input.role === "admin") {
+        API = ADMIN_API_END_POINT;
+      } else if (input.role === "Worker") {
+        API = WORKER_API_END_POINT;
+      }
+
+      const res = await axios.post(`${API}/login`, input, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -41,17 +57,46 @@ const Login = () => {
       });
 
       if (res.data.success) {
-        dispatch(setUser(res.data.user));
-        navigate("/");
+        let loggedInUser;
+        if (input.role === "admin") {
+          loggedInUser = { ...res.data.admin, role: "admin" };
+          navigate("/");
+        } else if (input.role === "Worker") {
+          loggedInUser = { ...res.data.worker, role: "Worker" };
+        } else {
+          loggedInUser = { ...res.data.user, role: "Client" };
+        }
+        dispatch(setUser(loggedInUser));
+        dispatch(setSingleWorker(null));
+
+        if (input.role === "Worker") {
+          navigate("/worker/profile");
+        } else {
+          navigate("/");
+        }
         toast.success(res.data.message);
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Something went wrong!");
     } finally {
       dispatch(setLoading(false));
     }
   };
+
+  //To prevent an already logged in user to go to the login page through URL and login again
+  useEffect(() => {
+    dispatch(setLoading(false)); // Emergency safety override: Never persist loading screen
+    if (user) {
+      if (user.role === "Worker") {
+        navigate("/worker/profile");
+      } else if (user.role === "admin") {
+        navigate("/");
+      } else {
+        navigate("/");
+      }
+    }
+  }, []);
 
   return (
     <div>
@@ -62,7 +107,7 @@ const Login = () => {
           onSubmit={submitHandler}
           className="w-1/2 border border-gray-200 rounded-md p-4 my-10"
         >
-          <h1 className="font-bold text-xl mb-5">Sign Up</h1>
+          <h1 className="font-bold text-xl mb-5">Log in</h1>
 
           <div className="flex items-center justify-between">
             <RadioGroup
@@ -91,17 +136,32 @@ const Login = () => {
                 />
                 <Label htmlFor="r2">Worker</Label>
               </div>
+              <div className="flex items-center gap-3">
+                <Input
+                  type="radio"
+                  name="role"
+                  value="admin"
+                  checked={input.role === "admin"}
+                  onChange={changeEventHandler}
+                  className="cursor-pointer"
+                />
+                <Label htmlFor="r2">Admin</Label>
+              </div>
             </RadioGroup>
           </div>
 
           <div className="my-2">
-            <Label>Email</Label>
+            <Label>{input.role === "Worker" ? "Phone Number" : "Email"}</Label>
             <Input
               type="text"
-              value={input.email}
-              name="email"
+              name={input.role === "Worker" ? "phoneNumber" : "email"}
+              value={input.role === "Worker" ? input.phoneNumber : input.email}
               onChange={changeEventHandler}
-              placeholder="Enter your email"
+              placeholder={
+                input.role === "Worker"
+                  ? "Enter your phone number"
+                  : "Enter your Email"
+              }
             />
           </div>
 

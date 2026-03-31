@@ -12,6 +12,7 @@ const useGetAllWorkers = () => {
         const res = await axios.get(`${WORKER_API_END_POINT}/getAllWorkers`, {
           withCredentials: true,
         });
+        console.log(res.data);
         if (res.data.success) {
           dispatch(setAllWorkers(res.data.workers));
         }
