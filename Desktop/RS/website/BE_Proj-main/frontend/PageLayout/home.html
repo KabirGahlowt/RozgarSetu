@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RozgarSetu</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1754cf",
+              "background-light": "#f6f6f8",
+              "background-dark": "#111621",
+            },
+            fontFamily: {
+              display: ["Inter"],
+            },
+            borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+          },
+        },
+      };
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="flex flex-col min-h-screen">
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+<nav class="container mx-auto px-4 lg:px-8 py-4 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-3" href="#">
+<svg class="h-8 w-8 text-primary" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4ZM13 15.5858L18.2929 10.2929L19.7071 11.7071L13 18.4142L11.5 17L5.29289 10.7929L6.70711 9.37868L11.5 14.1716L11.5858 14.2573L13 15.5858Z" fill-rule="evenodd"></path>
+</svg>
+<h1 class="text-xl font-bold text-gray-900 dark:text-white">RozgarSetu</h1>
+</a>
+<div class="hidden md:flex items-center gap-8 text-gray-600 dark:text-gray-300">
+<a class="hover:text-primary transition-colors" href="#">About Us</a>
+<a class="hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary hover:bg-primary/90 text-white font-semibold px-4 py-2 rounded-lg transition-colors">Hire Now</button>
+<button class="bg-primary/10 dark:bg-primary/20 hover:bg-primary/20 dark:hover:bg-primary/30 text-primary font-semibold px-4 py-2 rounded-lg transition-colors">Join as Worker</button>
+<button class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined"> language </span>
+</button>
+<img alt="User Avatar" class="w-10 h-10 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDni3HH2l4VMSeKbqGOdKA3NWvPO4eiE1bIUwraBN7SZ3IkidIU6X5mBgj3W62NSwb-35lVcr8yvob3KzKzBhofV9hR5XvhlKp9IbfYKutLt2c5JMwbVhOCYtstxen1-ZDh1rG553WG7AFkq7Q6rYy5sJDjJVL4wfyJ5u5xYn_exR3spWQFm6YDJf96GpsUa-o5zk1LWWpRfliz7TnQsHiSJEAxVhzoVdvzP5qx8AXXTsK_Kk0QXay1nDlIDir__At_x8q3k0Mc5vz"/>
+</div>
+</nav>
+</header>
+<main class="flex-grow">
+<section class="relative bg-cover bg-center py-24 md:py-40 flex items-center justify-center text-center" style='background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuD-cOXNEAZtzSThr7N2Rn3BnQuoVhIYAgMC3x7PgyKeu1JngKv_25kDYTfvR0dtQ35nWQJVK-JrEZaovfFkleeo1GhisWiauSdySuI5qILvfPg8SEbjbnnlM1-FptK4yMgf3aynKPhnzMPa8xyCRA9UOYbuFyF8A0okv2DqL4cD2NxZbD0G4p3ov49ZDBet9TYWy_4rA3VbW-L4O-XWlNzZNFQd81U2iQ6ZzyfE-Vma1FzdQbG68mBjOLfI052w-L2mbrhgJ40qSN2-")'>
+<div class="container mx-auto px-4">
+<h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">Connecting Hands to Opportunities.</h1>
+<p class="text-lg md:text-xl text-gray-200 mb-8 max-w-3xl mx-auto">Find skilled workers near you for all your needs. A modern, inclusive, and multilingual job portal.</p>
+<div class="max-w-2xl mx-auto">
+<div class="relative flex items-center bg-white dark:bg-gray-900 rounded-full shadow-lg">
+<input class="w-full bg-transparent pl-6 pr-20 py-4 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none rounded-full" placeholder="Find Workers Near You" type="text"/>
+<div class="absolute right-2 flex items-center gap-2">
+<button class="p-3 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-300"> mic </span>
+</button>
+<button class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-6 rounded-full transition-colors">Search</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 md:py-24">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">Popular Categories</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+<div class="text-center group">
+<div class="w-32 h-32 mx-auto rounded-full bg-cover bg-center mb-4 transition-transform duration-300 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAWNmLHZZa5jVl_qCV7ZiwqAqwagUm7PtnaF46MJDrL5XKipDqNJEtoZWTf_UgsGLHIC9DNdK74OkG4qljK0SpgrWh7h8UiYyJ_lWMP515dl_M6OvThlFmXmNiPg1vYwoX-UnSZszKv3hjVM9bR5uU8OCN2LbZ3-UnHFRPSxNq7vxSbz2EZmNqWH7ICmRqBXpti712rqVvUAFvoi23ngsHLZkqdzfdoM7RH_FVRZ2uwHK4CCo5Sa7XpP8xMvo86wInT9h4-b5gqBlnc")'></div>
+<h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200">Mechanic</h3>
+</div>
+<div class="text-center group">
+<div class="w-32 h-32 mx-auto rounded-full bg-cover bg-center mb-4 transition-transform duration-300 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBLsIR7Hb1pfyt6aR3V3JUoeqfipDw2E5vLwpNwp-Dp8nCNg9_qWsEHJNih6DcM4pfgJErs7iuH5Pan5wicJynGEEsxad0GFewjV3W7JhUO8WcMThjLtdnZopD_zhe_IPKJGcj9ASaY0fLY9tHa8hdiYVjiyNBXs02-joYYG4NVvnv0dJvUh2HQAS3pDXs2Vit4X0gKKh44w5rUjX7wsZocd5ikSyawnl9ujqkugjhiAsxKOdzXa4SzGC8saBZ4tokH_5cSHUhX-b_d")'></div>
+<h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200">Painter</h3>
+</div>
+<div class="text-center group">
+<div class="w-32 h-32 mx-auto rounded-full bg-cover bg-center mb-4 transition-transform duration-300 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDJzN7U7RtUxWguU2dAZC5yBYwCaW05zyHYoJEiQUQH8GAys9LwX0Y-UVnAgdfYC2GqPaw9NXoVg3RNUm4V8WOJ7B_dxQcAI_TINNDEB3nTH8MYMmA-EOaZ65BHe_1ACU7bwDfLY4bJpO2CT5GiBtcv8QRHmruRAhGZVk6DlimPyrAE5TZl6PpJB4uQO0cWMebKtapqegE2SW71rOCTGNKlPKjOnzb7x_RPOIozrDkMRbZBOhweS0jTqsaEVjgTmsTUhItwPINV3K11")'></div>
+<h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200">Cook</h3>
+</div>
+<div class="text-center group">
+<div class="w-32 h-32 mx-auto rounded-full bg-cover bg-center mb-4 transition-transform duration-300 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBSQW3HIvH8fepgKnuSSF5Obqi7MZ8Ns85InaRbJzCFKTz6zD5fFXYT4v09AvB5GKDLmwxJSnSeB95Le23Aa-6NbQ_huQJvzGBH3BBtsjtd7uRkyuJRfsbH7xceCLyAGw5N2c2_Je1mmWxzOgqJ-j8tVONt5syOeLCRkDev7gFEMrm-Rkh4q7Iep69l7rlGFulgDslSnQ5pQ4SR5cAur_2Dqo8jMS_unDJVDjCTvr0f_JYvAHQaR5MBPe_RUKb51FpwFOmw2WjaQ8rU")'></div>
+<h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200">Housekeeping</h3>
+</div>
+<div class="text-center group">
+<div class="w-32 h-32 mx-auto rounded-full bg-cover bg-center mb-4 transition-transform duration-300 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBMP6_nfbqWbIC3Y2Ocj89Q1gUgPyxIaYWheKcJ7nby9YZ6ZMaFI2Et5O5Kvl7D7et7qxpyrqf3gbexzltS6JPY-GkG_mHGo7bjR4AUVbcU7JJFvQRh7fvNu_U1GRK6L6Jy56yM0T1EDbwSIaQkytju83CxIMUPTH7HSxwJVbD1xgEdH8nw7BP_K9_VZpuEksDEMssozdGFisNQq8tMpPEi9bzcXSNTMssmzW-ywoWD4KLe8wVmYg1dhEFa5JqF61In8gUTzATx6r4W")'></div>
+<h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200">Gardener</h3>
+</div>
+<div class="text-center group">
+<div class="w-32 h-32 mx-auto rounded-full bg-cover bg-center mb-4 transition-transform duration-300 group-hover:scale-105" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBFKgBAqRYNM5Uq8CpJv4DZ6sZwJKTy7zJ85b2gTTU7eMp94HOQ7xZYx1Rb3DAT2CCV-gcAQWpIlVFCSh7sfbn6DoPr9MGZt_sejxWnihVSMTU5L6oVrMLrHF4w1Uj5J-R-Isb0ri8lF7hLaSd9G-CJnlJg4wk0yMSt8fTP0tCcBDSy9DC2Fw_6cUpLxf2_iBRcFipCEChggGRo5fIw828P34Q6zKgZ1Vi6TUM1xT4wy5BACseNhZTGndAjy6WzQKZEme6y0sb2owOl")'></div>
+<h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200">Electrician</h3>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-primary/5 dark:bg-primary/10 py-16 md:py-24">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">Top-Rated Workers</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="bg-white dark:bg-background-dark rounded-xl shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+<div class="h-56 bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBGC5Nd1mS4LrezqCM2dKu7uo1zha6zXHlqWRR-ICgqmTQ4bA-3EkL3vr9JhWhL5YW4Ss3RVdZKFFVRT4_t-byNTjkzWQpLHRe91GGzqGlJa9lWz720_iDyjoAzZKAeEo4T1zJJJiwCslz5l8pDB4znQkz7usTEDJrqH8wel1EVD9iTSN8SfLef4A3355WT57ptbMim1Le2RzaAOcOelQbpB1kwInZRgjeysC_JPV0kjpwVO_48z9GX7mZe921B-GGXFLGDZP7ZN_Px")'></div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 dark:text-white">Rajesh Kumar</h3>
+<p class="text-primary font-semibold">Mechanic</p>
+</div>
+</div>
+<div class="bg-white dark:bg-background-dark rounded-xl shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+<div class="h-56 bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBr0imc9UuMpTLIUj4QJCtEwexHaE3Dx9y60GThQ7w4FIZwkh1_JAyvEemS4or3thUFyxaVyOIIid_dkrveBV4JndnXam7pD-TlGFqX0jjA5daONpZWd9HtJmSfwy4mMKESmWvSIeau3HzPonq2ewIuRCbilbGTYot-bhLgxv59mKnQYWWMqUyKYfTYvE91cuzG8paazh0fYfUptK-ahy2VF7KzYC5x0YjikZnMV_lbNcj_sC4RmaK41bKwOc9D5KBEqkGgJKQOxtqF")'></div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 dark:text-white">Priya Sharma</h3>
+<p class="text-primary font-semibold">Housekeeper</p>
+</div>
+</div>
+<div class="bg-white dark:bg-background-dark rounded-xl shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+<div class="h-56 bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBT1VdV4Lw2bT4zXxzafozLJAIu1f93mHnUBNsY5YppaYXZSpcV1NuQGcD4rp8nnY8ebykbWuWRDYgqiETw2hyo0hzIcjytb0CC7B8iLAk3xAQloanVTPgcs_nNIi4XIXj3faGcfZqfucwQHdIgG3xwKcbTa09TPf0LRNc8K2LNwIqn_U6fiquFqKKyExbg5n4h1OVx_AI5E571RdBRHKuiwuEKWplLpRYzEn-wL97IDzVgmP046YqxhdN1ehK9goaG8D3cS1q9qARn")'></div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 dark:text-white">Amit Singh</h3>
+<p class="text-primary font-semibold">Electrician</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 md:py-24">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">What Our Users Say</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-white dark:bg-background-dark p-8 rounded-xl shadow-md">
+<div class="flex items-center mb-4">
+<img alt="Anjali Verma" class="w-12 h-12 rounded-full mr-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChcD3cbvkyV1Pgk7bgwMhtHKYXNxMFTDW9yc9bwOK4U0lVleGnZAMQWoUuK0lRW2aY4uLqf0Rp_RMrQ7ZGTb018DZR3oqN7DHcDLw3H5Qkng5sCCUdeEWdx9CpyfcGuVlFLQmMA4SNqRgk0-rPmHkTP-dxMP0K4BOuVQ2UDoNAmIMKHqAWqnHBCdK5711afpH-FjWC6PxWI3aImZnbg1vpL3TjwFUbfENWngm4Ti3FiMswXQ--AgOrvfNkrII-rTM4cH4zY3WfCxRJ"/>
+<div>
+<h4 class="font-bold text-lg text-gray-900 dark:text-white">Anjali Verma</h4>
+<p class="text-sm text-gray-500 dark:text-gray-400">2 months ago</p>
+</div>
+</div>
+<div class="flex text-primary mb-4">
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+</div>
+<p class="text-gray-600 dark:text-gray-300">"Rajesh did an excellent job fixing my car. He was prompt, professional, and very skilled. Highly recommend!"</p>
+</div>
+<div class="bg-white dark:bg-background-dark p-8 rounded-xl shadow-md">
+<div class="flex items-center mb-4">
+<img alt="Vikram Patel" class="w-12 h-12 rounded-full mr-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaudEbZMjiT5ONnuAxZ63TQj4sg9hGohfXVA3ysWpDFWgeFJzgCdcQeRtTZ3AW1dX7WPz1CB1f50ITg9jfx-6k7t3dnIeoPhdxpGkJrarFqxvUlYHLe2P43EbMkc_YhnG6a4kjDDOC83NqEMhMFRBRoNeCr2zWtq6M2kBV1OnLQ9MeYK6yq09QSdgliXtYpBkNiE2nwb8ri6dsrMnEvc5P8CBbsI1wNLyQFyXwaH58WJbMUJTgZRlg244U69q8WANuAqFmBUjR5BhQ"/>
+<div>
+<h4 class="font-bold text-lg text-gray-900 dark:text-white">Vikram Patel</h4>
+<p class="text-sm text-gray-500 dark:text-gray-400">3 months ago</p>
+</div>
+</div>
+<div class="flex text-primary mb-4">
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined text-gray-300 dark:text-gray-600">star_outline</span>
+</div>
+<p class="text-gray-600 dark:text-gray-300">"Priya is a fantastic housekeeper. She is thorough, efficient, and always leaves my home spotless."</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800">
+<div class="container mx-auto px-4 py-8">
+<div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+<p class="text-gray-500 dark:text-gray-400">© 2024 RozgarSetu. All rights reserved.</p>
+<div class="flex gap-6 mt-4 md:mt-0 text-gray-500 dark:text-gray-400">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+
+</body></html>
