@@ -8,8 +8,8 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { MoreHorizontal } from "lucide-react";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
 import { useDispatch, useSelector } from "react-redux";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import axios from "axios";
@@ -59,6 +59,7 @@ const ClientsTable = () => {
             <TableHead>Name</TableHead>
             <TableHead>Address</TableHead>
             <TableHead>Date of Hire Request</TableHead>
+            <TableHead>Contact</TableHead>
             <TableHead>Action</TableHead>
             <TableHead>Status</TableHead>
           </TableRow>
@@ -75,34 +76,60 @@ const ClientsTable = () => {
                 <TableCell>{application?.client?.fullname}</TableCell>
                 <TableCell>{application?.client?.address}</TableCell>
                 <TableCell>{application?.createdAt?.split("T")[0]}</TableCell>
-                <TableCell className="cursor-pointer">
-                  <Popover>
-                    <PopoverTrigger>
-                      <MoreHorizontal />
-                    </PopoverTrigger>
-                    <PopoverContent className="w-32">
-                      {readyToTakeWork.map((action, index) => {
-                        return (
-                          <div
-                            key={index}
-                            onClick={() =>
-                              handleStatusUpdate(application._id, action.value)
-                            }
-                            className="flex w-fit items-center my-2 cursor-pointer hover:bg-gray-100 px-2 py-1 rounded"
-                          >
-                            <span>{action?.label}</span>
-                          </div>
-                        );
-                      })}
-                    </PopoverContent>
-                  </Popover>
-                </TableCell>
                 <TableCell>
-                  {application?.status === "Accepted" && (
-                    <div className="text-sm mt-1">
+                  {application?.status === "Accepted" ? (
+                    <div className="flex items-center gap-1 text-sm font-medium">
                       📞 {application?.client?.phoneNumber}
                     </div>
+                  ) : (
+                    <span className="text-gray-400 italic">Hidden</span>
                   )}
+                </TableCell>
+                <TableCell>
+                  {application?.status === "Pending" ? (
+                    <div className="flex items-center gap-2">
+                      <Button
+                        size="sm"
+                        onClick={() => handleStatusUpdate(application._id, "Accepted")}
+                        className="bg-green-600 hover:bg-green-700 text-white"
+                      >
+                        A
+                      </Button>
+                      <Button
+                        size="sm"
+                        onClick={() => handleStatusUpdate(application._id, "Rejected")}
+                        variant="destructive"
+                      >
+                        R
+                      </Button>
+                    </div>
+                  ) : application?.status === "Accepted" ? (
+                    <Button
+                      size="sm"
+                      onClick={() => handleStatusUpdate(application._id, "Completed")}
+                      className="bg-blue-600 hover:bg-blue-700 text-white"
+                    >
+                      ✅ Job Done
+                    </Button>
+                  ) : (
+                    <span className="text-sm text-gray-500 italic">Done</span>
+                  )}
+                </TableCell>
+                <TableCell>
+                  <div className="flex flex-col gap-1 items-start">
+                    <Badge
+                      className={`${
+                        application?.status === "Accepted"
+                          ? "bg-green-100 text-green-700 border-green-700"
+                          : application?.status === "Rejected"
+                          ? "bg-red-100 text-red-700 border-red-700"
+                          : "bg-gray-100 text-gray-700 border-gray-700"
+                      }`}
+                      variant="outline"
+                    >
+                      {application?.status}
+                    </Badge>
+                  </div>
                 </TableCell>
               </tr>
             ))}

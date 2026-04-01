@@ -1,17 +1,14 @@
 import { useState } from "react";
 import "./App.css";
-import Navbar from "./components/shared/Navbar";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Singup";
 import Home from "./components/Home";
 import Workers from "./components/Workers";
-import Browse from "./components/Browse";
+import History from "./components/History";
 import Profile from "./components/Profile";
 import WorkerDescription from "./components/WorkerDescription";
-import AdminWorkers from "./components/admin/AdminWorkers";
-import WorkerCreate from "./components/admin/WorkerCreate";
-import WorkerSetup from "./components/admin/WorkerSetup";
+import AdminDashboard from "./components/admin/AdminDashboard";
 import WorkerProfile from "./components/worker/WorkerProfile";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 import AssistantPage from "./components/AssistantPage";
@@ -43,37 +40,20 @@ const appRouter = createBrowserRouter([
     element: <WorkerDescription />,
   },
   {
-    path: "/browse",
-    element: <Browse />,
+    path: "/history",
+    element: <History />,
   },
   {
     path: "/profile",
     element: <Profile />,
   },
 
-  // Admin paths start from here
-
+  // Admin paths
   {
-    path: "/admin/workers",
+    path: "/admin/dashboard",
     element: (
       <ProtectedRoute>
-        <AdminWorkers />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/admin/workers/create",
-    element: (
-      <ProtectedRoute>
-        <WorkerCreate />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/admin/workers/:id",
-    element: (
-      <ProtectedRoute>
-        <WorkerSetup />
+        <AdminDashboard />
       </ProtectedRoute>
     ),
   },

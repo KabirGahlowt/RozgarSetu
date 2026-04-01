@@ -16,6 +16,7 @@ import isAuthenticated from "../middlewares/isWorkerAuthenticated.js";
 import { singleUpload } from "../middlewares/multer.js";
 import isAdminAuthenticated from "../middlewares/isAdminAuthenticated.js";
 import isWorkerAuthenticated from "../middlewares/isWorkerAuthenticated.js";
+import optionalAuth from "../middlewares/optionalAuth.js";
 
 const router = express.Router();
 
@@ -24,7 +25,7 @@ router.route("/login").post(loginWorker);
 router.route("/profile/update").post(isAuthenticated,singleUpload,updateWorkerProfile);
 router.route("/logout").get(logoutWorker);
 router.route("/getAllWorkers").get(getAllWorkers);
-router.route("/getWorkerById/:id").get(getWorkerById);
+router.route("/getWorkerById/:id").get(optionalAuth, getWorkerById);
 router.route("/profile/update/:id").put(isAdminAuthenticated,singleUpload,updateWorkerById);
 router.route("/getAllWorkersForBrowse").get(isAuthenticated,getAllWorkersForBrowse);
 

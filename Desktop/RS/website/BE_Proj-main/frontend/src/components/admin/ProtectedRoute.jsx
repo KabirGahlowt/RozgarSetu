@@ -1,17 +1,20 @@
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useSelector((store) => store.auth);
 
-  const navigate = useNavigate();
+  // While persisted state is still loading, user could briefly be null.
+  // We check after rehydration — PersistGate in main.jsx handles the wait.
+  if (user === null) {
+    // Not logged in → go home
+    return <Navigate to="/" replace />;
+  }
 
-  useEffect(() => {
-    if (user === null || user.role !== "admin") {
-      navigate("/");
-    }
-  }, []);
+  if (user.role !== "admin") {
+    // Logged in but not admin
+    return <Navigate to="/" replace />;
+  }
 
   return <>{children}</>;
 };

@@ -69,3 +69,29 @@ export const getWorkerReviews = async(req,res) => {
         console.log(error);
     }
 };
+
+export const updateReview = async (req, res) => {
+    try {
+        const clientId = req.id;
+        const { workerId, rating, comment } = req.body;
+
+        const review = await Review.findOne({ client: clientId, worker: workerId });
+
+        if (!review) {
+            return res.status(404).json({ message: "Review not found", success: false });
+        }
+
+        if (rating) review.rating = rating;
+        if (comment !== undefined) review.comment = comment;
+        await review.save();
+
+        return res.status(200).json({
+            message: "Review updated successfully",
+            review,
+            success: true,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Server error", success: false });
+    }
+};

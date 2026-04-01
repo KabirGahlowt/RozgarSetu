@@ -1,4 +1,8 @@
 import { Admin } from "../models/admin.model.js";
+import { Worker } from "../models/worker.model.js";
+import { User } from "../models/user.model.js";
+import { Application } from "../models/application.model.js";
+import { Review } from "../models/review.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -113,3 +117,56 @@ export const logout = async (req,res) => {
         console.log(error);
     }
 }
+
+export const getDashboard = async (req, res) => {
+    try {
+        // Panel 1: Recently registered workers (last 10)
+        const recentWorkers = await Worker.find()
+            .sort({ createdAt: -1 })
+            .limit(10)
+            .select("fullname skills address city createdAt profilePhoto");
+
+        // Panel 2: Recently registered clients (last 10)
+        const recentClients = await User.find()
+            .sort({ createdAt: -1 })
+            .limit(10)
+            .select("fullname email phoneNumber address createdAt profilePhoto");
+
+        // Panel 3: Recent hire history (client hired which worker)
+        const hireHistory = await Application.find()
+            .sort({ createdAt: -1 })
+            .limit(20)
+            .populate("client", "fullname email profilePhoto")
+            .populate("worker", "fullname skills profilePhoto");
+
+        // Panel 4: Least rated workers (workers with avg rating, sorted ascending)
+        const allWorkers = await Worker.find().lean();
+        const workersWithRatings = await Promise.all(
+            allWorkers.map(async (worker) => {
+                const reviews = await Review.find({ worker: worker._id })
+                    .populate("client", "fullname profilePhoto")
+                    .sort({ createdAt: -1 });
+                const avgRating = reviews.length > 0
+                    ? reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length
+                    : 0;
+                return { ...worker, avgRating, reviews };
+            })
+        );
+        // Only include workers who have at least 1 review, sorted by lowest rating
+        const leastRated = workersWithRatings
+            .filter(w => w.reviews.length > 0)
+            .sort((a, b) => a.avgRating - b.avgRating)
+            .slice(0, 10);
+
+        return res.status(200).json({
+            recentWorkers,
+            recentClients,
+            hireHistory,
+            leastRated,
+            success: true,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Server error", success: false });
+    }
+};

@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "./ui/button";
-import { Bookmark } from "lucide-react";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
 import { useNavigate } from "react-router-dom";
@@ -21,9 +20,6 @@ const Worker = ({ worker }) => {
     <div className="p-5 rounded-md shadow-xl bg-white border border-gray-100">
       <div className="flex items-center justify-between">
         <p className="text-sm text-gray-500">{worker?.address}</p>
-        <Button variant="outline" className="rounded-full" size="icon">
-          <Bookmark />
-        </Button>
       </div>
 
       <div className="flex items-center gap-2 my-2">
@@ -72,7 +68,6 @@ const Worker = ({ worker }) => {
         >
           Details
         </Button>
-        <Button className="bg-[#6A38C2]">Save for Later</Button>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { REVIEW_API_END_POINT } from "../utils/constant";
 import { toast } from "sonner";
@@ -16,10 +16,23 @@ import { Label } from "./ui/label";
 import { Star } from "lucide-react";
 import { Button } from "./ui/button";
 
-const ReviewDialog = ({ open, setOpen, workerId }) => {
+// existingReview: if provided, we're in edit mode (PUT). Otherwise create mode (POST).
+const ReviewDialog = ({ open, setOpen, workerId, existingReview = null }) => {
+  const isEditMode = !!existingReview;
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const dispatch = useDispatch();
+
+  // Pre-populate when editing
+  useEffect(() => {
+    if (isEditMode && existingReview) {
+      setRating(existingReview.rating || 0);
+      setComment(existingReview.comment || "");
+    } else {
+      setRating(0);
+      setComment("");
+    }
+  }, [existingReview, open]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -29,30 +42,43 @@ const ReviewDialog = ({ open, setOpen, workerId }) => {
     }
 
     try {
-      const res = await axios.post(
-        `${REVIEW_API_END_POINT}/review`,
-        { workerId, rating, comment },
-        { withCredentials: true },
-      );
+      let res;
+      if (isEditMode) {
+        // Update existing review via PUT
+        res = await axios.put(
+          `${REVIEW_API_END_POINT}/review`,
+          { workerId, rating, comment },
+          { withCredentials: true }
+        );
+      } else {
+        // Create new review via POST
+        res = await axios.post(
+          `${REVIEW_API_END_POINT}/review`,
+          { workerId, rating, comment },
+          { withCredentials: true }
+        );
+      }
 
       if (res.data.success) {
         toast.success(res.data.message);
-        dispatch(addReview(res.data.review));
+        if (!isEditMode) dispatch(addReview(res.data.review));
         setOpen(false);
         setRating(0);
         setComment("");
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data?.message);
     }
   };
+
   return (
     <div>
       <Dialog open={open}>
         <DialogContent onInteractOutside={() => setOpen(false)}>
           <DialogHeader>
-            <DialogTitle>Give your review!</DialogTitle>
+            <DialogTitle>{isEditMode ? "Edit Your Review" : "Give your review!"}</DialogTitle>
           </DialogHeader>
 
           <form onSubmit={submitHandler}>
@@ -83,7 +109,7 @@ const ReviewDialog = ({ open, setOpen, workerId }) => {
 
             <DialogFooter>
               <Button type="submit" disabled={!rating}>
-                Submit Review
+                {isEditMode ? "Update Review" : "Submit Review"}
               </Button>
             </DialogFooter>
           </form>

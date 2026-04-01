@@ -41,7 +41,9 @@ const HiredWorkerTable = () => {
             <TableHead>Profile</TableHead>
             <TableHead>Worker Name</TableHead>
             <TableHead>Skill</TableHead>
+            <TableHead>Contact</TableHead>
             <TableHead className="text-center">Status</TableHead>
+            <TableHead className="text-center">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -55,27 +57,41 @@ const HiredWorkerTable = () => {
               </TableCell>
               <TableCell>{item?.worker?.fullname}</TableCell>
               <TableCell>{item?.worker?.skills}</TableCell>
-              <TableCell className="text-center items-center">
-                <div className="flex items-center justify-center gap-3">
-                  <Badge>{item?.status}</Badge>
-                  {item?.status === "Accepted" && (
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-1">
-                        <Phone className="cursor-pointer" size={18} />
-                        <span>{item?.worker?.phoneNumber}</span>
-                      </div>
-                      <Button
-                        size="sm"
-                        onClick={() =>
-                          item?.worker?._id &&
-                          handleOpenReview(item?.worker?._id)
-                        }
-                      >
-                        Give Review
-                      </Button>
-                    </div>
-                  )}
-                </div>
+              <TableCell>
+                {item?.status === "Accepted" ? (
+                  <div className="flex items-center gap-1 font-medium">
+                    <Phone className="cursor-pointer" size={16} />
+                    <span>{item?.worker?.phoneNumber}</span>
+                  </div>
+                ) : (
+                  <span className="text-gray-400 italic">Hidden</span>
+                )}
+              </TableCell>
+              <TableCell className="text-center">
+                <Badge
+                  className={`${
+                    item?.status === "Accepted"
+                      ? "bg-green-100 text-green-700 border-green-700"
+                      : item?.status === "Rejected"
+                      ? "bg-red-100 text-red-700 border-red-700"
+                      : "bg-gray-100 text-gray-700 border-gray-700"
+                  }`}
+                  variant="outline"
+                >
+                  {item?.status}
+                </Badge>
+              </TableCell>
+              <TableCell className="text-center">
+                {item?.status === "Accepted" && (
+                  <Button
+                    size="sm"
+                    onClick={() =>
+                      item?.worker?._id && handleOpenReview(item?.worker?._id)
+                    }
+                  >
+                    Give Review
+                  </Button>
+                )}
               </TableCell>
             </TableRow>
           ))}

@@ -15,8 +15,9 @@ const LatestJobs = () => {
         {allWorkers.length <= 0 ? (
           <span>No workers avaliable</span>
         ) : (
-          allWorkers
-            ?.slice(0, 6)
+          [...allWorkers]
+            .sort((a, b) => (b.avgRating || 0) - (a.avgRating || 0))
+            .slice(0, 6)
             .map((worker) => <TopWorkerCard key={worker._id} worker={worker} />)
         )}
       </div>

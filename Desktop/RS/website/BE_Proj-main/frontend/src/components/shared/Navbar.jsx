@@ -18,6 +18,7 @@ import {
   WORKER_API_END_POINT,
 } from "../../utils/constant";
 import { setUser } from "../../redux/authSlice";
+import NotificationBell from "../worker/NotificationBell";
 
 const Navbar = () => {
   //const user = true;
@@ -64,7 +65,10 @@ const Navbar = () => {
               {user && user.role === "admin" && (
                 <>
                   <li>
-                    <Link to="/admin/workers">Workers</Link>
+                    <Link to="/">Home</Link>
+                  </li>
+                  <li>
+                    <Link to="/admin/dashboard">Dashboard</Link>
                   </li>
                 </>
               )}
@@ -72,10 +76,11 @@ const Navbar = () => {
               {/* Worker */}
               {user && user.role === "Worker" && (
                 <li>
-                  <div className="flex w-fit items-center cursor-pointer">
+                  <div className="flex w-fit items-center gap-3 cursor-pointer">
                     <Button variant="link">
                       <Link to="/worker/profile">Profile</Link>
                     </Button>
+                    <NotificationBell />
                   </div>
                 </li>
               )}
@@ -89,7 +94,7 @@ const Navbar = () => {
                     <Link to="/workers">Workers</Link>
                   </li>
                   <li>
-                    <Link to="/browse">Browse</Link>
+                    <Link to="/history">History</Link>
                   </li>
                 </>
               )}

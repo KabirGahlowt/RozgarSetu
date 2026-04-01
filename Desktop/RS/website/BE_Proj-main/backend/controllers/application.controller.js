@@ -75,15 +75,16 @@ export const hireWorker = async (req, res) => {
             });
         }
 
-        // Check if already hired/requested
+        // Check if already hired/requested (only block Pending or Accepted, not Completed/Rejected)
         const existingApplication = await Application.findOne({
             worker: workerId,
-            client: clientId
+            client: clientId,
+            status: { $in: ["Pending", "Accepted"] }
         });
 
         if (existingApplication) {
             return res.status(400).json({
-                message: "You have already sent a hire request",
+                message: "You already have an active hire request for this worker",
                 success: false
             });
         }
@@ -95,6 +96,31 @@ export const hireWorker = async (req, res) => {
 
         return res.status(201).json({
             message: "Hire request sent successfully",
+            success: true,
+            newHire
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const hireAgain = async (req, res) => {
+    try {
+        const clientId = req.id;
+        const workerId = req.params.id;
+
+        if (!workerId) {
+            return res.status(400).json({ message: "Worker ID is required", success: false });
+        }
+
+        const newHire = await Application.create({
+            worker: workerId,
+            client: clientId,
+        });
+
+        return res.status(201).json({
+            message: "Hire Again request sent successfully",
             success: true,
             newHire
         });
@@ -258,7 +284,7 @@ export const updateHireStatus = async (req, res) => {
         const { status } = req.body;
         const applicationId = req.params.id;
 
-        const validStatus = ["Pending", "Accepted", "Rejected"];
+        const validStatus = ["Pending", "Accepted", "Rejected", "Completed"];
 
         if (!validStatus.includes(status)) {
             return res.status(400).json({

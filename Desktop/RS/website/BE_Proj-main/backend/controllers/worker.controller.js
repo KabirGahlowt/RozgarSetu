@@ -126,7 +126,7 @@ export const loginWorker = async (req,res) => {
 
 export const getAllWorkers = async (req, res) => {
     try {
-        const workers = await Worker.find().sort({ createdAt: -1 });
+        const workers = await Worker.find().sort({ createdAt: -1 }).lean();
 
         if (!workers || workers.length === 0) {
             return res.status(404).json({
@@ -135,8 +135,19 @@ export const getAllWorkers = async (req, res) => {
             });
         }
 
+        const workersWithRating = await Promise.all(
+            workers.map(async (worker) => {
+                const reviews = await Review.find({worker : worker._id});
+                const avgRating = reviews.length>0 ? reviews.reduce((acc,r) => acc + r.rating, 0) / reviews.length : 0;
+                return {
+                    ...worker,
+                    avgRating,
+                };
+            })
+        );
+
         return res.status(200).json({
-            workers,
+            workers: workersWithRating,
             success: true
         });
 
@@ -190,11 +201,25 @@ export const getWorkerById = async (req, res) => {
     // get all applications for this worker
     const applications = await Application.find({ worker: workerId });
 
+    // Check if the requesting client (if any) has an accepted hire
+    // req.id is set by isAuthenticated middleware — may be absent for unauthenticated requests
+    const clientId = req.id || null;
+    const clientHasAcceptedHire = clientId
+      ? applications.some(
+          (a) => String(a.client) === String(clientId) && a.status === "Accepted"
+        )
+      : false;
+
+    // Build worker payload — only expose phone number if client has accepted hire
+    const workerData = {
+      ...worker._doc,
+      phoneNumber: clientHasAcceptedHire ? worker.phoneNumber : undefined,
+      applications,
+      clientHasAcceptedHire,
+    };
+
     return res.status(200).json({
-      worker: {
-        ...worker._doc,
-        applications
-      },
+      worker: workerData,
       success: true
     });
 
