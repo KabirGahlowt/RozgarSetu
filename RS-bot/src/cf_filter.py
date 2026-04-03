@@ -6,8 +6,24 @@ from __future__ import annotations
 import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Optional, Any
 from collections import defaultdict
+
+
+def _resolve_axis_key(axis: pd.Index, key: Any) -> Optional[Any]:
+    """Match DataFrame index/column labels when ids are int in CSV vs str (Mongo)."""
+    if axis is None or len(axis) == 0:
+        return None
+    if key in axis:
+        return key
+    sk = str(key)
+    if sk in axis:
+        return sk
+    if sk.isdigit():
+        ik = int(sk)
+        if ik in axis:
+            return ik
+    return None
 
 
 class CollaborativeFilter:
@@ -49,13 +65,16 @@ class CollaborativeFilter:
         else:
             self.worker_similarities = np.array([[1.0]])
     
-    def get_similar_workers(self, worker_id: int, k: int = 10) -> List[Tuple[int, float]]:
+    def get_similar_workers(self, worker_id, k: int = 10) -> List[Tuple[Any, float]]:
         """Get k most similar workers"""
-        if worker_id not in self.user_item_matrix.index:
+        if self.user_item_matrix is None or self.user_item_matrix.empty:
+            return []
+        wid = _resolve_axis_key(self.user_item_matrix.index, worker_id)
+        if wid is None:
             return []
         
         try:
-            worker_idx = list(self.user_item_matrix.index).index(worker_id)
+            worker_idx = list(self.user_item_matrix.index).index(wid)
             similarities = self.worker_similarities[worker_idx]
         except ValueError:
             return []
@@ -69,17 +88,18 @@ class CollaborativeFilter:
         similar_workers.sort(key=lambda x: x[1], reverse=True)
         return similar_workers[:k]
     
-    def compute_cf_score(self, worker_id: int, job_id: int, k: int = 10) -> float:
+    def compute_cf_score(self, worker_id, job_id, k: int = 10) -> float:
         """
         Compute CF score: average ratings of k similar workers for this job
         """
-        if worker_id not in self.user_item_matrix.index:
+        if self.user_item_matrix is None or self.user_item_matrix.empty:
+            return 0.0
+        wid = _resolve_axis_key(self.user_item_matrix.index, worker_id)
+        jid = _resolve_axis_key(self.user_item_matrix.columns, job_id)
+        if wid is None or jid is None:
             return 0.0
         
-        if job_id not in self.user_item_matrix.columns:
-            return 0.0
-        
-        similar_workers = self.get_similar_workers(worker_id, k)
+        similar_workers = self.get_similar_workers(wid, k)
         
         if not similar_workers:
             return 0.0
@@ -87,8 +107,8 @@ class CollaborativeFilter:
         # Get ratings from similar workers for this job
         ratings = []
         for similar_worker_id, similarity in similar_workers:
-            if similar_worker_id in self.user_item_matrix.index and job_id in self.user_item_matrix.columns:
-                rating = self.user_item_matrix.loc[similar_worker_id, job_id]
+            if similar_worker_id in self.user_item_matrix.index and jid in self.user_item_matrix.columns:
+                rating = self.user_item_matrix.loc[similar_worker_id, jid]
                 if rating > 0:
                     # Weight by similarity
                     ratings.append(rating * similarity)
@@ -100,7 +120,7 @@ class CollaborativeFilter:
         
         return float(cf_score)
     
-    def compute_cf_scores_batch(self, worker_id: int, job_ids: List[int], k: int = 10) -> List[float]:
+    def compute_cf_scores_batch(self, worker_id, job_ids: List, k: int = 10) -> List[float]:
         """Compute CF scores for multiple jobs"""
         scores = []
         for job_id in job_ids:

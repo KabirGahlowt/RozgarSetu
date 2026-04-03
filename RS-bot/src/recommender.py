@@ -11,12 +11,17 @@ try:
     from .cf_filter import CollaborativeFilter
     from .chk_svm import CHKSVMClassifier
     from .data_loader import DataLoader
+    from .ids import normalize_entity_id
 except ImportError:
     sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     from src.cbf_filter import ContentBasedFilter
     from src.cf_filter import CollaborativeFilter
     from src.chk_svm import CHKSVMClassifier
     from src.data_loader import DataLoader
+    from src.ids import normalize_entity_id
+
+# Synthetic job used for address-only reverse search (not from DB)
+VIRTUAL_JOB_ID = 9999
 
 
 class RozgarSetuRecommender:
@@ -48,7 +53,9 @@ class RozgarSetuRecommender:
         jobs_df = self.data_loader.get_all_jobs()
         self.jobs_cache = []
         for _, row in jobs_df.iterrows():
-            self.jobs_cache.append(self.data_loader.get_job(int(row['job_id'])))
+            self.jobs_cache.append(
+                self.data_loader.get_job(normalize_entity_id(row["job_id"]))
+            )
     
     def get_top_matches(self, worker_id: Union[int, str], query: Dict = None, top_k: int = 5) -> List[Dict]:
         """
@@ -155,7 +162,7 @@ class RozgarSetuRecommender:
             
             # Create a virtual job at the specific specified landmark
             candidate_jobs = [{
-                'job_id': 9999,
+                'job_id': VIRTUAL_JOB_ID,
                 'title': f"Job near {address}",
                 'required_skills': skills,
                 'location': location or address,
@@ -216,7 +223,7 @@ class RozgarSetuRecommender:
                     'job_title': job['title'],
                     'job_location': job['location'],
                     'job_address': job.get('address', ''),
-                    'wage_range': f"{job['wage_min']}-{job['wage_max']}" if job['job_id'] != 9999 else "Negotiable",
+                    'wage_range': f"{job['wage_min']}-{job['wage_max']}" if job.get('job_id') != VIRTUAL_JOB_ID else "Negotiable",
                     'work_type': job['work_type'],
                     'profile_photo': worker.get('profile_photo', ''),
                     'score': final_score,

@@ -3,8 +3,13 @@ Data loading and preprocessing utilities for RozgarSetu
 """
 import pandas as pd
 import sqlite3
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Tuple, Optional, Union
 import os
+
+try:
+    from src.ids import normalize_entity_id
+except ImportError:
+    from ids import normalize_entity_id
 import io
 import random
 
@@ -429,7 +434,11 @@ class DataLoader:
         matches = self.jobs_df[self.jobs_df['job_id'] == job_id]
         if matches.empty:
             matches = self.jobs_df[self.jobs_df['job_id'].astype(str) == str(job_id)]
-            
+        if matches.empty and isinstance(job_id, str) and job_id.isdigit():
+            matches = self.jobs_df[self.jobs_df['job_id'] == int(job_id)]
+        if matches.empty and isinstance(job_id, (int, float)) and not pd.isna(job_id):
+            matches = self.jobs_df[self.jobs_df['job_id'].astype(str) == str(int(job_id))]
+
         if matches.empty:
             raise ValueError(f"Job with ID {job_id} not found")
             
@@ -442,8 +451,10 @@ class DataLoader:
         elif pd.isna(required_skills):
             required_skills = []
         
+        jid_out: Union[int, str] = normalize_entity_id(job['job_id'])
+        
         return {
-            'job_id': int(job['job_id']),
+            'job_id': jid_out,
             'title': str(job['title']),
             'required_skills': required_skills,
             'location': str(job['location']),
