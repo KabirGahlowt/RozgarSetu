@@ -81,9 +81,15 @@ class CHKSVMClassifier:
             job_id = row['job_id']
             rating = row['rating']
             
-            # Find worker and job
-            worker = next((w for w in workers if w['worker_id'] == worker_id), None)
-            job = next((j for j in jobs if j['job_id'] == job_id), None)
+            # Find worker and job (ids may be int CSV or str MongoDB ObjectIds)
+            worker = next(
+                (w for w in workers if str(w["worker_id"]) == str(worker_id)),
+                None,
+            )
+            job = next(
+                (j for j in jobs if str(j["job_id"]) == str(job_id)),
+                None,
+            )
             
             if worker and job:
                 # Get CBF and CF scores (simplified - in practice, compute these)
