@@ -1,6 +1,7 @@
 import {Worker} from "../models/worker.model.js"
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { getAuthCookieOptions, getClearAuthCookieOptions } from "../utils/authCookie.js";
 import { Application } from "../models/application.model.js";
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
@@ -112,7 +113,7 @@ export const loginWorker = async (req,res) => {
                 experienceYears : worker.experienceYears
             }
 
-            return res.status(200).cookie("token",token,{maxAge : 1*24*60*60*1000, httpOnly : true, sameSite : 'strict'}).json({
+            return res.status(200).cookie("token", token, getAuthCookieOptions()).json({
                 message : `Welcome back ${worker.fullname}`,
                 worker,
                 success : true 
@@ -231,7 +232,7 @@ export const getWorkerById = async (req, res) => {
 export const logoutWorker = async (req,res) => {
     try 
     {
-        return res.status(200).cookie("token","",{maxAge : 0}).json({
+        return res.status(200).cookie("token", "", getClearAuthCookieOptions()).json({
             message : "Logged out successfully",
             success : true
         })

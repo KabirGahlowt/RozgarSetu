@@ -6,6 +6,8 @@ Traditional job portals in India often focus on white-collar or short-term gigs;
 
 **Stack:** MongoDB, Express, React (Vite), Node.js. Optional **RS-bot** service for assistant and recommendation features.
 
+**Architecture:** See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for how components connect, and [docs/DIAGRAMS.md](docs/DIAGRAMS.md) for data-flow (Level 0 and 1), layered architecture, user-story maps, and domain class diagrams.
+
 ![Under development](./assets/under-development.gif)
 
 ## Prerequisites
