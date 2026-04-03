@@ -87,10 +87,7 @@ const Navbar = () => {
                 <>
                   <li><Link to="/" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500, transition: 'color 0.2s' }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>Home</Link></li>
                   <li>
-                    <div className="flex w-fit items-center gap-3 cursor-pointer">
-                      <Link to="/worker/profile" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>Profile</Link>
-                      <NotificationBell />
-                    </div>
+                    <Link to="/worker/profile" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>Profile</Link>
                   </li>
                 </>
               )}
@@ -103,6 +100,12 @@ const Navbar = () => {
                 </>
               )}
           </ul>
+
+          {user && user.role === "Worker" && (
+            <div className="shrink-0 flex items-center">
+              <NotificationBell />
+            </div>
+          )}
 
           {!user ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
