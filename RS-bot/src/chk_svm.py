@@ -75,12 +75,12 @@ class CHKSVMClassifier:
         X = []
         y = []
         
-        # Build feature matrix from interactions
-        for idx, row in interactions.iterrows():
-            worker_id = row['worker_id']
-            job_id = row['job_id']
-            rating = row['rating']
-            
+        # Build feature matrix from interactions (use positional index for score lists)
+        for pos, (_, row) in enumerate(interactions.iterrows()):
+            worker_id = row["worker_id"]
+            job_id = row["job_id"]
+            rating = row["rating"]
+
             # Find worker and job (ids may be int CSV or str MongoDB ObjectIds)
             worker = next(
                 (w for w in workers if str(w["worker_id"]) == str(worker_id)),
@@ -90,11 +90,10 @@ class CHKSVMClassifier:
                 (j for j in jobs if str(j["job_id"]) == str(job_id)),
                 None,
             )
-            
+
             if worker and job:
-                # Get CBF and CF scores (simplified - in practice, compute these)
-                cbf = cbf_scores[idx] if idx < len(cbf_scores) else 0.5
-                cf = cf_scores[idx] if idx < len(cf_scores) else 0.5
+                cbf = cbf_scores[pos] if pos < len(cbf_scores) else 0.5
+                cf = cf_scores[pos] if pos < len(cf_scores) else 0.5
                 
                 features = self._extract_features(cbf, cf, worker, job)
                 X.append(features)
@@ -108,11 +107,25 @@ class CHKSVMClassifier:
         
         X = np.array(X)
         y = np.array(y)
-        
-        # Split data
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=0.2, random_state=42
-        )
+
+        uniq = np.unique(y)
+        if len(uniq) < 2:
+            print(
+                "Warning: CHK-SVM needs two classes; got one label only. "
+                "Skipping fit (no model save)."
+            )
+            return
+
+        n = len(X)
+        strat = y if len(np.unique(y)) > 1 and n >= 4 else None
+        if n == 2:
+            X_train, X_test, y_train, y_test = train_test_split(
+                X, y, test_size=0.5, random_state=42, stratify=strat
+            )
+        else:
+            X_train, X_test, y_train, y_test = train_test_split(
+                X, y, test_size=0.2, random_state=42, stratify=strat
+            )
         
         # Scale features
         X_train_scaled = self.scaler.fit_transform(X_train)
