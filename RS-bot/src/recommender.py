@@ -257,13 +257,20 @@ class RozgarSetuRecommender:
                     'lng': map_lng,
                 })
         
-        # Rank: when search pin exists, prefer geocoded workers (known distance), then
-        # closer first, then query skill overlap, then blend (CBF-heavy for "near you" quality)
+        # Rank: primary = skill match, then (if search pin exists) geocoded + closer workers,
+        # then blended score (CBF-heavy) so skills > distance > rating.
         def _rank_key(m: Dict) -> Tuple:
             has_pin = target_coords is not None
             dk = m.get("distance_km")
             has_dist = dk is not None
             overlap = _query_skill_overlap(query, m.get("skills") or [])
+            # 0 = strong skill match, 1 = partial, 2 = weak / none
+            if overlap >= 0.7:
+                skill_tier = 0
+            elif overlap >= 0.3:
+                skill_tier = 1
+            else:
+                skill_tier = 2
             geo_tier = 1 if (has_pin and not has_dist) else 0
             dist_key = dk if has_dist else float("inf")
             blend = (
@@ -272,7 +279,7 @@ class RozgarSetuRecommender:
                 + 0.10 * m.get("cf_score", 0.0)
                 + 0.18 * overlap
             )
-            return (geo_tier, dist_key, -overlap, -blend)
+            return (skill_tier, geo_tier, dist_key, -overlap, -blend)
 
         all_matches.sort(key=_rank_key)
         
