@@ -9,10 +9,12 @@ import jobRoute from "./routes/job.route.js";
 import applicationRoute from "./routes/application.route.js";
 import adminRoute from "./routes/admin.route.js";
 import reviewRoute from "./routes/review.route.js";
+import { isCrossSiteAuthCookiesEnabled } from "./utils/authCookie.js";
 
 dotenv.config({});
 
 const app = express();
+app.set("trust proxy", 1);
 
 //middleware
 app.use(express.json());
@@ -74,5 +76,9 @@ app.use("/api/v1/review",reviewRoute);
 
 app.listen(PORT, HOST, () => {
     connectDB();
+    const crossSite = isCrossSiteAuthCookiesEnabled();
     console.log(`Server running at http://${HOST === "0.0.0.0" ? "localhost" : HOST}:${PORT} (listening on ${HOST})`);
+    console.log(
+        `[auth] JWT cookies: ${crossSite ? "SameSite=None; Secure (cross-origin)" : "SameSite=Lax (local)"} | NODE_ENV=${process.env.NODE_ENV ?? "(unset)"} RENDER=${process.env.RENDER ?? "(unset)"}`
+    );
 });

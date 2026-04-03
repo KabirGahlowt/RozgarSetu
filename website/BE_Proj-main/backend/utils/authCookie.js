@@ -1,17 +1,29 @@
 /**
- * JWT cookie flags: cross-origin SPA (e.g. Vercel) → API (e.g. Render) requires
- * SameSite=None and Secure. Render does not always set NODE_ENV=production, so we
- * also key off RENDER=true.
+ * Cross-origin SPA (Vercel) → API (Render) needs SameSite=None + Secure.
+ * Local dev should stay Lax + non-Secure on http://localhost.
+ *
+ * Render may omit NODE_ENV; RENDER / RENDER_EXTERNAL_URL indicate a hosted deploy.
+ * Override: FORCE_CROSS_SITE_COOKIES=true | FORCE_LOCAL_AUTH_COOKIES=true
  */
-function useCrossSiteCookieFlags() {
-  return (
-    process.env.NODE_ENV === "production" ||
-    process.env.RENDER === "true"
-  );
+export function isCrossSiteAuthCookiesEnabled() {
+  if (process.env.FORCE_LOCAL_AUTH_COOKIES === "true") return false;
+  if (process.env.FORCE_CROSS_SITE_COOKIES === "true") return true;
+  if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
+    return false;
+  }
+  if (process.env.NODE_ENV === "production") return true;
+  const onHostedPlatform =
+    process.env.RENDER === "true" ||
+    Boolean(process.env.RENDER_EXTERNAL_URL) ||
+    Boolean(process.env.RENDER_SERVICE_NAME) ||
+    Boolean(process.env.RAILWAY_ENVIRONMENT) ||
+    Boolean(process.env.FLY_APP_NAME);
+  if (onHostedPlatform) return true;
+  return false;
 }
 
 export function getAuthCookieOptions() {
-  const crossSite = useCrossSiteCookieFlags();
+  const crossSite = isCrossSiteAuthCookiesEnabled();
   return {
     maxAge: 24 * 60 * 60 * 1000,
     httpOnly: true,
@@ -21,9 +33,8 @@ export function getAuthCookieOptions() {
   };
 }
 
-/** Match set options so logout clears the same cookie in the browser. */
 export function getClearAuthCookieOptions() {
-  const crossSite = useCrossSiteCookieFlags();
+  const crossSite = isCrossSiteAuthCookiesEnabled();
   return {
     maxAge: 0,
     httpOnly: true,
