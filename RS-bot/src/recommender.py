@@ -24,6 +24,29 @@ except ImportError:
 VIRTUAL_JOB_ID = 9999
 
 
+def _query_skill_overlap(query: Optional[Dict], worker_skills: List) -> float:
+    """How well worker skills match parsed query skills [0,1]. Neutral 0.5 if no query skills."""
+    if not query:
+        return 0.5
+    req = query.get("skills") or []
+    if not req:
+        return 0.5
+    ws = [str(s).lower() for s in (worker_skills or [])]
+    qs = [str(s).lower() for s in req]
+    if not ws:
+        return 0.0
+    hits = 0
+    for q in qs:
+        for w in ws:
+            if q == w:
+                hits += 1
+                break
+            if len(q) >= 3 and len(w) >= 3 and (q in w or w in q):
+                hits += 1
+                break
+    return hits / max(len(qs), 1)
+
+
 class RozgarSetuRecommender:
     def __init__(self, data_dir: str = "data", model_path: str = "models/chk_svm_model.joblib", 
                  use_distance_based_location: bool = True, provider: str = "nominatim", api_key: str = None):
@@ -227,13 +250,31 @@ class RozgarSetuRecommender:
                     'work_type': job['work_type'],
                     'profile_photo': worker.get('profile_photo', ''),
                     'score': final_score,
+                    'cbf_score': cbf_score,
+                    'cf_score': cf_score,
                     'explanation': explanation,
                     'lat': map_lat,
                     'lng': map_lng,
                 })
         
-        # Sort by score and return top-k
-        all_matches.sort(key=lambda x: x['score'], reverse=True)
+        # Rank: when search pin exists, prefer geocoded workers (known distance), then
+        # closer first, then query skill overlap, then blend (CBF-heavy for "near you" quality)
+        def _rank_key(m: Dict) -> Tuple:
+            has_pin = target_coords is not None
+            dk = m.get("distance_km")
+            has_dist = dk is not None
+            overlap = _query_skill_overlap(query, m.get("skills") or [])
+            geo_tier = 1 if (has_pin and not has_dist) else 0
+            dist_key = dk if has_dist else float("inf")
+            blend = (
+                0.44 * m.get("cbf_score", 0.0)
+                + 0.28 * m["score"]
+                + 0.10 * m.get("cf_score", 0.0)
+                + 0.18 * overlap
+            )
+            return (geo_tier, dist_key, -overlap, -blend)
+
+        all_matches.sort(key=_rank_key)
         
         # Dedup matches by worker_id (if multiple jobs matched)
         seen_workers = set()

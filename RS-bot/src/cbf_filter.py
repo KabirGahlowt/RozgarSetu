@@ -87,11 +87,21 @@ class ContentBasedFilter:
                 # Store distance for later use in explanations
                 if hasattr(self, '_last_distance'):
                     self._last_distance = distance
+            elif job_coords and not worker_coords:
+                # Job pinned on map but worker not geocodable — do not treat as perfect match
+                sim_loc = 0.22
+            elif worker_coords and not job_coords:
+                sim_loc = 0.35
             else:
-                # Fallback to binary matching if geocoding fails
+                # Neither geocoded: weak city/area hint only (avoid 1.0 for same city string)
                 w_loc = (worker.get('location') or "").lower()
                 j_loc = (job.get('location') or "").lower()
-                sim_loc = 1.0 if w_loc == j_loc and w_loc != "" else 0.0
+                if w_loc and j_loc and (w_loc == j_loc or w_loc in j_loc or j_loc in w_loc):
+                    sim_loc = 0.45
+                elif w_loc and j_loc:
+                    sim_loc = 0.12
+                else:
+                    sim_loc = 0.0
         else:
             # Binary location matching (legacy)
             w_loc = (worker.get('location') or "").lower()
