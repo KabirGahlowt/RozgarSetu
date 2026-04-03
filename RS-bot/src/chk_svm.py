@@ -64,7 +64,43 @@ class CHKSVMClassifier:
         ])
         
         return features
-    
+
+    def _split_train_test(
+        self,
+        X: np.ndarray,
+        y: np.ndarray,
+        random_state: int = 42,
+    ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+        """
+        Split for evaluation when safe; otherwise train and test on full data so
+        y_train always has both classes (SVC requirement).
+        """
+        n = len(X)
+        # Below this, sklearn splits often leave one class only in train (e.g. n==2, 50/50).
+        if n < 8:
+            return X, X, y, y
+
+        test_size = 0.2 if n >= 5 else 0.5
+        strat = y if len(np.unique(y)) > 1 else None
+
+        try:
+            return train_test_split(
+                X, y, test_size=test_size, random_state=random_state, stratify=strat
+            )
+        except ValueError:
+            # Too few samples per class for stratify, or other sklearn constraint
+            pass
+
+        try:
+            return train_test_split(
+                X, y, test_size=test_size, random_state=random_state, stratify=None
+            )
+        except ValueError:
+            pass
+
+        # Last resort: full data for both (guarantees both classes in y_train if y has them)
+        return X, X, y, y
+
     def train(self, workers: List[Dict], jobs: List[Dict], 
               interactions: pd.DataFrame, cbf_scores: List[float],
               cf_scores: List[float]):
@@ -117,16 +153,13 @@ class CHKSVMClassifier:
             return
 
         n = len(X)
-        strat = y if len(np.unique(y)) > 1 and n >= 4 else None
-        if n == 2:
-            X_train, X_test, y_train, y_test = train_test_split(
-                X, y, test_size=0.5, random_state=42, stratify=strat
-            )
-        else:
-            X_train, X_test, y_train, y_test = train_test_split(
-                X, y, test_size=0.2, random_state=42, stratify=strat
-            )
-        
+        # SVC requires >=2 classes in *y_train*. With tiny n, any train/test split
+        # can put a single sample in train (one class). Imbalanced small sets also
+        # break stratify. Prefer no split when needed, then try stratified split.
+        X_train, X_test, y_train, y_test = self._split_train_test(X, y)
+        if len(np.unique(y_train)) < 2:
+            X_train, X_test, y_train, y_test = X, X, y, y
+
         # Scale features
         X_train_scaled = self.scaler.fit_transform(X_train)
         X_test_scaled = self.scaler.transform(X_test)

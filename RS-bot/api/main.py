@@ -24,6 +24,7 @@ sys.path.insert(0, parent_dir)
 
 from src.recommender import RozgarSetuRecommender
 from src.query_parser import QueryParser
+from src.ids import normalize_entity_id
 
 app = FastAPI(title="RozgarSetu API", version="1.0.0")
 
@@ -361,7 +362,7 @@ def get_jobs():
         jobs_df = recommender.data_loader.get_all_jobs()
         jobs = []
         for _, row in jobs_df.iterrows():
-            jobs.append(recommender.data_loader.get_job(int(row['job_id'])))
+            jobs.append(recommender.data_loader.get_job(normalize_entity_id(row["job_id"])))
         return {"jobs": jobs, "count": len(jobs)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -369,4 +370,5 @@ def get_jobs():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    port = int(os.environ.get("PORT", "8001"))
+    uvicorn.run(app, host="0.0.0.0", port=port)
