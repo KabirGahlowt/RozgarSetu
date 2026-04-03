@@ -36,6 +36,10 @@ function isAllowedCorsOrigin(origin) {
     if (merged.includes(origin)) return true;
     try {
         const u = new URL(origin);
+        // Vercel production + preview: https://*.vercel.app
+        if (u.protocol === "https:" && (u.hostname === "vercel.app" || u.hostname.endsWith(".vercel.app"))) {
+            return true;
+        }
         const port = u.port || (u.protocol === "https:" ? "443" : "80");
         if (port !== "5173" && port !== "5174") return false;
         const h = u.hostname;
