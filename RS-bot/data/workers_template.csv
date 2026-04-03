@@ -1,0 +1,4 @@
+worker_id,name,skills,location,experience_years,rating,phone,available
+1,Example Worker 1,"cleaning,cooking",Wakad,3,4.2,9876543210,True
+2,Example Worker 2,driving,Shivajinagar,5,4.5,9876543211,True
+3,Example Worker 3,"plumbing,electrician",Baner,8,4.7,9876543212,True

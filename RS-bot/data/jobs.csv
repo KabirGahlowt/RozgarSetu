@@ -1,0 +1,26 @@
+job_id,title,required_skills,location,required_experience_years,work_type,wage_min,wage_max,posted_date,status
+1,Part-time Maid Wanted,"cleaning,cooking",Wakad,2,Part-time,8000,12000,2024-01-15,Open
+2,Full-time Driver,"driving",Shivajinagar,3,Full-time,15000,20000,2024-01-16,Open
+3,House Cleaning Service,"cleaning",Hinjewadi,1,Part-time,5000,8000,2024-01-17,Open
+4,Plumber Needed Urgently,plumbing,Baner,5,Full-time,18000,25000,2024-01-18,Open
+5,Weekly Maid Service,"cleaning,laundry",Wakad,3,Part-time,6000,10000,2024-01-19,Open
+6,Electrician for Home Repair,electrician,Kothrud,4,Part-time,10000,15000,2024-01-20,Open
+7,Cook Required,"cooking",Aundh,2,Full-time,12000,18000,2024-01-21,Open
+8,Personal Driver,"driving",Viman Nagar,4,Full-time,20000,25000,2024-01-22,Open
+9,Full-time Maid,"cleaning,cooking,laundry",Wakad,4,Full-time,10000,15000,2024-01-23,Open
+10,Plumbing Installation,plumbing,Hadapsar,6,Part-time,12000,18000,2024-01-24,Open
+11,Cleaning Staff,"cleaning",Shivajinagar,1,Part-time,4000,7000,2024-01-25,Open
+12,Electrical Wiring Work,electrician,Baner,7,Full-time,20000,30000,2024-01-26,Open
+13,Housekeeper,"cooking,cleaning,laundry",Hinjewadi,3,Full-time,12000,18000,2024-01-27,Open
+14,Cab Driver,"driving",Wakad,5,Full-time,18000,22000,2024-01-28,Open
+15,Part-time Cook,"cooking,cleaning",Aundh,4,Part-time,8000,12000,2024-01-29,Open
+16,Emergency Plumber,plumbing,Kothrud,8,Part-time,15000,20000,2024-01-30,Open
+17,Weekly Cleaning,"cleaning,laundry",Wakad,2,Part-time,5000,9000,2024-02-01,Open
+18,Home Electrician,electrician,Hadapsar,4,Part-time,10000,15000,2024-02-02,Open
+19,Cook for Family,"cooking,cleaning",Shivajinagar,3,Full-time,14000,20000,2024-02-03,Open
+20,Professional Driver,"driving",Baner,6,Full-time,22000,28000,2024-02-04,Open
+21,Full-time Housekeeper,"cleaning,cooking,laundry",Wakad,5,Full-time,15000,20000,2024-02-05,Open
+22,Plumber for Renovation,plumbing,Viman Nagar,3,Part-time,10000,15000,2024-02-06,Open
+23,Cleaning Service,"cleaning",Hinjewadi,1,Part-time,4000,7000,2024-02-07,Open
+24,Senior Electrician,electrician,Aundh,9,Full-time,25000,35000,2024-02-08,Open
+25,Daily Maid,"cooking,cleaning",Wakad,3,Part-time,7000,11000,2024-02-09,Open
