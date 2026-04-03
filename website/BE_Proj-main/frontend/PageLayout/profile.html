@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RozgarSetu - Provider Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1754cf",
+              "background-light": "#f6f6f8",
+              "background-dark": "#111621",
+              "content-light": "#ffffff",
+              "content-dark": "#1a2230",
+              "text-primary-light": "#111621",
+              "text-primary-dark": "#ffffff",
+              "text-secondary-light": "#6b7280",
+              "text-secondary-dark": "#9ca3af",
+              "border-light": "#e5e7eb",
+              "border-dark": "#374151",
+            },
+            fontFamily: {
+              display: ["Inter"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              lg: "0.75rem",
+              xl: "1rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+    </style>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-primary-light dark:text-text-primary-dark">
+<div class="flex flex-col min-h-screen">
+<header class="sticky top-0 z-10 bg-content-light dark:bg-content-dark border-b border-border-light dark:border-border-dark shadow-sm">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-4">
+<div class="text-primary">
+<svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.59L6.41 12l1.41-1.41L11 13.17l4.59-4.58L17 10l-6 6z"></path>
+</svg>
+</div>
+<h1 class="text-xl font-bold">RozgarSetu</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative rounded-full p-2 text-text-secondary-light dark:text-text-secondary-dark hover:bg-primary/10 dark:hover:bg-primary/20">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA1UtlwMjX4iWf7cptcYwz3S8pSz4qgDqXJ1LEjpfw7vY4UOWqNGwnxMKDHyRIPVN_eUYYp638HdqSVHyuCVy3MwxHeKnOguLdllj6Wammy4uS8d98xGifHkTubfCDQWgisrnLujpmpcNqkqykHK--b8r90QYSMuJTWZIbRbMG-788ADGZKXoVrz0C3Pj82S8VL7g6bzE5XAEa3qy3vEIkDw5M1xm9NeO_6PknFMOY5bWvPe2cmL-mH_5XsLAszfz8oUKzaCfOnbFDg");'></div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+<div class="lg:col-span-1 flex flex-col items-center bg-content-light dark:bg-content-dark p-6 rounded-xl shadow-md">
+<div class="w-32 h-32 rounded-full bg-cover bg-center mb-4 border-4 border-primary/20" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC_emcmhpApzSyNJukeue7lkhnOqGEdvEkUUSh5nh0_kBR7Jm4FOYWBXOlOl-QEY2fABxLBi6ULTy8nMBDpVQ0Wjx7CrEmA6PDA930DI8UOHEVabYLip3LzwYctrCOAtsIsYL9wJn6LaI0stKUdYg-Errl1dh6JMsDXCO7KN8J0vb_2XiiDT0yZ61EPArvwpien9Lt1UeoyVZE65qCeZ2_VTcs9Q94u0NH9EfR_JMbnroAa-a1ifR1ppgy_sIxwfpvxCEXjcRIz0Ekc");'></div>
+<h2 class="text-2xl font-bold">Priya Sharma</h2>
+<p class="text-text-secondary-light dark:text-text-secondary-dark">Electrician</p>
+<div class="flex items-center gap-1 mt-2 text-text-secondary-light dark:text-text-secondary-dark">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-semibold text-text-primary-light dark:text-text-primary-dark">4.8</span>
+<span>(125 reviews)</span>
+</div>
+</div>
+<div class="lg:col-span-3">
+<div class="bg-content-light dark:bg-content-dark rounded-xl shadow-md">
+<div class="border-b border-border-light dark:border-border-dark">
+<nav class="flex justify-around -mb-px">
+<a class="flex flex-col items-center gap-2 py-4 px-1 border-b-2 border-primary text-primary font-semibold" href="#">
+<span class="material-symbols-outlined">person</span>
+<span>Profile</span>
+</a>
+<a class="flex flex-col items-center gap-2 py-4 px-1 border-b-2 border-transparent text-text-secondary-light dark:text-text-secondary-dark hover:border-primary/50 hover:text-text-primary-light dark:hover:text-text-primary-dark" href="#">
+<span class="material-symbols-outlined">star_outline</span>
+<span>Reviews</span>
+</a>
+<a class="flex flex-col items-center gap-2 py-4 px-1 border-b-2 border-transparent text-text-secondary-light dark:text-text-secondary-dark hover:border-primary/50 hover:text-text-primary-light dark:hover:text-text-primary-dark relative" href="#">
+<span class="material-symbols-outlined">chat_bubble_outline</span>
+<span>Messages</span>
+<span class="absolute top-3 right-[-8px] text-xs bg-primary text-white rounded-full px-1.5 py-0.5">3</span>
+</a>
+<a class="flex flex-col items-center gap-2 py-4 px-1 border-b-2 border-transparent text-text-secondary-light dark:text-text-secondary-dark hover:border-primary/50 hover:text-text-primary-light dark:hover:text-text-primary-dark" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+</div>
+<div class="p-6">
+<div class="mb-8">
+<h3 class="text-xl font-bold mb-4">About</h3>
+<div class="space-y-4">
+<div class="grid grid-cols-3 gap-4">
+<p class="font-semibold text-text-secondary-light dark:text-text-secondary-dark col-span-1">Skills</p>
+<p class="col-span-2">Electrical wiring, appliance repair, installation</p>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<p class="font-semibold text-text-secondary-light dark:text-text-secondary-dark col-span-1">Experience</p>
+<p class="col-span-2">5 years</p>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<p class="font-semibold text-text-secondary-light dark:text-text-secondary-dark col-span-1">Languages</p>
+<p class="col-span-2">Hindi, English</p>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<p class="font-semibold text-text-secondary-light dark:text-text-secondary-dark col-span-1">Availability</p>
+<p class="col-span-2">Mon-Fri, 9 AM - 6 PM</p>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-4">Reviews</h3>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-full bg-cover bg-center flex-shrink-0" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA7zOgy3cFn_q3W-aMrC5I6F2Z_J7F-JacGPsfo56lqhBxrXHClMNywccr3pDK-qoYooe8qKkhMLWAG5JCGkShXEGNo9LzZ7Fd29hnUTcPwiw-cv5aDXlj4st2y3yggOe9lViafekJOv-Z8A9r14fWbWCAQyxbfQt7mkcfbzGnja3RBhXziRAK1OXNqExP3qr7ozY7ZeP3WsDkq5R8o9cYhCFEueq1t8tl6PxBSLAN_sz19xqnSQpRvDlySb_6PHEL7QOu4jhzSCtMO");'></div>
+<div class="flex-grow">
+<div class="flex justify-between items-center">
+<div>
+<p class="font-semibold">Rohan Verma</p>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">1 month ago</p>
+</div>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<p class="mt-2">Priya did an excellent job fixing the wiring in my house. She was prompt, professional, and very skilled.</p>
+</div>
+</div>
+<div class="border-t border-border-light dark:border-border-dark my-6"></div>
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded-full bg-cover bg-center flex-shrink-0" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBzIh1pIKYpgevINsWzrk66CSezlfveXzhAj7r20Udpfm4PtWhdB1aoHaGI1HwqtQOVlA45QlrtYyyO6Php51iWaQFI-wh7KdPra3YVUzXoRH-EjsVgPTtwyIxiGKpGgyV7HpI0Dyp2_lUh-R1kaQlw5wFhhtuu9nXO0RR11MUzYM6qOnkiAdqEjZ5UF7OpnkcR-q9L7syAfDfD1TwqtcrRH6GUd-1dLP-ZpxroMXbiuK0m1QGFAPFw12Pq7xaytylU5Pvy8HXvAfqh");'></div>
+<div class="flex-grow">
+<div class="flex justify-between items-center">
+<div>
+<p class="font-semibold">Sneha Kapoor</p>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">2 months ago</p>
+</div>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-text-secondary-light dark:text-text-secondary-dark text-lg">star_outline</span>
+</div>
+</div>
+<p class="mt-2">Priya was good, but there was a slight delay in her arrival. Overall, satisfied with the work.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

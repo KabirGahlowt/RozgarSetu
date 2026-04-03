@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RozgarSetu - Profile Setup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1754cf",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111621",
+                        "pink-soft": "#fde8f0"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="flex flex-col min-h-screen">
+<header class="flex items-center justify-between px-6 sm:px-10 py-4 border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_319)">
+<path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+</g>
+<defs><clipPath id="clip0_6_319"><rect fill="white" height="48" width="48"></rect></clipPath></defs>
+</svg>
+</div>
+<h1 class="text-xl font-bold text-gray-900 dark:text-white">RozgarSetu</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 flex items-center justify-center bg-pink-soft rounded-full">
+<span class="material-symbols-outlined text-primary">mic</span>
+</div>
+<div class="relative w-48 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-primary" style="width: 60%;"></div>
+</div>
+<span class="text-sm font-medium text-gray-600 dark:text-gray-400">3/5</span>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center p-4 sm:p-6 lg:p-8">
+<div class="w-full max-w-4xl mx-auto">
+<div class="text-center mb-8">
+<h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">Create your profile</h2>
+<p class="mt-2 text-lg text-gray-600 dark:text-gray-400">Just say the answers, we'll fill them for you.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-white dark:bg-background-dark p-6 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
+<label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1" for="name">Aapka naam kya hai?</label>
+<p class="text-lg font-semibold text-gray-800 dark:text-gray-200">Name</p>
+<input class="mt-4 w-full bg-background-light dark:bg-gray-800 border-gray-300 dark:border-gray-700 focus:ring-primary focus:border-primary rounded-lg p-3 text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-500" id="name" placeholder="Your answer will appear here..." type="text"/>
+</div>
+<div class="bg-white dark:bg-background-dark p-6 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
+<label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1" for="skill">Aap kis kaam mein mahir ho?</label>
+<p class="text-lg font-semibold text-gray-800 dark:text-gray-200">Skill</p>
+<input class="mt-4 w-full bg-background-light dark:bg-gray-800 border-gray-300 dark:border-gray-700 focus:ring-primary focus:border-primary rounded-lg p-3 text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-500" id="skill" placeholder="Your answer will appear here..." type="text"/>
+</div>
+<div class="bg-white dark:bg-background-dark p-6 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
+<label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1" for="location">Aapka kaam kahan tak pahunch sakta hai?</label>
+<p class="text-lg font-semibold text-gray-800 dark:text-gray-200">Service Area / Location</p>
+<input class="mt-4 w-full bg-background-light dark:bg-gray-800 border-gray-300 dark:border-gray-700 focus:ring-primary focus:border-primary rounded-lg p-3 text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-500" id="location" placeholder="Your answer will appear here..." type="text"/>
+</div>
+<div class="bg-white dark:bg-background-dark p-6 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
+<label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1" for="rate">Din bhar ka daam kya hai?</label>
+<p class="text-lg font-semibold text-gray-800 dark:text-gray-200">Daily Rate</p>
+<input class="mt-4 w-full bg-background-light dark:bg-gray-800 border-gray-300 dark:border-gray-700 focus:ring-primary focus:border-primary rounded-lg p-3 text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-500" id="rate" placeholder="Your answer will appear here..." type="text"/>
+</div>
+<div class="md:col-span-2 bg-white dark:bg-background-dark p-6 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
+<label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1" for="experience">Kya aapka koi anubhav hai?</label>
+<p class="text-lg font-semibold text-gray-800 dark:text-gray-200">Experience</p>
+<input class="mt-4 w-full bg-background-light dark:bg-gray-800 border-gray-300 dark:border-gray-700 focus:ring-primary focus:border-primary rounded-lg p-3 text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-500" id="experience" placeholder="Your answer will appear here..." type="text"/>
+</div>
+</div>
+<div class="mt-8 flex justify-center">
+<button class="bg-primary text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-background-dark transition-colors duration-300">
+                        Looks Good, Next
+                    </button>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>
