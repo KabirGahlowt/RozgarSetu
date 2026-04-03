@@ -66,7 +66,7 @@ const Navbar = () => {
             <span style={{ color: '#FF9933' }}>Rozgar</span><span style={{ color: '#6ee87b' }}>Setu</span>
           </h1>
         </div>
-        <div className="rs-nav-right flex items-center gap-8">
+        <div className="rs-nav-right flex items-center gap-3 md:gap-8 min-w-0">
           <ul className="rs-navbar-links" style={{ display: 'flex', alignItems: 'center', gap: '1.4rem', listStyle: 'none', margin: 0, padding: 0 }}>
               {/* ── Guest (not logged in) ── */}
               {!user && (
@@ -100,12 +100,6 @@ const Navbar = () => {
                 </>
               )}
           </ul>
-
-          {user && user.role === "Worker" && (
-            <div className="shrink-0 flex items-center">
-              <NotificationBell />
-            </div>
-          )}
 
           {!user ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
@@ -148,7 +142,9 @@ const Navbar = () => {
               </Link>
             </div>
           ) : (
-            <Popover>
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 ml-auto">
+              {user.role === "Worker" && <NotificationBell />}
+              <Popover>
               <PopoverTrigger asChild>
                 <Avatar className="cursor-pointer ring-2 ring-transparent hover:ring-[rgba(255,153,51,0.45)] transition-[box-shadow]">
                   <AvatarImage src={user?.profilePhoto} alt="@shadcn" />
@@ -196,6 +192,7 @@ const Navbar = () => {
                 </div>
               </PopoverContent>
             </Popover>
+            </div>
           )}
         </div>
       </div>
