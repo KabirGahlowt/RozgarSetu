@@ -66,6 +66,12 @@ app.use(cors(corsOption));
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "0.0.0.0";
 
+// Root health for uptime monitors (HEAD must not 405 — many monitors use HEAD on /)
+app.head("/", (_req, res) => res.status(200).end());
+app.get("/", (_req, res) =>
+    res.status(200).json({ ok: true, service: "RozgarSetu backend" })
+);
+
 //api's
 app.use("/api/v1/user",userRoute);
 app.use("/api/v1/worker",workerRoute); 

@@ -3,6 +3,7 @@ FastAPI Backend for RozgarSetu
 """
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Union, Any
@@ -75,6 +76,12 @@ class WorkersForJobRequest(BaseModel):
 @app.get("/")
 def root():
     return {"message": "RozgarSetu API - RAG-Enhanced Hybrid Recommender"}
+
+
+@app.head("/")
+def root_head():
+    """UptimeRobot free tier uses HEAD; must return 200 with no body (not 405)."""
+    return Response(status_code=200)
 
 
 @app.post("/api/parse-query")
