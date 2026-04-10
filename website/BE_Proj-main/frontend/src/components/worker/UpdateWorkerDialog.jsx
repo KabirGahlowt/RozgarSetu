@@ -46,6 +46,17 @@ const UpdateWorkerDialog = ({ open, setOpen }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    if (
+      !String(input.fullname ?? "").trim() ||
+      !String(input.phoneNumber ?? "").trim() ||
+      !String(input.address ?? "").trim() ||
+      !String(input.pincode ?? "").trim() ||
+      !String(input.avaliability ?? "").trim() ||
+      String(input.experienceYears ?? "").trim() === ""
+    ) {
+      toast.error(t("auth.fillRequired"));
+      return;
+    }
     const formData = new FormData();
     formData.append("fullname", input.fullname);
     formData.append("address", input.address);
@@ -100,6 +111,9 @@ const UpdateWorkerDialog = ({ open, setOpen }) => {
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="name" className="text-right">
                   {t("workerProfile.fieldName")}
+                  <span style={{ color: "#f87171" }} aria-hidden>
+                    {" *"}
+                  </span>
                 </Label>
                 <Input
                   id="name"
@@ -115,6 +129,9 @@ const UpdateWorkerDialog = ({ open, setOpen }) => {
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="number" className="text-right">
                   {t("profile.phone")}
+                  <span style={{ color: "#f87171" }} aria-hidden>
+                    {" *"}
+                  </span>
                 </Label>
                 <Input
                   id="number"
@@ -129,6 +146,9 @@ const UpdateWorkerDialog = ({ open, setOpen }) => {
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="address" className="text-right">
                   {t("profile.address")}
+                  <span style={{ color: "#f87171" }} aria-hidden>
+                    {" *"}
+                  </span>
                 </Label>
                 <Input
                   id="address"
@@ -143,6 +163,9 @@ const UpdateWorkerDialog = ({ open, setOpen }) => {
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="pincode" className="text-right">
                   {t("profile.pincode")}
+                  <span style={{ color: "#f87171" }} aria-hidden>
+                    {" *"}
+                  </span>
                 </Label>
                 <Input
                   id="pincode"
@@ -157,6 +180,9 @@ const UpdateWorkerDialog = ({ open, setOpen }) => {
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="avaliability" className="text-right">
                   {t("workerProfile.availability")}
+                  <span style={{ color: "#f87171" }} aria-hidden>
+                    {" *"}
+                  </span>
                 </Label>
                 <Input
                   id="avaliability"
@@ -172,6 +198,9 @@ const UpdateWorkerDialog = ({ open, setOpen }) => {
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="experienceYears" className="text-right">
                   {t("workerProfile.yearsOfExperience")}
+                  <span style={{ color: "#f87171" }} aria-hidden>
+                    {" *"}
+                  </span>
                 </Label>
                 <Input
                   id="experienceYears"

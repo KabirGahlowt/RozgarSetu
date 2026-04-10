@@ -163,6 +163,7 @@
     "statusCompleted": "पूर्ण"
   },
   "auth": {
+    "fillRequired": "कृपया सर्व आवश्यक फील्ड भरा (* खुणा असलेले).",
     "selectRole": "कृपया भूमिका निवडा",
     "somethingWrong": "काहीतरी चुकले!",
     "welcome": "परत",
@@ -190,6 +191,9 @@
     "city": "शहर",
     "enterCity": "तुमचे शहर टाका",
     "enterPincode": "तुमचा पिनकोड टाका",
-    "createPassword": "पासवर्ड तयार करा"
+    "createPassword": "पासवर्ड तयार करा",
+    "enterAddress": "तुमचा पत्ता टाका (रस्ता, परिसर, लँडमार्क)",
+    "enterSkills": "उदा. स्वयंपाक, प्लंबिंग, इलेक्ट्रिशियन",
+    "enterYearsExperience": "वर्षे (उदा. 3)"
   }
 }
