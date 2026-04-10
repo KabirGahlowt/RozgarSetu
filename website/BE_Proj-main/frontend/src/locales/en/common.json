@@ -1,0 +1,161 @@
+{
+  "nav": {
+    "home": "Home",
+    "browseWorkers": "Browse Workers",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "workers": "Workers",
+    "history": "History",
+    "login": "Login",
+    "signup": "Sign Up",
+    "logout": "Logout",
+    "workerAccount": "Worker account",
+    "admin": "Administrator",
+    "clientAccount": "Client account",
+    "roleWorker": "Worker",
+    "roleAdmin": "Admin",
+    "roleClient": "Client"
+  },
+  "language": {
+    "label": "Language",
+    "english": "EN",
+    "hindi": "HI",
+    "marathi": "MR",
+    "tamil": "TA",
+    "telugu": "TE",
+    "kannada": "KN",
+    "englishFull": "English",
+    "hindiFull": "Hindi",
+    "marathiFull": "Marathi",
+    "tamilFull": "Tamil",
+    "teluguFull": "Telugu",
+    "kannadaFull": "Kannada",
+    "popupTitle": "Choose your language",
+    "popupSubtitle": "We will show the app in your selected language."
+  },
+  "hero": {
+    "brand": "Rozgar Setu",
+    "badge": "Rozgar Setu — India's employment platform",
+    "heading": {
+      "connecting": "Connecting",
+      "skilledHands": "skilled hands",
+      "to": "to",
+      "opportunities": "opportunities",
+      "acrossIndia": "across India"
+    },
+    "subtitle": {
+      "prefix": "Find verified, skilled workers near you — plumbers, electricians, cooks and more. A modern, inclusive, multilingual gig portal built for",
+      "bharat": "Bharat"
+    },
+    "search": {
+      "skillPlaceholder": "Skill (e.g. Cook, Electrician)",
+      "locationPlaceholder": "Location (e.g. Pune, Delhi)",
+      "search": "Search",
+      "try": "Try:"
+    },
+    "quick": {
+      "plumber": "Plumber",
+      "electrician": "Electrician",
+      "cook": "Cook",
+      "carpenter": "Carpenter",
+      "painter": "Painter",
+      "driver": "Driver"
+    },
+    "stats": {
+      "multilingual": "Multilingual support",
+      "avgRating": "Avg Rating",
+      "trusted": "Trusted",
+      "onlyTrusted": "Only trusted workers"
+    },
+    "guest": {
+      "joinText": "Join thousands of workers and clients across India",
+      "signupFree": "Sign Up Free",
+      "freeToJoin": "Free to join",
+      "onlyTrusted": "Only trusted workers",
+      "madeForBharat": "Made for Bharat"
+    }
+  },
+  "category": {
+    "heading": "Browse by",
+    "accent": "Category",
+    "sub": "Tap a skill to find workers instantly"
+  },
+  "latest": {
+    "heading": "Top Rated",
+    "accent": "Workers",
+    "sub": "Highest-rated professionals in your area",
+    "viewAll": "View All",
+    "empty": "No workers available yet."
+  },
+  "footer": {
+    "copyright": "© 2025 RozgarSetu. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "workers": {
+    "title": "Find",
+    "titleAccent": "Skilled Workers",
+    "available": "workers available",
+    "clearSearch": "Clear search",
+    "hideFilters": "Hide filters",
+    "showFilters": "Show filters",
+    "noWorkers": "No workers found",
+    "adjustFilters": "Try adjusting your filters or search terms"
+  },
+  "profile": {
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "pincode": "Pincode",
+    "edit": "Edit",
+    "none": "—",
+    "workers": "Workers",
+    "hired": "Hired"
+  },
+  "history": {
+    "yourReview": "Your Review",
+    "loading": "Loading…",
+    "noComment": "No comment.",
+    "notReviewed": "You haven't reviewed this worker yet.",
+    "giveReview": "Give Review",
+    "editReview": "Edit Review",
+    "viewProfile": "View Profile",
+    "hiring": "Hiring",
+    "title": "History",
+    "subtitle": "All your previous and ongoing hire requests",
+    "loadingYourHistory": "Loading your history…",
+    "empty": "You have no hiring history yet."
+  },
+  "workerRequests": {
+    "accept": "Accept",
+    "reject": "Reject",
+    "markJobDone": "Mark job done"
+  },
+  "auth": {
+    "selectRole": "Please select a role",
+    "somethingWrong": "Something went wrong!",
+    "welcome": "Welcome",
+    "back": "Back",
+    "signInContinue": "Sign in to continue to RozgarSetu",
+    "signInAs": "Sign in as",
+    "roleClientDesc": "Hire workers",
+    "roleWorkerDesc": "Find jobs",
+    "roleAdminDesc": "Manage platform",
+    "phoneNumber": "Phone Number",
+    "email": "Email",
+    "enterPhone": "Enter phone number",
+    "enterEmail": "Enter your email",
+    "password": "Password",
+    "enterPassword": "Enter your password",
+    "pleaseWait": "Please wait…",
+    "or": "or",
+    "createAccount": "Create New Account",
+    "noAccount": "Don't have an account?",
+    "signupError": "An error occurred during signup",
+    "join": "Join",
+    "marketplace": "India's inclusive gig marketplace",
+    "iAm": "I am a",
+    "profilePhotoOptional": "Profile Photo (optional)",
+    "haveAccount": "Already have an account?"
+  }
+}

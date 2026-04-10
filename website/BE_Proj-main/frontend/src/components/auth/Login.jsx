@@ -11,14 +11,15 @@ import { setLoading, setUser } from "../../redux/authSlice";
 import { Loader2, LogIn, Mail, Phone, Lock, UserCircle2, Briefcase, Shield } from "lucide-react";
 import Footer from "../shared/Footer";
 import { setSingleWorker } from "../../redux/workSlice";
-
-const ROLE_OPTIONS = [
-  { value: "Client", label: "Client", icon: UserCircle2, desc: "Hire workers" },
-  { value: "Worker", label: "Worker", icon: Briefcase, desc: "Find jobs" },
-  { value: "admin",  label: "Admin",  icon: Shield,      desc: "Manage platform" },
-];
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
+  const { t } = useTranslation();
+  const ROLE_OPTIONS = [
+    { value: "Client", label: t("nav.roleClient"), icon: UserCircle2, desc: t("auth.roleClientDesc") },
+    { value: "Worker", label: t("nav.roleWorker"), icon: Briefcase, desc: t("auth.roleWorkerDesc") },
+    { value: "admin", label: t("nav.roleAdmin"), icon: Shield, desc: t("auth.roleAdminDesc") },
+  ];
   const [input, setInput] = useState({ email: "", phoneNumber: "", password: "", role: "" });
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const Login = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (!input.role) { toast.error("Please select a role"); return; }
+    if (!input.role) { toast.error(t("auth.selectRole")); return; }
     try {
       dispatch(setLoading(true));
       let API = input.role === "Client" ? USER_API_END_POINT
@@ -49,7 +50,7 @@ const Login = () => {
         toast.success(res.data.message);
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || "Something went wrong!");
+      toast.error(error.response?.data?.message || t("auth.somethingWrong"));
     } finally {
       dispatch(setLoading(false));
     }
@@ -70,15 +71,15 @@ const Login = () => {
           {/* Header */}
           <div style={{ textAlign: "center", marginBottom: "2rem" }}>
             <h1 style={{ fontFamily: "var(--rs-font)", fontSize: "1.75rem", fontWeight: 700, color: "#fff", margin: "0 0 0.4rem" }}>
-              Welcome <span style={{ color: "var(--rs-saffron)" }}>Back</span>
+              {t("auth.welcome")} <span style={{ color: "var(--rs-saffron)" }}>{t("auth.back")}</span>
             </h1>
-            <p style={{ color: "var(--rs-text-muted)", fontSize: "0.85rem", margin: 0 }}>Sign in to continue to RozgarSetu</p>
+            <p style={{ color: "var(--rs-text-muted)", fontSize: "0.85rem", margin: 0 }}>{t("auth.signInContinue")}</p>
           </div>
 
           <form onSubmit={submitHandler}>
             {/* Role selector cards */}
             <div style={{ marginBottom: "1.5rem" }}>
-              <label className="rs-label">Sign in as</label>
+              <label className="rs-label">{t("auth.signInAs")}</label>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0.5rem" }}>
                 {ROLE_OPTIONS.map(({ value, label, icon: Icon, desc }) => (
                   <button
@@ -103,7 +104,7 @@ const Login = () => {
 
             {/* Email / Phone */}
             <div style={{ marginBottom: "1rem" }}>
-              <label className="rs-label">{input.role === "Worker" ? "Phone Number" : "Email"}</label>
+              <label className="rs-label">{input.role === "Worker" ? t("auth.phoneNumber") : t("auth.email")}</label>
               <div style={{ position: "relative" }}>
                 <span style={{ position: "absolute", left: "0.85rem", top: "50%", transform: "translateY(-50%)", color: "var(--rs-text-muted)", display: "flex" }}>
                   {input.role === "Worker" ? <Phone size={15} /> : <Mail size={15} />}
@@ -114,14 +115,14 @@ const Login = () => {
                   name={input.role === "Worker" ? "phoneNumber" : "email"}
                   value={input.role === "Worker" ? input.phoneNumber : input.email}
                   onChange={changeEventHandler}
-                  placeholder={input.role === "Worker" ? "Enter phone number" : "Enter your email"}
+                  placeholder={input.role === "Worker" ? t("auth.enterPhone") : t("auth.enterEmail")}
                 />
               </div>
             </div>
 
             {/* Password */}
             <div style={{ marginBottom: "1.5rem" }}>
-              <label className="rs-label">Password</label>
+              <label className="rs-label">{t("auth.password")}</label>
               <div style={{ position: "relative" }}>
                 <span style={{ position: "absolute", left: "0.85rem", top: "50%", transform: "translateY(-50%)", color: "var(--rs-text-muted)", display: "flex" }}>
                   <Lock size={15} />
@@ -129,7 +130,7 @@ const Login = () => {
                 <input
                   className="rs-input" style={{ paddingLeft: "2.4rem" }}
                   type="password" name="password" value={input.password}
-                  onChange={changeEventHandler} placeholder="Enter your password"
+                  onChange={changeEventHandler} placeholder={t("auth.enterPassword")}
                 />
               </div>
             </div>
@@ -140,13 +141,13 @@ const Login = () => {
               style={{ width: "100%", padding: "0.8rem", fontSize: "0.95rem", marginBottom: "1rem", justifyContent: "center" }}
               disabled={loading}
             >
-              {loading ? <><Loader2 size={16} style={{ animation: "spin 1s linear infinite" }} /> Please wait…</> : <><LogIn size={16} /> Login</>}
+              {loading ? <><Loader2 size={16} style={{ animation: "spin 1s linear infinite" }} /> {t("auth.pleaseWait")}</> : <><LogIn size={16} /> {t("nav.login")}</>}
             </button>
 
             {/* Divider */}
             <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
               <div style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.1)" }} />
-              <span style={{ fontSize: "0.75rem", color: "var(--rs-text-muted)" }}>or</span>
+              <span style={{ fontSize: "0.75rem", color: "var(--rs-text-muted)" }}>{t("auth.or")}</span>
               <div style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.1)" }} />
             </div>
 
@@ -164,13 +165,13 @@ const Login = () => {
                 onMouseEnter={(e) => { e.target.style.background = "rgba(255,153,51,0.1)"; e.target.style.borderColor = "#FF9933"; }}
                 onMouseLeave={(e) => { e.target.style.background = "transparent"; e.target.style.borderColor = "rgba(255,153,51,0.4)"; }}
               >
-                Create New Account →
+                {t("auth.createAccount")} →
               </button>
             </Link>
 
             <p style={{ textAlign: "center", fontSize: "0.78rem", color: "var(--rs-text-muted)", margin: 0 }}>
-              Don't have an account?{" "}
-              <Link to="/signup" style={{ color: "var(--rs-saffron)", fontWeight: 600, textDecoration: "none" }}>Sign Up</Link>
+              {t("auth.noAccount")}{" "}
+              <Link to="/signup" style={{ color: "var(--rs-saffron)", fontWeight: 600, textDecoration: "none" }}>{t("nav.signup")}</Link>
             </p>
           </form>
         </div>

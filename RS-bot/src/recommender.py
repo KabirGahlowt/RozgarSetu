@@ -202,7 +202,7 @@ class RozgarSetuRecommender:
             candidate_jobs = self._filter_jobs(query)
         
         if not candidate_jobs:
-            return {'matches': [], 'target_coords': target_coords}
+            return {"matches": [], "target_coords": target_coords, "empty_reason": None}
         
         # Get all available workers
         workers_df = self.data_loader.get_all_workers()
@@ -256,7 +256,42 @@ class RozgarSetuRecommender:
                     'lat': map_lat,
                     'lng': map_lng,
                 })
-        
+
+        # If the query names specific skills, drop workers who do not match any of them.
+        if query and query.get("skills"):
+            all_matches = [
+                m
+                for m in all_matches
+                if _query_skill_overlap(query, m.get("skills") or []) > 0
+            ]
+            if not all_matches:
+                return {
+                    "matches": [],
+                    "target_coords": target_coords,
+                    "empty_reason": "no_skill_match",
+                }
+
+        # Optional minimum star rating from natural language (e.g. "rating more than 3").
+        if query and query.get("min_rating") is not None:
+            try:
+                min_r = float(query["min_rating"])
+            except (TypeError, ValueError):
+                min_r = None
+            strict = bool(query.get("min_rating_strict"))
+            if min_r is not None:
+
+                def _rating_ok(m: Dict) -> bool:
+                    r = float(m.get("rating") or 0)
+                    return r > min_r if strict else r >= min_r
+
+                all_matches = [m for m in all_matches if _rating_ok(m)]
+                if not all_matches:
+                    return {
+                        "matches": [],
+                        "target_coords": target_coords,
+                        "empty_reason": "no_rating_match",
+                    }
+
         # Rank: primary = skill match, then (if search pin exists) geocoded + closer workers,
         # then blended score (CBF-heavy) so skills > distance > rating.
         def _rank_key(m: Dict) -> Tuple:
@@ -292,8 +327,31 @@ class RozgarSetuRecommender:
                 seen_workers.add(match['worker_id'])
                 if len(unique_matches) >= top_k:
                     break
-        
-        return {'matches': unique_matches, 'target_coords': target_coords}
+
+        # Final order: closer workers first; experience breaks ties (distance > experience vs raw score).
+        def _distance_over_experience_key(m: Dict) -> Tuple:
+            overlap = _query_skill_overlap(query, m.get("skills") or [])
+            if overlap >= 0.7:
+                skill_tier = 0
+            elif overlap >= 0.3:
+                skill_tier = 1
+            else:
+                skill_tier = 2
+            has_pin = target_coords is not None
+            dk = m.get("distance_km")
+            has_dist = dk is not None
+            geo_tier = 1 if (has_pin and not has_dist) else 0
+            dist_key = float(dk) if has_dist else float("inf")
+            exp = float(m.get("experience_years") or 0)
+            return (skill_tier, geo_tier, dist_key, -exp)
+
+        unique_matches.sort(key=_distance_over_experience_key)
+
+        return {
+            "matches": unique_matches,
+            "target_coords": target_coords,
+            "empty_reason": None,
+        }
 
     def get_map_features(
         self,

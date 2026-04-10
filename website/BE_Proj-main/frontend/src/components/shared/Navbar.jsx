@@ -11,6 +11,7 @@ import { LogOut, User2 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 import {
   USER_API_END_POINT,
   ADMIN_API_END_POINT,
@@ -24,6 +25,16 @@ const Navbar = () => {
   const { user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const languages = ["en", "hi", "mr", "ta", "te", "kn"];
+  const languageLabelMap = {
+    en: t("language.english"),
+    hi: t("language.hindi"),
+    mr: t("language.marathi"),
+    ta: t("language.tamil"),
+    te: t("language.telugu"),
+    kn: t("language.kannada"),
+  };
 
   const logoutHandler = async () => {
     try {
@@ -71,38 +82,51 @@ const Navbar = () => {
               {/* ── Guest (not logged in) ── */}
               {!user && (
                 <>
-                  <li><Link to="/" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500, transition: 'color 0.2s' }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>Home</Link></li>
-                  <li><Link to="/workers" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>Browse Workers</Link></li>
+                  <li><Link to="/" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500, transition: 'color 0.2s' }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>{t("nav.home")}</Link></li>
+                  <li><Link to="/workers" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>{t("nav.browseWorkers")}</Link></li>
                 </>
               )}
               {/* ── Admin ── */}
               {user && user.role === "admin" && (
                 <>
-                  <li><Link to="/" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500, transition: 'color 0.2s' }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>Home</Link></li>
-                  <li><Link to="/admin/dashboard" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>Dashboard</Link></li>
+                  <li><Link to="/" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500, transition: 'color 0.2s' }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>{t("nav.home")}</Link></li>
+                  <li><Link to="/admin/dashboard" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>{t("nav.dashboard")}</Link></li>
                 </>
               )}
               {/* ── Worker ── */}
               {user && user.role === "Worker" && (
                 <>
-                  <li><Link to="/" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500, transition: 'color 0.2s' }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>Home</Link></li>
+                  <li><Link to="/" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500, transition: 'color 0.2s' }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>{t("nav.home")}</Link></li>
                   <li>
-                    <Link to="/worker/profile" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>Profile</Link>
+                    <Link to="/worker/profile" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>{t("nav.profile")}</Link>
                   </li>
                 </>
               )}
               {/* ── Client ── */}
               {user && user.role === "Client" && (
                 <>
-                  <li><Link to="/" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>Home</Link></li>
-                  <li><Link to="/workers" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>Workers</Link></li>
-                  <li><Link to="/history" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>History</Link></li>
+                  <li><Link to="/" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>{t("nav.home")}</Link></li>
+                  <li><Link to="/workers" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>{t("nav.workers")}</Link></li>
+                  <li><Link to="/history" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.88rem', fontWeight: 500 }} onMouseEnter={e=>e.target.style.color='#FF9933'} onMouseLeave={e=>e.target.style.color='rgba(255,255,255,0.8)'}>{t("nav.history")}</Link></li>
                 </>
               )}
           </ul>
 
           {!user ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+              <div style={{ marginRight: "0.2rem" }}>
+                <select
+                  value={i18n.language}
+                  onChange={(e) => i18n.changeLanguage(e.target.value)}
+                  style={{ padding: "0.24rem 0.45rem", borderRadius: "999px", border: "1px solid rgba(255,153,51,0.35)", color: "#fff", fontSize: "0.7rem", background: "rgba(2,8,30,0.85)" }}
+                >
+                  {languages.map((lng) => (
+                    <option key={lng} value={lng} style={{ background: "#02081e", color: "#fff" }}>
+                      {languageLabelMap[lng]}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <Link to="/login">
                 <button style={{
                   padding: '0.45rem 1.2rem',
@@ -119,7 +143,7 @@ const Navbar = () => {
                 }}
                 onMouseEnter={e=>{e.target.style.background='rgba(255,153,51,0.2)'; e.target.style.borderColor='#FF9933';}}
                 onMouseLeave={e=>{e.target.style.background='rgba(255,255,255,0.08)'; e.target.style.borderColor='rgba(255,153,51,0.35)';}}>
-                  Login
+                  {t("nav.login")}
                 </button>
               </Link>
               <Link to="/signup">
@@ -137,12 +161,25 @@ const Navbar = () => {
                 }}
                 onMouseEnter={e=>e.target.style.opacity='0.9'}
                 onMouseLeave={e=>e.target.style.opacity='1'}>
-                  Sign Up
+                  {t("nav.signup")}
                 </button>
               </Link>
             </div>
           ) : (
             <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 ml-auto">
+              <div style={{ marginRight: "0.25rem" }}>
+                <select
+                  value={i18n.language}
+                  onChange={(e) => i18n.changeLanguage(e.target.value)}
+                  style={{ padding: "0.24rem 0.45rem", borderRadius: "999px", border: "1px solid rgba(255,153,51,0.35)", color: "#fff", fontSize: "0.7rem", background: "rgba(2,8,30,0.85)" }}
+                >
+                  {languages.map((lng) => (
+                    <option key={lng} value={lng} style={{ background: "#02081e", color: "#fff" }}>
+                      {languageLabelMap[lng]}
+                    </option>
+                  ))}
+                </select>
+              </div>
               {user.role === "Worker" && <NotificationBell />}
               <Popover>
               <PopoverTrigger asChild>
@@ -164,11 +201,11 @@ const Navbar = () => {
                     <div className="min-w-0 flex-1">
                       <h4 className="font-semibold text-[0.95rem] text-white truncate" style={{ fontFamily: "'Poppins',sans-serif" }}>{user?.fullname}</h4>
                       <p className="text-xs text-[rgba(255,255,255,0.5)] mt-0.5 line-clamp-2" style={{ fontFamily: "'Poppins',sans-serif" }}>
-                        {user?.address || (user?.role === "Worker" ? "Worker account" : user?.role === "admin" ? "Administrator" : "Client account")}
+                        {user?.address || (user?.role === "Worker" ? t("nav.workerAccount") : user?.role === "admin" ? t("nav.admin") : t("nav.clientAccount"))}
                       </p>
                       {user?.role && (
                         <span className="inline-block mt-1.5 text-[0.65rem] font-medium uppercase tracking-wider px-2 py-0.5 rounded-full bg-[rgba(19,136,8,0.15)] text-[#6ee87b] border border-[rgba(19,136,8,0.25)]">
-                          {user.role === "Worker" ? "Worker" : user.role === "admin" ? "Admin" : "Client"}
+                          {user.role === "Worker" ? t("nav.roleWorker") : user.role === "admin" ? t("nav.roleAdmin") : t("nav.roleClient")}
                         </span>
                       )}
                     </div>
@@ -179,14 +216,14 @@ const Navbar = () => {
                     <div className="flex items-center rounded-lg hover:bg-[rgba(255,153,51,0.08)] transition-colors">
                       <User2 className="ml-2 h-4 w-4 text-[#FF9933]" />
                       <Button variant="link" className="justify-start text-white hover:text-[#FF9933] hover:no-underline flex-1" asChild>
-                        <Link to="/profile">Profile</Link>
+                        <Link to="/profile">{t("nav.profile")}</Link>
                       </Button>
                     </div>
                   )}
                   <div className="flex items-center rounded-lg hover:bg-[rgba(255,153,51,0.08)] transition-colors">
                     <LogOut className="ml-2 h-4 w-4 text-[rgba(255,255,255,0.55)]" />
                     <Button onClick={logoutHandler} variant="link" className="justify-start text-[rgba(255,255,255,0.85)] hover:text-[#FF9933] hover:no-underline flex-1">
-                      Logout
+                      {t("nav.logout")}
                     </Button>
                   </div>
                 </div>

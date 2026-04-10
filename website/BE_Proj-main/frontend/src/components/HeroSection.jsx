@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchQuery } from "../redux/workSlice";
 import { useNavigate, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 /* ─────────────── GLOBE CANVAS COMPONENT ─────────────── */
 const GlobeBackground = () => {
@@ -277,6 +278,7 @@ function checkLandMass(lat, lon) {
 
 /* ─────────────── MAIN HERO SECTION ─────────────── */
 const HeroSection = () => {
+  const { t } = useTranslation();
   const [skill, setSkill] = useState("");
   const [location, setLocation] = useState("");
   const [focused, setFocused] = useState(null);
@@ -294,11 +296,18 @@ const HeroSection = () => {
     if (e.key === "Enter") searchWorkerHandler();
   };
 
-  const pills = ["Plumber", "Electrician", "Cook", "Carpenter", "Painter", "Driver"];
+  const pills = [
+    t("hero.quick.plumber"),
+    t("hero.quick.electrician"),
+    t("hero.quick.cook"),
+    t("hero.quick.carpenter"),
+    t("hero.quick.painter"),
+    t("hero.quick.driver"),
+  ];
   const stats = [
-    { icon: Languages, value: "5", label: "Multilingual support" },
-    { icon: Star, value: "4.8★", label: "Avg Rating" },
-    { icon: Shield, value: "Trusted", label: "Only trusted workers" },
+    { icon: Languages, value: "6", label: t("hero.stats.multilingual") },
+    { icon: Star, value: "4.8★", label: t("hero.stats.avgRating") },
+    { icon: Shield, value: t("hero.stats.trusted"), label: t("hero.stats.onlyTrusted") },
   ];
 
   return (
@@ -662,24 +671,23 @@ const HeroSection = () => {
           {/* Badge */}
           <div className="liq-glass badge-pill">
             <Sparkles size={12} style={{ color: "#FF9933" }} />
-            <span>Rozgar Setu — भारत का रोज़गार मंच</span>
+            <span>{t("hero.badge")}</span>
           </div>
 
           {/* Heading */}
           <h1 className="hero-h1">
-            Connecting{" "}
-            <span className="saffron">skilled hands</span>
+            {t("hero.heading.connecting")}{" "}
+            <span className="saffron">{t("hero.heading.skilledHands")}</span>
             <br />
-            to{" "}
-            <em>opportunities</em>{" "}
-            <span className="green">across India</span>
+            {t("hero.heading.to")}{" "}
+            <em>{t("hero.heading.opportunities")}</em>{" "}
+            <span className="green">{t("hero.heading.acrossIndia")}</span>
           </h1>
 
           {/* Subtitle */}
           <p className="hero-sub">
-            Find verified, skilled workers near you — plumbers, electricians,
-            cooks and more. A modern, inclusive, multilingual gig portal built
-            for <strong style={{ color: "rgba(255,220,160,0.9)" }}>Bharat</strong>.
+            {t("hero.subtitle.prefix")}{" "}
+            <strong style={{ color: "rgba(255,220,160,0.9)" }}>{t("hero.subtitle.bharat")}</strong>.
           </p>
 
           {/* Search bar — only for logged-in users */}
@@ -693,7 +701,7 @@ const HeroSection = () => {
                   <Search size={16} className="search-icon" />
                   <input
                     type="text"
-                    placeholder="Skill (e.g. Cook, Electrician)"
+                    placeholder={t("hero.search.skillPlaceholder")}
                     value={skill}
                     onChange={(e) => setSkill(e.target.value)}
                     onKeyDown={handleKeyDown}
@@ -705,7 +713,7 @@ const HeroSection = () => {
                   <MapPin size={16} className="search-icon" />
                   <input
                     type="text"
-                    placeholder="Location (e.g. Pune, Delhi)"
+                    placeholder={t("hero.search.locationPlaceholder")}
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     onKeyDown={handleKeyDown}
@@ -715,14 +723,14 @@ const HeroSection = () => {
                 </div>
                 <button className="search-btn" onClick={searchWorkerHandler}>
                   <Search size={15} />
-                  <span>Search</span>
+                  <span>{t("hero.search.search")}</span>
                 </button>
               </div>
 
               {/* Quick skill pills */}
               <div className="quick-pills">
                 <span style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.4)", marginRight: "0.3rem", alignSelf: "center" }}>
-                  Try:
+                  {t("hero.search.try")}
                 </span>
                 {pills.map((p) => (
                   <button
@@ -740,7 +748,7 @@ const HeroSection = () => {
             /* ── Guest CTA ── */
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem", marginBottom: "3rem", animation: "fadeSlideUp 0.9s ease 0.3s both" }}>
               <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.88rem", margin: 0, fontFamily: "'Poppins',sans-serif" }}>
-                Join thousands of workers and clients across India
+                {t("hero.guest.joinText")}
               </p>
               <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}>
                 <Link to="/login" style={{ textDecoration: "none" }}>
@@ -759,7 +767,7 @@ const HeroSection = () => {
                     onMouseEnter={(e) => { e.currentTarget.style.background="rgba(255,153,51,0.18)"; e.currentTarget.style.borderColor="#FF9933"; e.currentTarget.style.transform="translateY(-2px)"; }}
                     onMouseLeave={(e) => { e.currentTarget.style.background="rgba(255,255,255,0.08)"; e.currentTarget.style.borderColor="rgba(255,153,51,0.5)"; e.currentTarget.style.transform="translateY(0)"; }}
                   >
-                    <LogIn size={18} /> Login
+                    <LogIn size={18} /> {t("nav.login")}
                   </button>
                 </Link>
                 <Link to="/signup" style={{ textDecoration: "none" }}>
@@ -777,15 +785,15 @@ const HeroSection = () => {
                     onMouseEnter={(e) => { e.currentTarget.style.transform="translateY(-2px)"; e.currentTarget.style.boxShadow="0 12px 40px rgba(255,153,51,0.55)"; }}
                     onMouseLeave={(e) => { e.currentTarget.style.transform="translateY(0)"; e.currentTarget.style.boxShadow="0 8px 32px rgba(255,153,51,0.4)"; }}
                   >
-                    <UserPlus size={18} /> Sign Up Free
+                    <UserPlus size={18} /> {t("hero.guest.signupFree")}
                   </button>
                 </Link>
               </div>
               <div style={{ display: "flex", gap: "1.5rem", marginTop: "0.5rem" }}>
                 {[
-                  { emoji: "✅", text: "Free to join" },
-                  { emoji: "🤝", text: "Only trusted workers" },
-                  { emoji: "🇮🇳", text: "Made for Bharat" },
+                  { emoji: "✅", text: t("hero.guest.freeToJoin") },
+                  { emoji: "🤝", text: t("hero.guest.onlyTrusted") },
+                  { emoji: "🇮🇳", text: t("hero.guest.madeForBharat") },
                 ].map(({ emoji, text }) => (
                   <span key={text} style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.45)", fontFamily: "'Poppins',sans-serif" }}>
                     {emoji} {text}
@@ -823,7 +831,7 @@ const HeroSection = () => {
               return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(255,255,255,0.6)" strokeWidth="1.5"/>;
             })}
           </svg>
-          <span>Rozgar Setu</span>
+          <span>{t("hero.brand")}</span>
           <svg className="chakra-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="46" stroke="rgba(255,255,255,0.6)" strokeWidth="2"/>
             <circle cx="50" cy="50" r="8" stroke="rgba(255,255,255,0.6)" strokeWidth="2"/>

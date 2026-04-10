@@ -8,6 +8,7 @@ import { Star, Clock, CheckCircle, XCircle, MapPin, Briefcase, Pen, Eye, Message
 import { useNavigate } from "react-router-dom";
 import ReviewDialog from "./ReviewDialog";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const StarDisplay = ({ rating, size = 13 }) => (
   <div style={{ display: "flex", gap: "2px" }}>
@@ -25,6 +26,7 @@ const statusConfig = {
 };
 
 const HistoryItem = ({ application, user, onGiveReview, onEditReview }) => {
+  const { t } = useTranslation();
   const worker = application.worker;
   const navigate = useNavigate();
   const [review, setReview] = useState(null);
@@ -91,12 +93,12 @@ const HistoryItem = ({ application, user, onGiveReview, onEditReview }) => {
 
       {/* Review box */}
       <div className="rs-glass" style={{ padding: "0.85rem", borderRadius: "0.75rem", marginBottom: "0.85rem" }}>
-        <p style={{ margin: "0 0 0.4rem", fontSize: "0.75rem", fontWeight: 600, color: "var(--rs-text-muted)", textTransform: "uppercase", letterSpacing: "0.07em", fontFamily: "var(--rs-font)" }}>Your Review</p>
+        <p style={{ margin: "0 0 0.4rem", fontSize: "0.75rem", fontWeight: 600, color: "var(--rs-text-muted)", textTransform: "uppercase", letterSpacing: "0.07em", fontFamily: "var(--rs-font)" }}>{t("history.yourReview")}</p>
         {loadingReview
-          ? <p style={{ margin: 0, color: "var(--rs-text-muted)", fontSize: "0.82rem" }}>Loading…</p>
+          ? <p style={{ margin: 0, color: "var(--rs-text-muted)", fontSize: "0.82rem" }}>{t("history.loading")}</p>
           : review
-            ? <><StarDisplay rating={review.rating} /><p style={{ margin: "0.35rem 0 0", fontSize: "0.82rem", color: "var(--rs-text-secondary)", fontFamily: "var(--rs-font)" }}>{review.comment || "No comment."}</p></>
-            : <p style={{ margin: 0, fontSize: "0.82rem", color: "var(--rs-text-muted)", fontFamily: "var(--rs-font)" }}>You haven't reviewed this worker yet.</p>
+            ? <><StarDisplay rating={review.rating} /><p style={{ margin: "0.35rem 0 0", fontSize: "0.82rem", color: "var(--rs-text-secondary)", fontFamily: "var(--rs-font)" }}>{review.comment || t("history.noComment")}</p></>
+            : <p style={{ margin: 0, fontSize: "0.82rem", color: "var(--rs-text-muted)", fontFamily: "var(--rs-font)" }}>{t("history.notReviewed")}</p>
         }
       </div>
 
@@ -104,16 +106,16 @@ const HistoryItem = ({ application, user, onGiveReview, onEditReview }) => {
       <div style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap", justifyContent: "flex-end" }}>
         {!review && application.status === "Accepted" && (
           <button onClick={() => onGiveReview(worker._id)} className="rs-btn-primary" style={{ padding: "0.45rem 1rem", fontSize: "0.8rem", display: "flex", alignItems: "center", gap: "0.35rem" }}>
-            <MessageSquare size={13} /> Give Review
+            <MessageSquare size={13} /> {t("history.giveReview")}
           </button>
         )}
         {review && application.status === "Accepted" && (
           <button onClick={() => onEditReview(worker._id, review)} className="rs-btn-outline" style={{ padding: "0.45rem 1rem", fontSize: "0.8rem", display: "flex", alignItems: "center", gap: "0.35rem", borderColor: "rgba(255,153,51,0.5)", color: "#FF9933" }}>
-            <Pen size={13} /> Edit Review
+            <Pen size={13} /> {t("history.editReview")}
           </button>
         )}
         <button onClick={() => navigate(`/description/${worker._id}`)} className="rs-btn-outline" style={{ padding: "0.45rem 1rem", fontSize: "0.8rem", display: "flex", alignItems: "center", gap: "0.35rem" }}>
-          <Eye size={13} /> View Profile
+          <Eye size={13} /> {t("history.viewProfile")}
         </button>
       </div>
     </div>
@@ -121,6 +123,7 @@ const HistoryItem = ({ application, user, onGiveReview, onEditReview }) => {
 };
 
 const History = () => {
+  const { t } = useTranslation();
   const { user } = useSelector((store) => store.auth);
   const [hires, setHires] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -145,15 +148,15 @@ const History = () => {
       <Navbar />
       <div style={{ maxWidth: "1000px", margin: "0 auto", padding: "2rem 1.5rem", minHeight: "calc(100vh - 120px)" }}>
         <h1 style={{ fontFamily: "var(--rs-font)", fontSize: "1.75rem", fontWeight: 700, color: "#fff", marginBottom: "0.25rem" }}>
-          Hiring <span style={{ color: "var(--rs-saffron)" }}>History</span>
+          {t("history.hiring")} <span style={{ color: "var(--rs-saffron)" }}>{t("history.title")}</span>
         </h1>
-        <p style={{ color: "var(--rs-text-muted)", fontSize: "0.84rem", marginBottom: "1.75rem" }}>All your previous and ongoing hire requests</p>
+        <p style={{ color: "var(--rs-text-muted)", fontSize: "0.84rem", marginBottom: "1.75rem" }}>{t("history.subtitle")}</p>
 
         {loading
-          ? <p style={{ color: "var(--rs-text-muted)", fontFamily: "var(--rs-font)" }}>Loading your history…</p>
+          ? <p style={{ color: "var(--rs-text-muted)", fontFamily: "var(--rs-font)" }}>{t("history.loadingYourHistory")}</p>
           : hires.length === 0
             ? <div className="rs-glass" style={{ padding: "3rem", textAlign: "center", borderRadius: "1rem" }}>
-                <p style={{ color: "var(--rs-text-muted)", fontFamily: "var(--rs-font)" }}>You have no hiring history yet.</p>
+                <p style={{ color: "var(--rs-text-muted)", fontFamily: "var(--rs-font)" }}>{t("history.empty")}</p>
               </div>
             : <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "1rem" }}>
                 {hires.map((application) => (

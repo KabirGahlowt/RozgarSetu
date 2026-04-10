@@ -156,6 +156,8 @@ class QueryParser:
             'skills': [],
             'wage_max': None,
             'work_type': None,
+            'min_rating': None,
+            'min_rating_strict': False,
             'language': 'hi' if is_hindi or is_hinglish else 'en',
             'translated_query': translated_query
         }
@@ -169,9 +171,16 @@ class QueryParser:
         # If address extraction removed the location suffix, also check original query
         if not result['location']:
             result['location'] = self._extract_location(query_text, result['address'])
-        result['skills'] = self._extract_skills(translated_query)
+        skills_tr = self._extract_skills(translated_query)
+        skills_orig = self._extract_skills(query_text)
+        # Preserve order, dedupe (original query can retain keywords lost in translation)
+        result['skills'] = list(dict.fromkeys(skills_tr + skills_orig))
         result['wage_max'] = self._extract_wage(translated_query)
         result['work_type'] = self._extract_work_type(translated_query)
+        combined_for_rating = f"{translated_query} {query_text}"
+        mr, strict = self._extract_min_rating(combined_for_rating)
+        result['min_rating'] = mr
+        result['min_rating_strict'] = strict if mr is not None else False
         
         return result
     
@@ -285,3 +294,47 @@ class QueryParser:
                 if keyword in query_lower:
                     return work_type.capitalize()
         return None
+
+    def _extract_min_rating(self, query: str):
+        """
+        Extract minimum star rating. Returns (value, strict) where strict means
+        use rating > value ('more than 3'); non-strict means rating >= value ('at least 3').
+        """
+        q = query.lower()
+
+        def _ok(v: float) -> bool:
+            return 0.0 <= v <= 5.0
+
+        # Strict: "more than", "above" (exclusive)
+        strict_patterns = [
+            r'rating\s+(?:more\s+than|greater\s+than|higher\s+than|above|over|>)\s*(\d+(?:\.\d+)?)',
+            r'(?:more\s+than|greater\s+than|above|over)\s*(\d+(?:\.\d+)?)\s*(?:star|stars|rating)\b',
+            r'larger\s+than\s*(\d+(?:\.\d+)?)\s*(?:star|stars|rating)?',
+        ]
+        for pattern in strict_patterns:
+            match = re.search(pattern, q)
+            if match:
+                try:
+                    v = float(match.group(1))
+                    if _ok(v):
+                        return (v, True)
+                except (TypeError, ValueError):
+                    continue
+
+        # Inclusive: "at least", "minimum", ">="
+        loose_patterns = [
+            r'(?:min(?:imum)?|at\s+least)\s+(?:rating|of)?\s*(\d+(?:\.\d+)?)\s*(?:star|stars)?',
+            r'rating\s*(?:>=|≥)\s*(\d+(?:\.\d+)?)',
+            r'(\d+(?:\.\d+)?)\s*\+\s*(?:star|stars)',
+        ]
+        for pattern in loose_patterns:
+            match = re.search(pattern, q)
+            if match:
+                try:
+                    v = float(match.group(1))
+                    if _ok(v):
+                        return (v, False)
+                except (TypeError, ValueError):
+                    continue
+
+        return (None, False)

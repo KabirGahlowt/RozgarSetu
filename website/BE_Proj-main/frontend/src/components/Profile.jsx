@@ -6,17 +6,19 @@ import { useSelector } from "react-redux";
 import useGetClientHires from "../hooks/useGetClientHires";
 import { Pen, Mail, Phone, MapPin, Hash, User } from "lucide-react";
 import Footer from "./shared/Footer";
+import { useTranslation } from "react-i18next";
 
 const Profile = () => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const { user } = useSelector((store) => store.auth);
   useGetClientHires();
 
   const infoRows = [
-    { icon: Mail,   label: "Email",        value: user?.email },
-    { icon: Phone,  label: "Phone",        value: user?.phoneNumber },
-    { icon: MapPin, label: "Address",      value: user?.address },
-    { icon: Hash,   label: "Pincode",      value: user?.pincode },
+    { icon: Mail,   label: t("profile.email"),        value: user?.email },
+    { icon: Phone,  label: t("profile.phone"),        value: user?.phoneNumber },
+    { icon: MapPin, label: t("profile.address"),      value: user?.address },
+    { icon: Hash,   label: t("profile.pincode"),      value: user?.pincode },
   ];
 
   return (
@@ -44,7 +46,7 @@ const Profile = () => {
               </div>
               <div>
                 <h1 style={{ margin: 0, fontFamily: "var(--rs-font)", fontSize: "1.4rem", fontWeight: 700, color: "#fff" }}>{user?.fullname}</h1>
-                <span className="rs-badge" style={{ marginTop: "0.4rem", display: "inline-flex" }}>Client</span>
+                <span className="rs-badge" style={{ marginTop: "0.4rem", display: "inline-flex" }}>{t("nav.roleClient")}</span>
               </div>
             </div>
             <button
@@ -52,7 +54,7 @@ const Profile = () => {
               className="rs-btn-outline"
               style={{ padding: "0.5rem 1rem", display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.82rem" }}
             >
-              <Pen size={14} /> Edit
+              <Pen size={14} /> {t("profile.edit")}
             </button>
           </div>
 
@@ -64,7 +66,7 @@ const Profile = () => {
                 <Icon size={15} style={{ color: "var(--rs-saffron)", flexShrink: 0 }} />
                 <div>
                   <p style={{ margin: 0, fontSize: "0.68rem", color: "var(--rs-text-muted)", textTransform: "uppercase", letterSpacing: "0.07em", fontFamily: "var(--rs-font)" }}>{label}</p>
-                  <p style={{ margin: "0.15rem 0 0", fontSize: "0.88rem", color: "#fff", fontFamily: "var(--rs-font)" }}>{value || "—"}</p>
+                  <p style={{ margin: "0.15rem 0 0", fontSize: "0.88rem", color: "#fff", fontFamily: "var(--rs-font)" }}>{value || t("profile.none")}</p>
                 </div>
               </div>
             ))}
@@ -74,7 +76,7 @@ const Profile = () => {
         {/* Hired Workers Table */}
         <div className="rs-glass-strong rs-anim rs-anim-d1" style={{ borderRadius: "1.5rem", padding: "1.5rem" }}>
           <h2 style={{ margin: "0 0 1rem", fontFamily: "var(--rs-font)", fontSize: "1.05rem", fontWeight: 600, color: "#fff" }}>
-            Workers <span style={{ color: "var(--rs-saffron)" }}>Hired</span>
+            {t("profile.workers")} <span style={{ color: "var(--rs-saffron)" }}>{t("profile.hired")}</span>
           </h2>
           <HiredWorkerTable />
         </div>

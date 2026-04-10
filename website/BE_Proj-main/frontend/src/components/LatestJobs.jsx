@@ -3,8 +3,10 @@ import TopWorkerCard from "./TopWorkerCard";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Trophy } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const LatestJobs = () => {
+  const { t } = useTranslation();
   const { allWorkers } = useSelector((store) => store.work);
   const navigate = useNavigate();
 
@@ -20,11 +22,11 @@ const LatestJobs = () => {
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.3rem" }}>
             <Trophy size={18} style={{ color: "#FF9933" }} />
             <h2 className="rs-section-heading" style={{ margin: 0 }}>
-              Top Rated <span className="accent">Workers</span>
+              {t("latest.heading")} <span className="accent">{t("latest.accent")}</span>
             </h2>
           </div>
           <p style={{ color: "var(--rs-text-muted)", fontSize: "0.84rem", margin: 0 }}>
-            Highest-rated professionals in your area
+            {t("latest.sub")}
           </p>
         </div>
         <button
@@ -32,14 +34,14 @@ const LatestJobs = () => {
           className="rs-btn-outline"
           style={{ display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.82rem", padding: "0.5rem 1.2rem" }}
         >
-          View All <ArrowRight size={14} />
+          {t("latest.viewAll")} <ArrowRight size={14} />
         </button>
       </div>
 
       {/* Grid */}
       {topWorkers.length === 0 ? (
         <div style={{ textAlign: "center", padding: "3rem", color: "var(--rs-text-muted)", fontFamily: "var(--rs-font)" }}>
-          No workers available yet.
+          {t("latest.empty")}
         </div>
       ) : (
         <div style={{
