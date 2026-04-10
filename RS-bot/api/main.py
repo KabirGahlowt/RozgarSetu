@@ -196,6 +196,7 @@ def get_workers_for_job(request: WorkersForJobRequest):
             "count": len(matches),
             "target_coords": tc_list,
             "map_features": map_features,
+            "empty_reason": results.get("empty_reason"),
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -214,6 +215,7 @@ def bot_chat(request: QueryRequest):
         # 2. Find workers matching the job description
         results = recommender.get_workers_for_job(query=parsed, top_k=5)
         matches = results.get("matches", [])
+        empty_reason = results.get("empty_reason")
         target_coords = results.get("target_coords")
         tc_list = list(target_coords) if target_coords else None
         map_features = jsonable_encoder(
@@ -230,6 +232,16 @@ def bot_chat(request: QueryRequest):
                     f"{i}. {m['name']}{dist_str} — "
                     f"{', '.join(m.get('skills', []))}\n"
                 )
+        elif empty_reason == "no_skill_match":
+            summary = (
+                "No workers available with the requested skills for this search. "
+                "Try a different skill or area."
+            )
+        elif empty_reason == "no_rating_match":
+            summary = (
+                "No workers available with a rating at or above your minimum for this search. "
+                "Try lowering the rating requirement or broadening the location."
+            )
         else:
             summary = (
                 "Sorry, no workers found for your query. "
@@ -243,6 +255,7 @@ def bot_chat(request: QueryRequest):
             "matches": matches,
             "target_coords": tc_list,
             "map_features": map_features,
+            "empty_reason": empty_reason,
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

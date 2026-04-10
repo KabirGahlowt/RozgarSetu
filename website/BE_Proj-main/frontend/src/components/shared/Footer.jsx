@@ -1,6 +1,8 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer style={{
       background: "rgba(2,8,30,0.8)",
@@ -32,11 +34,11 @@ const Footer = () => {
             <span style={{ color: "#6ee87b" }}>Setu</span>
           </span>
           <p style={{ margin: "0.25rem 0 0", fontSize: "0.76rem", color: "rgba(255,255,255,0.4)" }}>
-            © 2025 RozgarSetu. All rights reserved.
+            {t("footer.copyright")}
           </p>
         </div>
         <div style={{ display: "flex", gap: "1.5rem" }}>
-          {["Privacy Policy", "Terms of Service"].map((link) => (
+          {[t("footer.privacy"), t("footer.terms")].map((link) => (
             <a
               key={link}
               href="#"

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { MapContainer, TileLayer, Popup, Marker, useMap } from "react-leaflet";
@@ -40,6 +40,23 @@ function normalizeMapFeatures(raw) {
       };
     })
     .filter(Boolean);
+}
+
+/** Closer workers first; more experience breaks ties (matches server ranking). */
+function sortMatchesDistanceFirst(matches) {
+  if (!Array.isArray(matches)) return [];
+  return [...matches].sort((a, b) => {
+    const da = Number(a.distance_km);
+    const db = Number(b.distance_km);
+    const aOk = Number.isFinite(da);
+    const bOk = Number.isFinite(db);
+    if (aOk && bOk && da !== db) return da - db;
+    if (aOk && !bOk) return -1;
+    if (!aOk && bOk) return 1;
+    const ea = Number(a.experience_years) || 0;
+    const eb = Number(b.experience_years) || 0;
+    return eb - ea;
+  });
 }
 
 /**
@@ -117,7 +134,6 @@ function InitialsAvatar({ name }) {
 }
 
 function WorkerCard({ match, index, onSelect }) {
-  const score = Math.round((match.score || 0) * 100);
   const [photoOk, setPhotoOk] = useState(!!match.profile_photo);
   return (
     <div
@@ -141,12 +157,11 @@ function WorkerCard({ match, index, onSelect }) {
         ) : (
           <InitialsAvatar name={match.name} />
         )}
-        <div>
+        <div style={{ flex: 1, minWidth: 0 }}>
           <div className="rs-worker-name">
             {index}. {match.name}
           </div>
         </div>
-        <div className="rs-worker-score">{score}% match</div>
       </div>
       <div className="rs-worker-meta">
         {match.distance && match.distance !== "Unknown" && (
@@ -199,7 +214,7 @@ function Message({ msg, onSelect }) {
           <div className="rs-msg-bubble bot" style={{ maxWidth: "100%" }}>
             {msg.text}
           </div>
-          {msg.matches.map((m, i) => (
+          {sortMatchesDistanceFirst(msg.matches).map((m, i) => (
             <WorkerCard key={m.worker_id} match={m} index={i + 1} onSelect={onSelect} />
           ))}
         </div>
@@ -469,17 +484,6 @@ export default function AssistantPage() {
     setTimeout(() => inputRef.current?.focus(), 50);
   };
 
-  const mapHint = useMemo(() => {
-    const n = mapFeatures.length;
-    const head = n > 0 ? `${n} pin(s) · ` : "0 pins · ";
-    const hasT = mapFeatures.some((f) => f.type === "target");
-    const hasW = mapFeatures.some((f) => f.type === "worker");
-    if (hasT && hasW) return `${head}🎯 red = search · blue = workers`;
-    if (hasW) return `${head}Blue = workers (address geocoded)`;
-    if (hasT) return `${head}🎯 red = search only`;
-    return `${head}Search e.g. "cook near Hinjewadi"; RS Bot must be on :8001 with workers data.`;
-  }, [mapFeatures]);
-
   const handleSelectWorker = (worker) => {
     navigate(`/description/${worker.worker_id}`);
   };
@@ -515,7 +519,7 @@ export default function AssistantPage() {
       }
 
       setMapFeatures(buildMapFeaturesFromBotPayload(data, overrideCoords));
-      const workerMatches = data.matches || [];
+      const workerMatches = sortMatchesDistanceFirst(data.matches);
 
       if (workerMatches.length > 0) {
         setMessages((prev) => [
@@ -588,7 +592,7 @@ export default function AssistantPage() {
             {botOnline === null
               ? "Connecting to bot…"
               : botOnline
-                ? "Online — map matches RS Bot (red search, blue workers)"
+                ? "Online"
                 : "Bot offline — start the FastAPI server on port 8001"}
           </div>
         </div>
@@ -679,7 +683,6 @@ export default function AssistantPage() {
         </div>
 
         <div className="rs-assistant-map-col">
-          <div className="rs-assistant-map-head">{mapHint}</div>
           <div className="rs-assistant-map-wrap">
             {!mapReady ? (
               <div

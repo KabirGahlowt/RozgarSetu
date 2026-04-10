@@ -85,17 +85,6 @@
   background: #020710;
 }
 
-.rs-assistant-map-head {
-  padding: 10px 14px;
-  font-size: 11px;
-  color: rgba(255, 153, 51, 0.7);
-  background: rgba(2, 8, 30, 0.9);
-  border-bottom: 1px solid rgba(255, 153, 51, 0.1);
-  flex-shrink: 0;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
 .rs-assistant-map-wrap {
   flex: 1;
   min-height: 0;
@@ -259,11 +248,6 @@
   color: #FF9933; font-weight: 700; font-size: 14px; flex-shrink: 0;
 }
 .rs-worker-name { font-size: 13px; font-weight: 700; color: #fff; }
-.rs-worker-score {
-  margin-left: auto;
-  background: linear-gradient(135deg, #FF9933, #e8650a);
-  color: white; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600;
-}
 .rs-worker-meta { display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px; color: rgba(255,255,255,0.55); }
 .rs-worker-meta-item { display: flex; align-items: center; gap: 3px; }
 .rs-worker-skills { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }

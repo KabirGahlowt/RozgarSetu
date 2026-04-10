@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { APPLICATION_API_END_POINT } from "../../utils/constant";
@@ -29,6 +30,7 @@ const td = {
 };
 
 const ClientsTable = () => {
+  const { t } = useTranslation();
   const { applicants } = useSelector((store) => store.application);
   const dispatch = useDispatch();
 
@@ -135,15 +137,15 @@ const ClientsTable = () => {
                 {application?.status === "Pending" ? (
                   <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", flexWrap: "wrap" }}>
                     <button type="button" className="rs-btn-primary" style={{ padding: "0.35rem 0.85rem", fontSize: "0.75rem" }} onClick={() => handleStatusUpdate(application._id, "Accepted")}>
-                      Accept
+                      {t("workerRequests.accept")}
                     </button>
                     <button type="button" className="rs-btn-outline" style={{ padding: "0.35rem 0.85rem", fontSize: "0.75rem" }} onClick={() => handleStatusUpdate(application._id, "Rejected")}>
-                      Reject
+                      {t("workerRequests.reject")}
                     </button>
                   </div>
                 ) : application?.status === "Accepted" ? (
                   <button type="button" className="rs-btn-outline" style={{ padding: "0.35rem 0.85rem", fontSize: "0.75rem" }} onClick={() => handleStatusUpdate(application._id, "Completed")}>
-                    Mark job done
+                    {t("workerRequests.markJobDone")}
                   </button>
                 ) : (
                   <span style={{ color: "var(--rs-text-muted)", fontSize: "0.8rem" }}>—</span>

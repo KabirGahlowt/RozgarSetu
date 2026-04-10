@@ -8,10 +8,12 @@ import { setSearchQuery } from "../redux/workSlice";
 import { motion } from "framer-motion";
 import useGetAllWorkersForBrowse from "../hooks/useGetAllWorkersForBrowse";
 import { Search, SlidersHorizontal } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const DEFAULT_BROWSE = { city: "", skill: "", availability: "" };
 
 const Workers = () => {
+  const { t } = useTranslation();
   const work = useSelector((store) => store.work);
   const allWorkers = work?.allWorkers ?? [];
   const searchQuery = work?.searchQuery ?? "";
@@ -67,10 +69,10 @@ const Workers = () => {
         {/* Page header */}
         <div style={{ marginBottom: "1.8rem" }} className="rs-anim">
           <h1 className="rs-section-heading">
-            Find <span className="accent">Skilled Workers</span>
+            {t("workers.title")} <span className="accent">{t("workers.titleAccent")}</span>
           </h1>
           <p style={{ color: "var(--rs-text-muted)", fontSize: "0.88rem", marginTop: "0.25rem" }}>
-            {filterWorker.length} worker{filterWorker.length !== 1 ? "s" : ""} available
+            {filterWorker.length} {t("workers.available", { count: filterWorker.length })}
             {(browseFilters?.city) ? ` in ${browseFilters.city}` : ""}
             {searchQuery ? ` · “${searchQuery}”` : ""}
           </p>
@@ -81,7 +83,7 @@ const Workers = () => {
               style={{ marginTop: "0.4rem", padding: "0.3rem 0.8rem", fontSize: "0.76rem" }}
               onClick={() => dispatch(setSearchQuery(""))}
             >
-              Clear search
+              {t("workers.clearSearch")}
             </button>
           )}
         </div>
@@ -93,7 +95,7 @@ const Workers = () => {
           style={{ marginBottom: "1rem", padding: "0.45rem 0.9rem", fontSize: "0.8rem", alignItems: "center", gap: "0.4rem" }}
           onClick={() => setShowFiltersMobile((v) => !v)}
         >
-          <SlidersHorizontal size={14} /> {showFiltersMobile ? "Hide filters" : "Show filters"}
+          <SlidersHorizontal size={14} /> {showFiltersMobile ? t("workers.hideFilters") : t("workers.showFilters")}
         </button>
 
         <div className="rs-layout-with-sidebar" style={{ display: "flex", gap: "1.5rem", alignItems: "flex-start" }}>
@@ -116,10 +118,10 @@ const Workers = () => {
               }}>
                 <Search size={40} style={{ color: "var(--rs-text-muted)", marginBottom: "1rem" }} />
                 <p style={{ color: "var(--rs-text-secondary)", fontFamily: "var(--rs-font)", fontSize: "1rem", margin: 0 }}>
-                  No workers found
+                  {t("workers.noWorkers")}
                 </p>
                 <p style={{ color: "var(--rs-text-muted)", fontSize: "0.82rem", marginTop: "0.4rem" }}>
-                  Try adjusting your filters or search terms
+                  {t("workers.adjustFilters")}
                 </p>
               </div>
             ) : (

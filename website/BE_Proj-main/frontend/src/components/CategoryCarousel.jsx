@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setSearchQuery } from "../redux/workSlice";
+import { useTranslation } from "react-i18next";
 
 const categories = [
   { label: "🧹 Housekeeping", value: "Housekeeping" },
@@ -15,6 +16,7 @@ const categories = [
 ];
 
 const CategoryCarousel = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -27,10 +29,10 @@ const CategoryCarousel = () => {
     <section style={{ padding: "3rem 1.5rem 1rem", maxWidth: "1280px", margin: "0 auto" }}>
       <div style={{ textAlign: "center", marginBottom: "2rem" }}>
         <h2 className="rs-section-heading" style={{ textAlign: "center" }}>
-          Browse by <span className="accent">Category</span>
+          {t("category.heading")} <span className="accent">{t("category.accent")}</span>
         </h2>
         <p style={{ color: "var(--rs-text-muted)", fontSize: "0.86rem", marginTop: "0.3rem" }}>
-          Tap a skill to find workers instantly
+          {t("category.sub")}
         </p>
       </div>
 

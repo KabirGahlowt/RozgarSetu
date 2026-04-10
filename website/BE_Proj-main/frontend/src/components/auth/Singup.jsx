@@ -8,8 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../../redux/authSlice";
 import { Loader2, UserPlus, Mail, Phone, Lock, MapPin, Hash } from "lucide-react";
 import Footer from "../shared/Footer";
+import { useTranslation } from "react-i18next";
+
+const ROLE_VALUES = ["Client", "Worker"];
 
 const Singup = () => {
+  const { t } = useTranslation();
   const [input, setInput] = useState({
     fullname: "", email: "", phoneNumber: "", password: "",
     role: "", city: "", pincode: "", file: "",
@@ -39,7 +43,7 @@ const Singup = () => {
       const res = await axios.post(`${USER_API_END_POINT}/register`, formData, { withCredentials: true });
       if (res.data.success) { navigate("/login"); toast.success(res.data.message); }
     } catch (error) {
-      toast.error(error.response?.data?.message || "An error occurred during signup");
+      toast.error(error.response?.data?.message || t("auth.signupError"));
     } finally {
       dispatch(setLoading(false));
     }
@@ -77,22 +81,22 @@ const Singup = () => {
         }}>
           <div style={{ textAlign: "center", marginBottom: "2rem" }}>
             <h1 style={{ fontFamily: "var(--rs-font)", fontSize: "1.75rem", fontWeight: 700, color: "#fff", margin: "0 0 0.4rem" }}>
-              Join <span style={{ color: "var(--rs-saffron)" }}>RozgarSetu</span>
+              {t("auth.join")} <span style={{ color: "var(--rs-saffron)" }}>RozgarSetu</span>
             </h1>
             <p style={{ color: "var(--rs-text-muted)", fontSize: "0.85rem" }}>
-              India's inclusive gig marketplace
+              {t("auth.marketplace")}
             </p>
           </div>
 
           <form onSubmit={submitHandler}>
             {/* Role */}
             <div style={{ marginBottom: "1.2rem" }}>
-              <label className="rs-label">I am a</label>
+              <label className="rs-label">{t("auth.iAm")}</label>
               <div className="rs-radio-group">
-                {["Client", "Worker"].map((r) => (
+                {ROLE_VALUES.map((r) => (
                   <label key={r} className={`rs-radio-option ${input.role === r ? "selected" : ""}`}>
                     <input type="radio" name="role" value={r} checked={input.role === r} onChange={changeEventHandler} style={{ display: "none" }} />
-                    {r}
+                    {r === "Client" ? t("nav.roleClient") : t("nav.roleWorker")}
                   </label>
                 ))}
               </div>
@@ -123,7 +127,7 @@ const Singup = () => {
 
             {/* Profile photo */}
             <div style={{ marginBottom: "1.5rem" }}>
-              <label className="rs-label">Profile Photo (optional)</label>
+              <label className="rs-label">{t("auth.profilePhotoOptional")}</label>
               <input
                 type="file"
                 accept="image/*"
@@ -148,13 +152,13 @@ const Singup = () => {
               style={{ width: "100%", padding: "0.75rem", fontSize: "0.95rem", marginBottom: "1.25rem" }}
               disabled={loading}
             >
-              {loading ? <><Loader2 size={16} className="animate-spin" /> Please wait…</> : <><UserPlus size={16} /> Create Account</>}
+              {loading ? <><Loader2 size={16} className="animate-spin" /> {t("auth.pleaseWait")}</> : <><UserPlus size={16} /> {t("auth.createAccount")}</>}
             </button>
 
             <p style={{ textAlign: "center", fontSize: "0.83rem", color: "var(--rs-text-muted)" }}>
-              Already have an account?{" "}
+              {t("auth.haveAccount")}{" "}
               <Link to="/login" style={{ color: "var(--rs-saffron)", fontWeight: 600, textDecoration: "none" }}>
-                Login
+                {t("nav.login")}
               </Link>
             </p>
           </form>

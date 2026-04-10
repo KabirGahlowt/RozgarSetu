@@ -1,0 +1,158 @@
+{
+  "nav": {
+    "home": "होम",
+    "browseWorkers": "कामगार पहा",
+    "dashboard": "डॅशबोर्ड",
+    "profile": "प्रोफाइल",
+    "workers": "कामगार",
+    "history": "इतिहास",
+    "login": "लॉगिन",
+    "signup": "साइन अप",
+    "logout": "लॉगआउट",
+    "workerAccount": "कामगार खाते",
+    "admin": "प्रशासक",
+    "clientAccount": "क्लायंट खाते",
+    "roleWorker": "कामगार",
+    "roleAdmin": "अॅडमिन",
+    "roleClient": "क्लायंट"
+  },
+  "language": {
+    "label": "भाषा",
+    "english": "EN",
+    "hindi": "HI",
+    "englishFull": "English",
+    "hindiFull": "Hindi",
+    "marathi": "MR",
+    "tamil": "TA",
+    "telugu": "TE",
+    "kannada": "KN",
+    "popupTitle": "तुमची भाषा निवडा",
+    "popupSubtitle": "अॅप तुमच्या निवडलेल्या भाषेत दाखवला जाईल.",
+    "marathiFull": "मराठी",
+    "tamilFull": "தமிழ்",
+    "teluguFull": "తెలుగు",
+    "kannadaFull": "ಕನ್ನಡ"
+  },
+  "hero": {
+    "brand": "रोजगार सेतू",
+    "badge": "रोजगार सेतू — भारताचा रोजगार मंच",
+    "heading": {
+      "connecting": "जोडत आहोत",
+      "skilledHands": "कुशल हातांना",
+      "to": "",
+      "opportunities": "संधींशी",
+      "acrossIndia": "संपूर्ण भारतात"
+    },
+    "subtitle": {
+      "prefix": "तुमच्या जवळचे पडताळलेले आणि कुशल कामगार शोधा — प्लंबर, इलेक्ट्रिशियन, कुक आणि बरेच काही. भारतासाठी तयार केलेला आधुनिक, सर्वसमावेशक आणि बहुभाषिक गिग पोर्टल.",
+      "bharat": "भारत"
+    },
+    "search": {
+      "skillPlaceholder": "कौशल्य (उदा. कुक, इलेक्ट्रिशियन)",
+      "locationPlaceholder": "स्थान (उदा. पुणे, दिल्ली)",
+      "search": "शोधा",
+      "try": "प्रयत्न करा:"
+    },
+    "quick": {
+      "plumber": "प्लंबर",
+      "electrician": "इलेक्ट्रिशियन",
+      "cook": "कुक",
+      "carpenter": "सुतार",
+      "painter": "पेंटर",
+      "driver": "ड्रायव्हर"
+    },
+    "stats": {
+      "multilingual": "बहुभाषिक समर्थन",
+      "avgRating": "सरासरी रेटिंग",
+      "trusted": "विश्वसनीय",
+      "onlyTrusted": "फक्त विश्वासू कामगार"
+    },
+    "guest": {
+      "joinText": "संपूर्ण भारतातील हजारो कामगार आणि क्लायंट्ससोबत जोडा",
+      "signupFree": "मोफत साइन अप",
+      "freeToJoin": "जोडण्यासाठी मोफत",
+      "onlyTrusted": "फक्त विश्वासू कामगार",
+      "madeForBharat": "भारतातील लोकांसाठी तयार"
+    }
+  },
+  "category": {
+    "heading": "पहा",
+    "accent": "वर्गानुसार",
+    "sub": "कामगार लगेच शोधण्यासाठी कौशल्य निवडा"
+  },
+  "latest": {
+    "heading": "उच्च रेटिंगचे",
+    "accent": "कामगार",
+    "sub": "तुमच्या भागातील सर्वोच्च रेटिंग असलेले व्यावसायिक",
+    "viewAll": "सर्व पहा",
+    "empty": "सध्या कोणतेही कामगार उपलब्ध नाहीत."
+  },
+  "footer": {
+    "copyright": "© 2025 रोजगार सेतू. सर्व हक्क राखीव.",
+    "privacy": "गोपनीयता धोरण",
+    "terms": "सेवेच्या अटी"
+  },
+  "workers": {
+    "title": "शोधा",
+    "titleAccent": "कुशल कामगार",
+    "available": "कामगार उपलब्ध",
+    "clearSearch": "शोध काढा",
+    "hideFilters": "फिल्टर लपवा",
+    "showFilters": "फिल्टर दाखवा",
+    "noWorkers": "कोणतेही कामगार सापडले नाहीत",
+    "adjustFilters": "फिल्टर किंवा शोध शब्द बदलून पहा"
+  },
+  "profile": {
+    "email": "ईमेल",
+    "phone": "फोन",
+    "address": "पत्ता",
+    "pincode": "पिनकोड",
+    "edit": "संपादित करा",
+    "none": "—",
+    "workers": "कामगार",
+    "hired": "नियुक्त"
+  },
+  "history": {
+    "yourReview": "तुमचा अभिप्राय",
+    "loading": "लोड होत आहे…",
+    "noComment": "टिप्पणी नाही.",
+    "notReviewed": "तुम्ही अजून या कामगाराचा अभिप्राय दिलेला नाही.",
+    "giveReview": "अभिप्राय द्या",
+    "editReview": "अभिप्राय संपादित करा",
+    "viewProfile": "प्रोफाइल पहा",
+    "hiring": "नियुक्ती",
+    "title": "इतिहास",
+    "subtitle": "तुमच्या सर्व जुन्या आणि चालू नियुक्ती विनंत्या",
+    "loadingYourHistory": "तुमचा इतिहास लोड होत आहे…",
+    "empty": "तुमच्याकडे अद्याप कोणताही नियुक्ती इतिहास नाही."
+  },
+  "workerRequests": {
+    "accept": "स्वीकार करा",
+    "reject": "नकारा",
+    "markJobDone": "काम पूर्ण केले म्हणून चिन्हांकित करा"
+  },
+  "auth": {
+    "selectRole": "कृपया भूमिका निवडा",
+    "somethingWrong": "काहीतरी चुकले!",
+    "welcome": "परत",
+    "back": "स्वागत आहे",
+    "signInContinue": "रोजगारसेतूवर पुढे जाण्यासाठी साइन इन करा",
+    "signInAs": "या रूपात साइन इन करा",
+    "phoneNumber": "फोन नंबर",
+    "email": "ईमेल",
+    "enterPhone": "फोन नंबर टाका",
+    "enterEmail": "तुमचा ईमेल टाका",
+    "password": "पासवर्ड",
+    "enterPassword": "तुमचा पासवर्ड टाका",
+    "pleaseWait": "कृपया थांबा…",
+    "or": "किंवा",
+    "createAccount": "नवीन खाते तयार करा",
+    "noAccount": "तुमचे खाते नाही का?",
+    "signupError": "साइनअप दरम्यान त्रुटी आली",
+    "join": "जुळा",
+    "marketplace": "भारताचा सर्वसमावेशक गिग मार्केटप्लेस",
+    "iAm": "मी आहे",
+    "profilePhotoOptional": "प्रोफाइल फोटो (ऐच्छिक)",
+    "haveAccount": "आधीच खाते आहे का?"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "nav": {
+    "home": "होम",
+    "browseWorkers": "वर्कर देखें",
+    "dashboard": "डैशबोर्ड",
+    "profile": "प्रोफाइल",
+    "workers": "वर्कर",
+    "history": "इतिहास",
+    "login": "लॉगिन",
+    "signup": "साइन अप",
+    "logout": "लॉग आउट",
+    "workerAccount": "वर्कर अकाउंट",
+    "admin": "प्रशासक",
+    "clientAccount": "क्लाइंट अकाउंट",
+    "roleWorker": "वर्कर",
+    "roleAdmin": "एडमिन",
+    "roleClient": "क्लाइंट"
+  },
+  "language": {
+    "label": "भाषा",
+    "english": "EN",
+    "hindi": "HI",
+    "marathi": "MR",
+    "tamil": "TA",
+    "telugu": "TE",
+    "kannada": "KN",
+    "englishFull": "अंग्रेज़ी",
+    "hindiFull": "हिंदी",
+    "marathiFull": "मराठी",
+    "tamilFull": "तमिल",
+    "teluguFull": "तेलुगु",
+    "kannadaFull": "कन्नड़",
+    "popupTitle": "अपनी भाषा चुनें",
+    "popupSubtitle": "हम ऐप को आपकी चुनी हुई भाषा में दिखाएंगे।"
+  },
+  "hero": {
+    "brand": "रोज़गार सेतु",
+    "badge": "रोज़गार सेतु — भारत का रोज़गार मंच",
+    "heading": {
+      "connecting": "जोड़ते हैं",
+      "skilledHands": "कुशल हाथों को",
+      "to": "",
+      "opportunities": "अवसरों से",
+      "acrossIndia": "पूरे भारत में"
+    },
+    "subtitle": {
+      "prefix": "अपने आसपास सत्यापित और कुशल कामगार खोजें — प्लंबर, इलेक्ट्रीशियन, कुक और अन्य। भारत के लिए बना आधुनिक, समावेशी और बहुभाषी गिग पोर्टल।",
+      "bharat": "भारत"
+    },
+    "search": {
+      "skillPlaceholder": "कौशल (जैसे कुक, इलेक्ट्रीशियन)",
+      "locationPlaceholder": "स्थान (जैसे पुणे, दिल्ली)",
+      "search": "खोजें",
+      "try": "आजमाएं:"
+    },
+    "quick": {
+      "plumber": "प्लंबर",
+      "electrician": "इलेक्ट्रीशियन",
+      "cook": "कुक",
+      "carpenter": "बढ़ई",
+      "painter": "पेंटर",
+      "driver": "ड्राइवर"
+    },
+    "stats": {
+      "multilingual": "बहुभाषी सहायता",
+      "avgRating": "औसत रेटिंग",
+      "trusted": "विश्वसनीय",
+      "onlyTrusted": "केवल विश्वसनीय कामगार"
+    },
+    "guest": {
+      "joinText": "पूरे भारत के हजारों कामगारों और क्लाइंट्स से जुड़ें",
+      "signupFree": "फ्री साइन अप",
+      "freeToJoin": "फ्री में जुड़ें",
+      "onlyTrusted": "केवल विश्वसनीय कामगार",
+      "madeForBharat": "भारत के लिए बनाया गया"
+    }
+  },
+  "category": {
+    "heading": "देखें",
+    "accent": "श्रेणी के अनुसार",
+    "sub": "कामगार तुरंत खोजने के लिए कौशल चुनें"
+  },
+  "latest": {
+    "heading": "टॉप रेटेड",
+    "accent": "वर्कर",
+    "sub": "आपके क्षेत्र के सबसे अधिक रेटेड प्रोफेशनल",
+    "viewAll": "सभी देखें",
+    "empty": "अभी कोई वर्कर उपलब्ध नहीं है।"
+  },
+  "footer": {
+    "copyright": "© 2025 रोज़गार सेतु। सर्वाधिकार सुरक्षित।",
+    "privacy": "गोपनीयता नीति",
+    "terms": "सेवा की शर्तें"
+  },
+  "workers": {
+    "title": "खोजें",
+    "titleAccent": "कुशल वर्कर",
+    "available": "वर्कर उपलब्ध",
+    "clearSearch": "सर्च हटाएं",
+    "hideFilters": "फिल्टर छुपाएं",
+    "showFilters": "फिल्टर दिखाएं",
+    "noWorkers": "कोई वर्कर नहीं मिला",
+    "adjustFilters": "फिल्टर या सर्च शब्द बदलकर देखें"
+  },
+  "profile": {
+    "email": "ईमेल",
+    "phone": "फ़ोन",
+    "address": "पता",
+    "pincode": "पिनकोड",
+    "edit": "संपादित करें",
+    "none": "—",
+    "workers": "वर्कर",
+    "hired": "नियुक्त"
+  },
+  "history": {
+    "yourReview": "आपकी समीक्षा",
+    "loading": "लोड हो रहा है…",
+    "noComment": "कोई टिप्पणी नहीं।",
+    "notReviewed": "आपने अभी तक इस वर्कर की समीक्षा नहीं की है।",
+    "giveReview": "समीक्षा दें",
+    "editReview": "समीक्षा संपादित करें",
+    "viewProfile": "प्रोफाइल देखें",
+    "hiring": "हायरिंग",
+    "title": "इतिहास",
+    "subtitle": "आपके सभी पुराने और चालू हायर अनुरोध",
+    "loadingYourHistory": "आपका इतिहास लोड हो रहा है…",
+    "empty": "अभी आपका कोई हायरिंग इतिहास नहीं है।"
+  },
+  "workerRequests": {
+    "accept": "स्वीकार करें",
+    "reject": "अस्वीकार करें",
+    "markJobDone": "कार्य पूर्ण चिह्नित करें"
+  },
+  "auth": {
+    "selectRole": "कृपया रोल चुनें",
+    "somethingWrong": "कुछ गलत हो गया!",
+    "welcome": "वापस",
+    "back": "स्वागत है",
+    "signInContinue": "रोज़गारसेतु पर जारी रखने के लिए लॉगिन करें",
+    "signInAs": "इस रूप में लॉगिन करें",
+    "roleClientDesc": "वर्कर हायर करें",
+    "roleWorkerDesc": "काम खोजें",
+    "roleAdminDesc": "प्लेटफ़ॉर्म प्रबंधित करें",
+    "phoneNumber": "फोन नंबर",
+    "email": "ईमेल",
+    "enterPhone": "फोन नंबर दर्ज करें",
+    "enterEmail": "अपना ईमेल दर्ज करें",
+    "password": "पासवर्ड",
+    "enterPassword": "अपना पासवर्ड दर्ज करें",
+    "pleaseWait": "कृपया प्रतीक्षा करें…",
+    "or": "या",
+    "createAccount": "नया अकाउंट बनाएं",
+    "noAccount": "क्या आपका अकाउंट नहीं है?",
+    "signupError": "साइनअप के दौरान त्रुटि हुई",
+    "join": "जुड़ें",
+    "marketplace": "भारत का समावेशी गिग मार्केटप्लेस",
+    "iAm": "मैं हूँ",
+    "profilePhotoOptional": "प्रोफाइल फोटो (वैकल्पिक)",
+    "haveAccount": "क्या आपका पहले से अकाउंट है?"
+  }
+}
