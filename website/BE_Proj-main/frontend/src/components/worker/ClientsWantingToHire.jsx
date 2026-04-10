@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import ClientsTable from "./ClientsTable";
 import axios from "axios";
 import { APPLICATION_API_END_POINT } from "../../utils/constant";
@@ -6,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAllApplicants } from "../../redux/applicationSlice";
 
 const ClientsWantingToHire = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { applicants } = useSelector((store) => store.application);
 
@@ -24,7 +26,8 @@ const ClientsWantingToHire = () => {
   return (
     <div className="rs-glass-strong rs-anim rs-anim-d1" style={{ borderRadius: "1.5rem", padding: "1.5rem", marginTop: "1.5rem" }}>
       <h2 style={{ margin: "0 0 1rem", fontFamily: "var(--rs-font)", fontSize: "1.05rem", fontWeight: 600, color: "#fff" }}>
-        Clients <span style={{ color: "var(--rs-saffron)" }}>({applicants?.length || 0})</span>
+        {t("workerProfile.clientsHeading")}{" "}
+        <span style={{ color: "var(--rs-saffron)" }}>({applicants?.length || 0})</span>
       </h2>
       <ClientsTable />
     </div>

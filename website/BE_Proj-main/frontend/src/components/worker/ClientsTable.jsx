@@ -34,6 +34,17 @@ const ClientsTable = () => {
   const { applicants } = useSelector((store) => store.application);
   const dispatch = useDispatch();
 
+  const statusLabel = (status) => {
+    const key =
+      {
+        Pending: "workerProfile.statusPending",
+        Accepted: "workerProfile.statusAccepted",
+        Rejected: "workerProfile.statusRejected",
+        Completed: "workerProfile.statusCompleted",
+      }[status];
+    return key ? t(key) : status;
+  };
+
   const handleStatusUpdate = async (id, status) => {
     try {
       const res = await axios.post(
@@ -61,7 +72,7 @@ const ClientsTable = () => {
     return (
       <div className="rs-glass" style={{ padding: "2rem", textAlign: "center", borderRadius: "0.75rem" }}>
         <p style={{ color: "var(--rs-text-muted)", fontFamily: "var(--rs-font)", fontSize: "0.88rem", margin: 0 }}>
-          No hire requests yet.
+          {t("workerProfile.noHireRequestsYet")}
         </p>
       </div>
     );
@@ -72,9 +83,9 @@ const ClientsTable = () => {
       <table style={{ width: "100%", borderCollapse: "collapse" }}>
         <thead>
           <tr>
-            {["Photo", "Name", "Request date", "Contact", "Actions", "Status"].map((h) => (
-              <th key={h} style={th}>
-                {h}
+            {["colPhoto", "colName", "colRequestDate", "colContact", "colActions", "colStatus"].map((col) => (
+              <th key={col} style={th}>
+                {t(`workerProfile.${col}`)}
               </th>
             ))}
           </tr>
@@ -130,7 +141,7 @@ const ClientsTable = () => {
                     <Phone size={13} /> {application?.client?.phoneNumber}
                   </div>
                 ) : (
-                  <span style={{ color: "var(--rs-text-muted)", fontStyle: "italic" }}>Hidden until accepted</span>
+                  <span style={{ color: "var(--rs-text-muted)", fontStyle: "italic" }}>{t("workerProfile.hiddenUntilAccepted")}</span>
                 )}
               </td>
               <td style={td}>
@@ -148,7 +159,7 @@ const ClientsTable = () => {
                     {t("workerRequests.markJobDone")}
                   </button>
                 ) : (
-                  <span style={{ color: "var(--rs-text-muted)", fontSize: "0.8rem" }}>—</span>
+                  <span style={{ color: "var(--rs-text-muted)", fontSize: "0.8rem" }}>{t("profile.none")}</span>
                 )}
               </td>
               <td style={td}>
@@ -181,7 +192,7 @@ const ClientsTable = () => {
                     }`,
                   }}
                 >
-                  {application?.status}
+                  {statusLabel(application?.status)}
                 </span>
               </td>
             </tr>
@@ -197,7 +208,7 @@ const ClientsTable = () => {
             padding: "0.75rem",
           }}
         >
-          Clients who sent you a hire request
+          {t("workerProfile.hireRequestsCaption")}
         </caption>
       </table>
     </div>

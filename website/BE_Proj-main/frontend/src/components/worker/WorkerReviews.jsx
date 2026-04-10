@@ -1,8 +1,10 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Star } from "lucide-react";
 
 const WorkerReviews = () => {
+  const { t } = useTranslation();
   const { reviews } = useSelector((store) => store.review);
 
   return (
@@ -16,13 +18,14 @@ const WorkerReviews = () => {
           color: "#fff",
         }}
       >
-        Reviews <span style={{ color: "var(--rs-saffron)" }}>({reviews.length})</span>
+        {t("workerProfile.reviewsHeading")}{" "}
+        <span style={{ color: "var(--rs-saffron)" }}>({reviews.length})</span>
       </h2>
 
       {reviews.length === 0 ? (
         <div className="rs-glass" style={{ padding: "1.5rem", borderRadius: "0.75rem", textAlign: "center" }}>
           <p style={{ margin: 0, color: "var(--rs-text-muted)", fontSize: "0.88rem", fontFamily: "var(--rs-font)" }}>
-            No reviews yet.
+            {t("workerProfile.noReviewsYet")}
           </p>
         </div>
       ) : (
@@ -68,7 +71,7 @@ const WorkerReviews = () => {
                   )}
                 </div>
                 <span style={{ fontWeight: 600, color: "#fff", fontFamily: "var(--rs-font)", fontSize: "0.92rem" }}>
-                  {review?.client?.fullname || "Client"}
+                  {review?.client?.fullname || t("workerProfile.reviewClientFallback")}
                 </span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: "3px", marginBottom: "0.5rem" }}>

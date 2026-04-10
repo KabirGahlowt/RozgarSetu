@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Loader2 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -17,6 +18,7 @@ import { Button } from "../ui/button";
 import { setSingleWorker } from "../../redux/workSlice";
 
 const UpdateWorkerDialog = ({ open, setOpen }) => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const { singleWorker } = useSelector((store) => store.work);
 
@@ -91,13 +93,13 @@ const UpdateWorkerDialog = ({ open, setOpen }) => {
           onInteractOutside={() => setOpen(false)}
         >
           <DialogHeader>
-            <DialogTitle>Update Worker Profile</DialogTitle>
+            <DialogTitle>{t("workerProfile.updateTitle")}</DialogTitle>
           </DialogHeader>
           <form onSubmit={submitHandler}>
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="name" className="text-right">
-                  Name
+                  {t("workerProfile.fieldName")}
                 </Label>
                 <Input
                   id="name"
@@ -112,7 +114,7 @@ const UpdateWorkerDialog = ({ open, setOpen }) => {
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="number" className="text-right">
-                  Number
+                  {t("profile.phone")}
                 </Label>
                 <Input
                   id="number"
@@ -126,7 +128,7 @@ const UpdateWorkerDialog = ({ open, setOpen }) => {
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="address" className="text-right">
-                  Address
+                  {t("profile.address")}
                 </Label>
                 <Input
                   id="address"
@@ -140,7 +142,7 @@ const UpdateWorkerDialog = ({ open, setOpen }) => {
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="pincode" className="text-right">
-                  Pincode
+                  {t("profile.pincode")}
                 </Label>
                 <Input
                   id="pincode"
@@ -154,14 +156,14 @@ const UpdateWorkerDialog = ({ open, setOpen }) => {
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="avaliability" className="text-right">
-                  Avaliability
+                  {t("workerProfile.availability")}
                 </Label>
                 <Input
                   id="avaliability"
                   className="col-span-3"
                   name="avaliability"
                   value={input.avaliability}
-                  placeholder="Full-time / Half-time"
+                  placeholder={t("workerProfile.availabilityPlaceholder")}
                   onChange={changeEventHandler}
                 />
               </div>
@@ -169,7 +171,7 @@ const UpdateWorkerDialog = ({ open, setOpen }) => {
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="experienceYears" className="text-right">
-                  Years of Experience
+                  {t("workerProfile.yearsOfExperience")}
                 </Label>
                 <Input
                   id="experienceYears"
@@ -183,7 +185,7 @@ const UpdateWorkerDialog = ({ open, setOpen }) => {
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="file" className="text-right">
-                  Profile photo
+                  {t("workerProfile.profilePhotoField")}
                 </Label>
                 <Input
                   id="file"
@@ -199,11 +201,11 @@ const UpdateWorkerDialog = ({ open, setOpen }) => {
               {loading ? (
                 <Button className="w-full my-4">
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Please Wait
+                  {t("auth.pleaseWait")}
                 </Button>
               ) : (
                 <Button type="submit" className="w-full my-4">
-                  Update
+                  {t("workerProfile.update")}
                 </Button>
               )}
             </DialogFooter>

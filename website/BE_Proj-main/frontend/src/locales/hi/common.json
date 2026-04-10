@@ -131,6 +131,37 @@
     "reject": "अस्वीकार करें",
     "markJobDone": "कार्य पूर्ण चिह्नित करें"
   },
+  "workerProfile": {
+    "roleBadge": "वर्कर",
+    "notYetRated": "अभी कोई रेटिंग नहीं",
+    "availability": "उपलब्धता",
+    "experience": "अनुभव",
+    "skills": "कौशल",
+    "yearsExperience": "{{count}} वर्ष",
+    "clientsHeading": "क्लाइंट",
+    "reviewsHeading": "समीक्षाएँ",
+    "noReviewsYet": "अभी कोई समीक्षा नहीं।",
+    "reviewClientFallback": "क्लाइंट",
+    "noHireRequestsYet": "अभी कोई हायर अनुरोध नहीं।",
+    "colPhoto": "फोटो",
+    "colName": "नाम",
+    "colRequestDate": "अनुरोध तिथि",
+    "colContact": "संपर्क",
+    "colActions": "कार्रवाई",
+    "colStatus": "स्थिति",
+    "hiddenUntilAccepted": "स्वीकृति तक छिपा",
+    "hireRequestsCaption": "क्लाइंट जिन्होंने आपको हायर अनुरोध भेजा",
+    "updateTitle": "वर्कर प्रोफाइल अपडेट करें",
+    "fieldName": "नाम",
+    "yearsOfExperience": "अनुभव (वर्ष)",
+    "profilePhotoField": "प्रोफाइल फोटो",
+    "availabilityPlaceholder": "फुल-टाइम / हाफ-टाइम",
+    "update": "अपडेट करें",
+    "statusPending": "लंबित",
+    "statusAccepted": "स्वीकृत",
+    "statusRejected": "अस्वीकृत",
+    "statusCompleted": "पूर्ण"
+  },
   "auth": {
     "selectRole": "कृपया रोल चुनें",
     "somethingWrong": "कुछ गलत हो गया!",
@@ -156,6 +187,12 @@
     "marketplace": "भारत का समावेशी गिग मार्केटप्लेस",
     "iAm": "मैं हूँ",
     "profilePhotoOptional": "प्रोफाइल फोटो (वैकल्पिक)",
-    "haveAccount": "क्या आपका पहले से अकाउंट है?"
+    "haveAccount": "क्या आपका पहले से अकाउंट है?",
+    "fullName": "पूरा नाम",
+    "enterFullName": "अपना पूरा नाम दर्ज करें",
+    "city": "शहर",
+    "enterCity": "अपना शहर दर्ज करें",
+    "enterPincode": "अपना पिनकोड दर्ज करें",
+    "createPassword": "पासवर्ड बनाएं"
   }
 }

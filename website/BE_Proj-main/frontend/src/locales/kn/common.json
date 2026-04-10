@@ -131,6 +131,37 @@
     "reject": "ತಿರಸ್ಕರಿಸಿ",
     "markJobDone": "ಕೆಲಸ ಪೂರ್ಣಗೊಂಡಿದೆ"
   },
+  "workerProfile": {
+    "roleBadge": "ಕಾರ್ಮಿಕ",
+    "notYetRated": "ಇನ್ನೂ ರೇಟಿಂಗ್ ಇಲ್ಲ",
+    "availability": "ಲಭ್ಯತೆ",
+    "experience": "ಅನುಭವ",
+    "skills": "ಕೌಶಲ್ಯಗಳು",
+    "yearsExperience": "{{count}} ವರ್ಷಗಳು",
+    "clientsHeading": "ಗ್ರಾಹಕರು",
+    "reviewsHeading": "ವಿಮರ್ಶೆಗಳು",
+    "noReviewsYet": "ಇನ್ನೂ ವಿಮರ್ಶೆಗಳಿಲ್ಲ.",
+    "reviewClientFallback": "ಗ್ರಾಹಕ",
+    "noHireRequestsYet": "ಇನ್ನೂ ನೇಮಕಾತಿ ವಿನಂತಿಗಳಿಲ್ಲ.",
+    "colPhoto": "ಫೋಟೋ",
+    "colName": "ಹೆಸರು",
+    "colRequestDate": "ವಿನಂತಿ ದಿನಾಂಕ",
+    "colContact": "ಸಂಪರ್ಕ",
+    "colActions": "ಕ್ರಿಯೆಗಳು",
+    "colStatus": "ಸ್ಥಿತಿ",
+    "hiddenUntilAccepted": "ಸ್ವೀಕಾರದವರೆಗೆ ಮರೆಮಾಡಲಾಗಿದೆ",
+    "hireRequestsCaption": "ನಿಮಗೆ ನೇಮಕಾತಿ ವಿನಂತಿ ಕಳುಹಿಸಿದ ಗ್ರಾಹಕರು",
+    "updateTitle": "ಕಾರ್ಮಿಕ ಪ್ರೊಫೈಲ್ ಅಪ್‌ಡೇಟ್ ಮಾಡಿ",
+    "fieldName": "ಹೆಸರು",
+    "yearsOfExperience": "ಅನುಭವ (ವರ್ಷಗಳು)",
+    "profilePhotoField": "ಪ್ರೊಫೈಲ್ ಫೋಟೋ",
+    "availabilityPlaceholder": "ಪೂರ್ಣ ಸಮಯ / ಅರೆ ಸಮಯ",
+    "update": "ಅಪ್‌ಡೇಟ್",
+    "statusPending": "ಬಾಕಿ",
+    "statusAccepted": "ಸ್ವೀಕೃತ",
+    "statusRejected": "ತಿರಸ್ಕೃತ",
+    "statusCompleted": "ಪೂರ್ಣ"
+  },
   "auth": {
     "selectRole": "ದಯವಿಟ್ಟು ಪಾತ್ರವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
     "somethingWrong": "ಏನೋ ತಪ್ಪಾಗಿದೆ!",
@@ -153,6 +184,12 @@
     "marketplace": "ಭಾರತದ ಸಮಾವೇಶಕಾರಿ ಗಿಗ್ ಮಾರುಕಟ್ಟೆ",
     "iAm": "ನಾನು",
     "profilePhotoOptional": "ಪ್ರೊಫೈಲ್ ಫೋಟೋ (ಐಚ್ಛಿಕ)",
-    "haveAccount": "ಈಗಾಗಲೇ ಖಾತೆ ಇದೆಯೇ?"
+    "haveAccount": "ಈಗಾಗಲೇ ಖಾತೆ ಇದೆಯೇ?",
+    "fullName": "ಪೂರ್ಣ ಹೆಸರು",
+    "enterFullName": "ನಿಮ್ಮ ಪೂರ್ಣ ಹೆಸರನ್ನು ನಮೂದಿಸಿ",
+    "city": "ನಗರ",
+    "enterCity": "ನಿಮ್ಮ ನಗರವನ್ನು ನಮೂದಿಸಿ",
+    "enterPincode": "ನಿಮ್ಮ ಪಿನ್‌ಕೋಡ್ ನಮೂದಿಸಿ",
+    "createPassword": "ಪಾಸ್‌ವರ್ಡ್ ರಚಿಸಿ"
   }
 }

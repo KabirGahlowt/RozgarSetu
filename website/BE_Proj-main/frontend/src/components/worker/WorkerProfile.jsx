@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Navbar from "../shared/Navbar";
 import ClientsWantingToHire from "./ClientsWantingToHire";
 import { useSelector } from "react-redux";
@@ -6,21 +6,34 @@ import { Pen, Phone, MapPin, Hash, Clock, Award, Star, Briefcase } from "lucide-
 import UpdateWorkerDialog from "./UpdateWorkerDialog";
 import WorkerReviews from "./WorkerReviews";
 import useGetWorkerReviews from "../../hooks/useGetWorkerReviews";
+import { useTranslation } from "react-i18next";
 
 const WorkerProfile = () => {
+  const { t } = useTranslation();
   const { user } = useSelector((store) => store.auth);
   const [open, setOpen] = useState(false);
   const { avgRating, reviews } = useSelector((store) => store.review);
   useGetWorkerReviews(user?._id);
 
-  const infoRows = [
-    { icon: Phone,   label: "Phone",        value: user?.phoneNumber },
-    { icon: MapPin,  label: "Address",      value: user?.address },
-    { icon: Hash,    label: "Pincode",      value: user?.pincode },
-    { icon: Clock,   label: "Availability", value: user?.avaliability },
-    { icon: Award,   label: "Experience",   value: user?.experienceYears ? `${user.experienceYears} years` : null },
-    { icon: Briefcase,label:"Skills",       value: user?.skills },
-  ];
+  const infoRows = useMemo(
+    () => [
+      { key: "phone", icon: Phone, labelKey: "profile.phone", value: user?.phoneNumber },
+      { key: "address", icon: MapPin, labelKey: "profile.address", value: user?.address },
+      { key: "pincode", icon: Hash, labelKey: "profile.pincode", value: user?.pincode },
+      { key: "availability", icon: Clock, labelKey: "workerProfile.availability", value: user?.avaliability },
+      {
+        key: "experience",
+        icon: Award,
+        labelKey: "workerProfile.experience",
+        value:
+          user?.experienceYears != null && user.experienceYears !== ""
+            ? t("workerProfile.yearsExperience", { count: user.experienceYears })
+            : null,
+      },
+      { key: "skills", icon: Briefcase, labelKey: "workerProfile.skills", value: user?.skills },
+    ],
+    [user, t],
+  );
 
   return (
     <div className="rs-page">
@@ -47,7 +60,7 @@ const WorkerProfile = () => {
               <div>
                 <h1 style={{ margin: 0, fontFamily: "var(--rs-font)", fontSize: "1.4rem", fontWeight: 700, color: "#fff" }}>{user?.fullname}</h1>
                 <span className="rs-badge-green" style={{ marginTop: "0.35rem", display: "inline-flex", padding: "0.2rem 0.75rem", borderRadius: "999px", fontSize: "0.7rem", fontWeight: 500, background: "rgba(19,136,8,0.12)", color: "#6ee87b", border: "1px solid rgba(19,136,8,0.25)" }}>
-                  Worker
+                  {t("workerProfile.roleBadge")}
                 </span>
 
                 {/* Star rating */}
@@ -56,25 +69,25 @@ const WorkerProfile = () => {
                     <Star key={s} size={13} style={{ color: s <= Math.round(avgRating||0) ? "#FF9933" : "rgba(255,255,255,0.2)", fill: s <= Math.round(avgRating||0) ? "#FF9933" : "transparent" }} />
                   ))}
                   <span style={{ fontSize: "0.75rem", color: "var(--rs-text-muted)", marginLeft: "4px" }}>
-                    {avgRating > 0 ? `(${avgRating?.toFixed(1)})` : "Not yet rated"}
+                    {avgRating > 0 ? `(${avgRating?.toFixed(1)})` : t("workerProfile.notYetRated")}
                   </span>
                 </div>
               </div>
             </div>
             <button onClick={() => setOpen(true)} className="rs-btn-outline" style={{ padding: "0.5rem 1rem", display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.82rem" }}>
-              <Pen size={14} /> Edit
+              <Pen size={14} /> {t("profile.edit")}
             </button>
           </div>
 
           <hr className="rs-divider" />
 
           <div className="rs-grid-2-sm1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.85rem", marginTop: "1rem" }}>
-            {infoRows.map(({ icon: Icon, label, value }) => (
-              <div key={label} className="rs-glass" style={{ padding: "0.85rem 1rem", borderRadius: "0.75rem", display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            {infoRows.map(({ key, icon: Icon, labelKey, value }) => (
+              <div key={key} className="rs-glass" style={{ padding: "0.85rem 1rem", borderRadius: "0.75rem", display: "flex", alignItems: "center", gap: "0.75rem" }}>
                 <Icon size={15} style={{ color: "var(--rs-saffron)", flexShrink: 0 }} />
                 <div>
-                  <p style={{ margin: 0, fontSize: "0.68rem", color: "var(--rs-text-muted)", textTransform: "uppercase", letterSpacing: "0.07em", fontFamily: "var(--rs-font)" }}>{label}</p>
-                  <p style={{ margin: "0.15rem 0 0", fontSize: "0.88rem", color: "#fff", fontFamily: "var(--rs-font)" }}>{value || "—"}</p>
+                  <p style={{ margin: 0, fontSize: "0.68rem", color: "var(--rs-text-muted)", textTransform: "uppercase", letterSpacing: "0.07em", fontFamily: "var(--rs-font)" }}>{t(labelKey)}</p>
+                  <p style={{ margin: "0.15rem 0 0", fontSize: "0.88rem", color: "#fff", fontFamily: "var(--rs-font)" }}>{value || t("profile.none")}</p>
                 </div>
               </div>
             ))}
