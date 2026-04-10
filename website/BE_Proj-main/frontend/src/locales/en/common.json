@@ -163,6 +163,7 @@
     "statusCompleted": "Completed"
   },
   "auth": {
+    "fillRequired": "Please fill all required fields (marked with *).",
     "selectRole": "Please select a role",
     "somethingWrong": "Something went wrong!",
     "welcome": "Welcome",
@@ -193,6 +194,9 @@
     "city": "City",
     "enterCity": "Enter your city",
     "enterPincode": "Enter your pincode",
-    "createPassword": "Create a password"
+    "createPassword": "Create a password",
+    "enterAddress": "Enter your address (street, area, landmark)",
+    "enterSkills": "e.g. Cooking, Plumbing, Electrician",
+    "enterYearsExperience": "Years (e.g. 3)"
   }
 }

@@ -9,8 +9,10 @@ import { getAuthCookieOptions, getClearAuthCookieOptions } from "../utils/authCo
 export const register = async(req,res) => {
     try
     {
-        const{fullname, email, phoneNumber, password, address, city, pincode} = req.body;
-        if(!fullname || !email || !phoneNumber || !password) // || !address || !city || !pincode
+        const{fullname, email, phoneNumber, password, address, city, pincode, role} = req.body;
+        const isWorker = role === "Worker";
+
+        if(!fullname || !phoneNumber || !password)
         {
             return res.status(400).json
             ({
@@ -19,6 +21,15 @@ export const register = async(req,res) => {
             });
         };
 
+        if(!isWorker && !email)
+        {
+            return res.status(400).json
+            ({
+                message : "Email is required for client accounts",
+                success : false
+            });
+        }
+
         let profilePhoto = "";
         if (req.file) {
             const fileUri = getDataUri(req.file);
@@ -26,21 +37,34 @@ export const register = async(req,res) => {
             profilePhoto = cloudResponse.secure_url;
         }
 
-        const user = await User.findOne({email});
-        if(user)
+        const existingPhone = await User.findOne({ phoneNumber });
+        if(existingPhone)
         {
             return res.status(400).json
             ({
-                message : "User already exists with this email",
+                message : "User already exists with this phone number",
                 success : false 
             });
-        };
+        }
+
+        if(email)
+        {
+            const existingEmail = await User.findOne({ email });
+            if(existingEmail)
+            {
+                return res.status(400).json
+                ({
+                    message : "User already exists with this email",
+                    success : false 
+                });
+            }
+        }
 
         const hashedPassword = await bcrypt.hash(password,10);
 
         await User.create({
             fullname, 
-            email, 
+            email: email || undefined, 
             phoneNumber, 
             password : hashedPassword, 
             address, 

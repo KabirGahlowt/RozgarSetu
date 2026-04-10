@@ -163,6 +163,7 @@
     "statusCompleted": "पूर्ण"
   },
   "auth": {
+    "fillRequired": "कृपया सभी आवश्यक फ़ील्ड भरें (* चिह्न वाले)।",
     "selectRole": "कृपया रोल चुनें",
     "somethingWrong": "कुछ गलत हो गया!",
     "welcome": "वापस",
@@ -193,6 +194,9 @@
     "city": "शहर",
     "enterCity": "अपना शहर दर्ज करें",
     "enterPincode": "अपना पिनकोड दर्ज करें",
-    "createPassword": "पासवर्ड बनाएं"
+    "createPassword": "पासवर्ड बनाएं",
+    "enterAddress": "अपना पता दर्ज करें (गली, क्षेत्र, लैंडमार्क)",
+    "enterSkills": "जैसे: खाना बनाना, प्लंबिंग, बिजली",
+    "enterYearsExperience": "वर्ष (जैसे 3)"
   }
 }
