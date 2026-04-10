@@ -131,6 +131,37 @@
     "reject": "Reject",
     "markJobDone": "Mark job done"
   },
+  "workerProfile": {
+    "roleBadge": "Worker",
+    "notYetRated": "Not yet rated",
+    "availability": "Availability",
+    "experience": "Experience",
+    "skills": "Skills",
+    "yearsExperience": "{{count}} years",
+    "clientsHeading": "Clients",
+    "reviewsHeading": "Reviews",
+    "noReviewsYet": "No reviews yet.",
+    "reviewClientFallback": "Client",
+    "noHireRequestsYet": "No hire requests yet.",
+    "colPhoto": "Photo",
+    "colName": "Name",
+    "colRequestDate": "Request date",
+    "colContact": "Contact",
+    "colActions": "Actions",
+    "colStatus": "Status",
+    "hiddenUntilAccepted": "Hidden until accepted",
+    "hireRequestsCaption": "Clients who sent you a hire request",
+    "updateTitle": "Update Worker Profile",
+    "fieldName": "Name",
+    "yearsOfExperience": "Years of experience",
+    "profilePhotoField": "Profile photo",
+    "availabilityPlaceholder": "Full-time / Part-time",
+    "update": "Update",
+    "statusPending": "Pending",
+    "statusAccepted": "Accepted",
+    "statusRejected": "Rejected",
+    "statusCompleted": "Completed"
+  },
   "auth": {
     "selectRole": "Please select a role",
     "somethingWrong": "Something went wrong!",
@@ -156,6 +187,12 @@
     "marketplace": "India's inclusive gig marketplace",
     "iAm": "I am a",
     "profilePhotoOptional": "Profile Photo (optional)",
-    "haveAccount": "Already have an account?"
+    "haveAccount": "Already have an account?",
+    "fullName": "Full Name",
+    "enterFullName": "Enter your full name",
+    "city": "City",
+    "enterCity": "Enter your city",
+    "enterPincode": "Enter your pincode",
+    "createPassword": "Create a password"
   }
 }

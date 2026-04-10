@@ -131,6 +131,37 @@
     "reject": "తిరస్కరించు",
     "markJobDone": "పని పూర్తయింది"
   },
+  "workerProfile": {
+    "roleBadge": "కార్మికుడు",
+    "notYetRated": "ఇంకా రేటింగ్ లేదు",
+    "availability": "లభ్యత",
+    "experience": "అనుభవం",
+    "skills": "నైపుణ్యాలు",
+    "yearsExperience": "{{count}} సంవత్సరాలు",
+    "clientsHeading": "క్లయింట్లు",
+    "reviewsHeading": "సమీక్షలు",
+    "noReviewsYet": "ఇంకా సమీక్షలు లేవు.",
+    "reviewClientFallback": "క్లయింట్",
+    "noHireRequestsYet": "ఇంకా నియామక అభ్యర్థనలు లేవు.",
+    "colPhoto": "ఫోటో",
+    "colName": "పేరు",
+    "colRequestDate": "అభ్యర్థన తేదీ",
+    "colContact": "సంప్రదింపు",
+    "colActions": "చర్యలు",
+    "colStatus": "స్థితి",
+    "hiddenUntilAccepted": "అంగీకారం వరకు దాచబడింది",
+    "hireRequestsCaption": "మీకు నియామక అభ్యర్థన పంపిన క్లయింట్లు",
+    "updateTitle": "కార్మిక ప్రొఫైల్ నవీకరించండి",
+    "fieldName": "పేరు",
+    "yearsOfExperience": "అనుభవం (సంవత్సరాలు)",
+    "profilePhotoField": "ప్రొఫైల్ ఫోటో",
+    "availabilityPlaceholder": "పూర్తి సమయం / సగం సమయం",
+    "update": "నవీకరించు",
+    "statusPending": "పెండింగ్",
+    "statusAccepted": "అంగీకరించబడింది",
+    "statusRejected": "తిరస్కరించబడింది",
+    "statusCompleted": "పూర్తయింది"
+  },
   "auth": {
     "selectRole": "దయచేసి ఒక పాత్రను ఎంచుకోండి",
     "somethingWrong": "ఏదో తప్పు జరిగింది!",
@@ -153,6 +184,12 @@
     "marketplace": "భారతదేశ సమగ్ర గిగ్ మార్కెట్‌ప్లేస్",
     "iAm": "నేను",
     "profilePhotoOptional": "ప్రొఫైల్ ఫోటో (ఐచ్చికం)",
-    "haveAccount": "ఇప్పటికే ఖాతా ఉందా?"
+    "haveAccount": "ఇప్పటికే ఖాతా ఉందా?",
+    "fullName": "పూర్తి పేరు",
+    "enterFullName": "మీ పూర్తి పేరు నమోదు చేయండి",
+    "city": "నగరం",
+    "enterCity": "మీ నగరాన్ని నమోదు చేయండి",
+    "enterPincode": "మీ పిన్‌కోడ్‌ను నమోదు చేయండి",
+    "createPassword": "పాస్‌వర్డ్ సృష్టించండి"
   }
 }

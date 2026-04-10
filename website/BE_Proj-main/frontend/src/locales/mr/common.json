@@ -131,6 +131,37 @@
     "reject": "नकारा",
     "markJobDone": "काम पूर्ण केले म्हणून चिन्हांकित करा"
   },
+  "workerProfile": {
+    "roleBadge": "कामगार",
+    "notYetRated": "अद्याप रेटिंग नाही",
+    "availability": "उपलब्धता",
+    "experience": "अनुभव",
+    "skills": "कौशल्ये",
+    "yearsExperience": "{{count}} वर्षे",
+    "clientsHeading": "ग्राहक",
+    "reviewsHeading": "अभिप्राय",
+    "noReviewsYet": "अद्याप कोणताही अभिप्राय नाही.",
+    "reviewClientFallback": "ग्राहक",
+    "noHireRequestsYet": "अद्याप कोणतीही नियुक्ती विनंती नाही.",
+    "colPhoto": "फोटो",
+    "colName": "नाव",
+    "colRequestDate": "विनंती तारीख",
+    "colContact": "संपर्क",
+    "colActions": "कृती",
+    "colStatus": "स्थिती",
+    "hiddenUntilAccepted": "स्वीकार पर्यंत लपवले",
+    "hireRequestsCaption": "ज्या ग्राहकांनी तुम्हाला नियुक्ती विनंती पाठवली",
+    "updateTitle": "कामगार प्रोफाइल अपडेट करा",
+    "fieldName": "नाव",
+    "yearsOfExperience": "अनुभव (वर्षे)",
+    "profilePhotoField": "प्रोफाइल फोटो",
+    "availabilityPlaceholder": "पूर्णवेळ / अर्धवेळ",
+    "update": "अपडेट करा",
+    "statusPending": "प्रलंबित",
+    "statusAccepted": "स्वीकृत",
+    "statusRejected": "नकारले",
+    "statusCompleted": "पूर्ण"
+  },
   "auth": {
     "selectRole": "कृपया भूमिका निवडा",
     "somethingWrong": "काहीतरी चुकले!",
@@ -153,6 +184,12 @@
     "marketplace": "भारताचा सर्वसमावेशक गिग मार्केटप्लेस",
     "iAm": "मी आहे",
     "profilePhotoOptional": "प्रोफाइल फोटो (ऐच्छिक)",
-    "haveAccount": "आधीच खाते आहे का?"
+    "haveAccount": "आधीच खाते आहे का?",
+    "fullName": "पूर्ण नाव",
+    "enterFullName": "तुमचे पूर्ण नाव टाका",
+    "city": "शहर",
+    "enterCity": "तुमचे शहर टाका",
+    "enterPincode": "तुमचा पिनकोड टाका",
+    "createPassword": "पासवर्ड तयार करा"
   }
 }

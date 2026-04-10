@@ -131,6 +131,37 @@
     "reject": "நிராகரி",
     "markJobDone": "வேலை முடிந்தது"
   },
+  "workerProfile": {
+    "roleBadge": "பணியாளர்",
+    "notYetRated": "இன்னும் மதிப்பீடு இல்லை",
+    "availability": "கிடைக்கும் நேரம்",
+    "experience": "அனுபவம்",
+    "skills": "திறன்கள்",
+    "yearsExperience": "{{count}} ஆண்டுகள்",
+    "clientsHeading": "வாடிக்கையாளர்கள்",
+    "reviewsHeading": "விமர்சனங்கள்",
+    "noReviewsYet": "இன்னும் விமர்சனங்கள் இல்லை.",
+    "reviewClientFallback": "வாடிக்கையாளர்",
+    "noHireRequestsYet": "இன்னும் நியமன கோரிக்கைகள் இல்லை.",
+    "colPhoto": "படம்",
+    "colName": "பெயர்",
+    "colRequestDate": "கோரிக்கை தேதி",
+    "colContact": "தொடர்பு",
+    "colActions": "செயல்கள்",
+    "colStatus": "நிலை",
+    "hiddenUntilAccepted": "ஏற்றுக்கொள்ளும் வரை மறை",
+    "hireRequestsCaption": "உங்களுக்கு நியமன கோரிக்கை அனுப்பிய வாடிக்கையாளர்கள்",
+    "updateTitle": "பணியாளர் சுயவிவரத்தை புதுப்பிக்கவும்",
+    "fieldName": "பெயர்",
+    "yearsOfExperience": "அனுபவம் (ஆண்டுகள்)",
+    "profilePhotoField": "சுயவிவர புகைப்படம்",
+    "availabilityPlaceholder": "முழுநேரம் / பகுதிநேரம்",
+    "update": "புதுப்பிக்கவும்",
+    "statusPending": "நிலுவையில்",
+    "statusAccepted": "ஏற்றுக்கொள்ளப்பட்டது",
+    "statusRejected": "நிராகரிக்கப்பட்டது",
+    "statusCompleted": "முடிந்தது"
+  },
   "auth": {
     "selectRole": "தயவுசெய்து ஒரு பாத்திரத்தைத் தேர்ந்தெடுக்கவும்",
     "somethingWrong": "ஏதோ தவறு ஏற்பட்டது!",
@@ -153,6 +184,12 @@
     "marketplace": "இந்தியாவின் உட்சேர்க்கை கிக் சந்தை",
     "iAm": "நான்",
     "profilePhotoOptional": "சுயவிவர புகைப்படம் (விருப்பம்)",
-    "haveAccount": "ஏற்கனவே கணக்கு உள்ளதா?"
+    "haveAccount": "ஏற்கனவே கணக்கு உள்ளதா?",
+    "fullName": "முழு பெயர்",
+    "enterFullName": "உங்கள் முழு பெயரை உள்ளிடவும்",
+    "city": "நகரம்",
+    "enterCity": "உங்கள் நகரத்தை உள்ளிடவும்",
+    "enterPincode": "உங்கள் அஞ்சல் குறியீட்டை உள்ளிடவும்",
+    "createPassword": "கடவுச்சொல்லை உருவாக்கவும்"
   }
 }

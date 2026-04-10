@@ -55,12 +55,12 @@ const Singup = () => {
   }, []);
 
   const fields = [
-    { label: "Full Name",     name: "fullname",    type: "text",     icon: UserPlus, placeholder: "Enter your full name" },
-    { label: "Email",         name: "email",       type: "email",    icon: Mail,     placeholder: "Enter your email" },
-    { label: "Phone Number",  name: "phoneNumber", type: "text",     icon: Phone,    placeholder: "Enter your phone number" },
-    { label: "City",          name: "city",        type: "text",     icon: MapPin,   placeholder: "Enter your city" },
-    { label: "Pincode",       name: "pincode",     type: "text",     icon: Hash,     placeholder: "Enter your pincode" },
-    { label: "Password",      name: "password",    type: "password", icon: Lock,     placeholder: "Create a password" },
+    { name: "fullname", type: "text", icon: UserPlus, labelKey: "auth.fullName", placeholderKey: "auth.enterFullName" },
+    { name: "email", type: "email", icon: Mail, labelKey: "auth.email", placeholderKey: "auth.enterEmail" },
+    { name: "phoneNumber", type: "text", icon: Phone, labelKey: "auth.phoneNumber", placeholderKey: "auth.enterPhone" },
+    { name: "city", type: "text", icon: MapPin, labelKey: "auth.city", placeholderKey: "auth.enterCity" },
+    { name: "pincode", type: "text", icon: Hash, labelKey: "profile.pincode", placeholderKey: "auth.enterPincode" },
+    { name: "password", type: "password", icon: Lock, labelKey: "auth.password", placeholderKey: "auth.createPassword" },
   ];
 
   return (
@@ -104,9 +104,9 @@ const Singup = () => {
 
             {/* Fields grid */}
             <div className="rs-grid-2-sm1" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.85rem", marginBottom: "1rem" }}>
-              {fields.map(({ label, name, type, icon: Icon, placeholder }) => (
+              {fields.map(({ name, type, icon: Icon, labelKey, placeholderKey }) => (
                 <div key={name} style={{ gridColumn: name === "fullname" || name === "password" ? "1 / -1" : "auto" }}>
-                  <label className="rs-label">{label}</label>
+                  <label className="rs-label">{t(labelKey)}</label>
                   <div style={{ position: "relative" }}>
                     <span style={{ position: "absolute", left: "0.8rem", top: "50%", transform: "translateY(-50%)", color: "var(--rs-text-muted)" }}>
                       <Icon size={14} />
@@ -118,7 +118,7 @@ const Singup = () => {
                       name={name}
                       value={input[name]}
                       onChange={changeEventHandler}
-                      placeholder={placeholder}
+                      placeholder={t(placeholderKey)}
                     />
                   </div>
                 </div>
